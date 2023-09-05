@@ -17,7 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import ru.yotfr.alarm.custom.TimePicker
+import ru.yotfr.alarm.ui.viewmodel.CreateAlarmViewModel
 
 
 @Preview
@@ -27,7 +29,9 @@ fun CreateAlarmScreenPreview() {
 }
 
 @Composable
-fun CreateAlarmScreen() {
+fun CreateAlarmScreen(
+    vm: CreateAlarmViewModel = hiltViewModel()
+) {
 
     val currentHour = remember { mutableStateOf(0) }
     val currentMinute = remember { mutableStateOf(0) }
@@ -56,7 +60,10 @@ fun CreateAlarmScreen() {
         }
         Spacer(modifier = Modifier.height(32.dp))
         TextButton(onClick = {
-
+            vm.createNewAlarm(
+                hour = currentHour.value,
+                minute = currentMinute.value,
+            )
         }) {
             Text(text = "Create")
         }

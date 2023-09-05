@@ -65,13 +65,14 @@ dependencies {
     val jUnitVersion = "4.13.2"
     val androidJUnitVersion = "1.1.5"
     val espressoVersion = "3.5.1"
+    val hiltNavVersion = "1.0.0"
 
     // Desugaring
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 
     // Room
     implementation("androidx.room:room-runtime:$roomVersion")
-    //ksp("androidx.room:room-compiler:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
 
     // KTX
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModelKTXVersion")
@@ -89,6 +90,7 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:$daggerVersion")
     kapt("com.google.dagger:hilt-android-compiler:$daggerVersion")
+    implementation("androidx.hilt:hilt-navigation-compose:$hiltNavVersion")
 
     // Timber
     implementation("com.jakewharton.timber:timber:$timberVersion")

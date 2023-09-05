@@ -3,13 +3,14 @@ package ru.yotfr.alarm.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import ru.yotfr.alarm.data.AlarmDao
 import ru.yotfr.alarm.data.AlarmRepositoryImpl
 import ru.yotfr.alarm.domain.AlarmRepository
 import javax.inject.Singleton
 
 @Module
-@InstallIn()
+@InstallIn(SingletonComponent::class)
 object RepositoryModule {
     @Provides
     @Singleton
