@@ -30,6 +30,7 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -65,6 +66,8 @@ dependencies {
     val androidJUnitVersion = "1.1.5"
     val espressoVersion = "3.5.1"
 
+    // Desugaring
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 
     // Room
     implementation("androidx.room:room-runtime:$roomVersion")
