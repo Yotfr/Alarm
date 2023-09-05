@@ -34,6 +34,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt
@@ -62,7 +63,7 @@ fun TimePicker(
 ) {
 
     val scope = rememberCoroutineScope()
-    val numbersColumnHeight = 36.dp
+    val numbersColumnHeight = 72.dp
     val halvedNumbersColumnHeight = numbersColumnHeight / 2
     val halvedNumbersColumnHeightPx = with(LocalDensity.current) { halvedNumbersColumnHeight.toPx() }
 
@@ -153,7 +154,8 @@ private fun Label(text: String, modifier: Modifier) {
             detectTapGestures(onLongPress = {
                 // FIXME: Empty to disable text selection
             })
-        }
+        },
+        fontSize = 32.sp
     )
 }
 
