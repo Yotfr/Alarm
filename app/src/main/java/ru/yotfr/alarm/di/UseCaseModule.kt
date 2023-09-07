@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import ru.yotfr.alarm.domain.AlarmRepository
+import ru.yotfr.alarm.domain.AlarmScheduler
 import ru.yotfr.alarm.domain.CreateNewAlarmUseCase
 import ru.yotfr.alarm.domain.GetAllAlarmsUseCase
 
@@ -18,7 +19,13 @@ object UseCaseModule {
     }
 
     @Provides
-    fun provideCreateNewAlarmUseCase(alarmRepository: AlarmRepository): CreateNewAlarmUseCase {
-        return CreateNewAlarmUseCase(alarmRepository)
+    fun provideCreateNewAlarmUseCase(
+        alarmRepository: AlarmRepository,
+        alarmScheduler: AlarmScheduler
+    ): CreateNewAlarmUseCase {
+        return CreateNewAlarmUseCase(
+            alarmRepository,
+            alarmScheduler
+        )
     }
 }

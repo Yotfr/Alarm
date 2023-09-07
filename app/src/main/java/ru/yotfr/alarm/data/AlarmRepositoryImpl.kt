@@ -13,7 +13,7 @@ class AlarmRepositoryImpl @Inject constructor(
         return alarmDao.getAllAlarms().map { it.map { it.map() } }
     }
 
-    override suspend fun insertAlarm(alarmModel: AlarmModel) {
-        alarmDao.insertAlarm(alarmModel.map())
+    override suspend fun insertAlarm(alarmModel: AlarmModel): Long {
+        return alarmDao.insertAlarm(alarmModel.map())
     }
 }

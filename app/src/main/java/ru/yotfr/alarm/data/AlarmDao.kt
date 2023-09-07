@@ -12,5 +12,5 @@ interface AlarmDao {
     fun getAllAlarms(): Flow<List<AlarmEntity>>
 
     @Insert(entity = AlarmEntity::class)
-    suspend fun insertAlarm(alarmEntity: AlarmEntity)
+    suspend fun insertAlarm(alarmEntity: AlarmEntity) : Long
 }
