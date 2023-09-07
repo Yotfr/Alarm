@@ -9,7 +9,6 @@ import android.content.Intent
 import android.util.Log
 import ru.yotfr.alarm.MainActivity
 import ru.yotfr.alarm.domain.AlarmScheduler
-import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.ZoneId
 

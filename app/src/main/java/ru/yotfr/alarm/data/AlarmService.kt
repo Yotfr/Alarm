@@ -5,6 +5,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import ru.yotfr.alarm.MainActivity
 import ru.yotfr.alarm.R
 
 class AlarmService : Service() {
@@ -16,19 +17,28 @@ class AlarmService : Service() {
                 stopSelf()
             }
         }
-        val intentSelf = Intent(this, AlarmService::class.java).apply {
-            putExtra("CANCEL", true)
-        }
-        val pendingIntentSelf = PendingIntent.getService(this, 0, intentSelf, PendingIntent.FLAG_IMMUTABLE)
         val notification = NotificationCompat.Builder(this, "NOTIFICATION_CHANNEL_SERVICE")
             .setContentTitle("Alarm")
             .setContentText("Ringing...")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setOngoing(true)
             .setCategory(NotificationCompat.CATEGORY_ALARM)
-            .addAction(androidx.core.R.drawable.ic_call_decline, "", pendingIntentSelf)
+            .addAction(androidx.core.R.drawable.ic_call_decline, "", getCancelIntent())
+            .setAutoCancel(true)
             .build()
+        val startActivityIntent = Intent(this, MainActivity::class.java).addFlags(
+            Intent.FLAG_ACTIVITY_NEW_TASK
+        )
+        startActivity(startActivityIntent)
         startForeground(3, notification)
         return START_STICKY
     }
+
+    private fun getCancelIntent(): PendingIntent {
+        val intentSelf = Intent(this, AlarmService::class.java).apply {
+            putExtra("CANCEL", true)
+        }
+        return PendingIntent.getService(this, 0, intentSelf, PendingIntent.FLAG_IMMUTABLE)
+    }
+
 }
