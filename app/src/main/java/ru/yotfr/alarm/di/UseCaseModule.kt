@@ -7,6 +7,7 @@ import dagger.hilt.android.components.ViewModelComponent
 import ru.yotfr.alarm.domain.AlarmRepository
 import ru.yotfr.alarm.domain.AlarmScheduler
 import ru.yotfr.alarm.domain.CreateNewAlarmUseCase
+import ru.yotfr.alarm.domain.DeleteAlarmUseCase
 import ru.yotfr.alarm.domain.GetAllAlarmsUseCase
 import ru.yotfr.alarm.domain.ToggleAlarmStatusUseCase
 
@@ -36,6 +37,17 @@ object UseCaseModule {
         alarmScheduler: AlarmScheduler
     ): ToggleAlarmStatusUseCase {
         return ToggleAlarmStatusUseCase(
+            alarmRepository,
+            alarmScheduler
+        )
+    }
+
+    @Provides
+    fun provideDeleteAlarmStatusUseCase(
+        alarmRepository: AlarmRepository,
+        alarmScheduler: AlarmScheduler
+    ): DeleteAlarmUseCase {
+        return DeleteAlarmUseCase(
             alarmRepository,
             alarmScheduler
         )

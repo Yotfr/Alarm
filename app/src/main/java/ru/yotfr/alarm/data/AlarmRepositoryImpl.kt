@@ -32,4 +32,8 @@ class AlarmRepositoryImpl @Inject constructor(
             ).map()
         )
     }
+
+    override suspend fun deleteAlarm(alarmModel: AlarmModel) {
+        alarmDao.deleteAlarm(alarmModel.map())
+    }
 }

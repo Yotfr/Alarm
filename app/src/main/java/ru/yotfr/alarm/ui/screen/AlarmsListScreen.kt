@@ -10,8 +10,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,6 +48,9 @@ fun AlarmsListScreen(
                     alarmModel = alarmModel,
                     onToggle = {
                         vm.toggleAlarm(alarmModel, !it)
+                    },
+                    delete = {
+                        vm.deleteAlarm(alarmModel)
                     }
                 )
             }
@@ -70,7 +75,8 @@ fun AlarmsListScreen(
 @Composable
 fun AlarmItem(
     alarmModel: AlarmModel,
-    onToggle: (Boolean) -> Unit
+    onToggle: (Boolean) -> Unit,
+    delete: () -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -80,6 +86,12 @@ fun AlarmItem(
         Text(
             text = alarmModel.triggerTime.format(DateTimeFormatter.ofPattern("HH:mm"))
         )
+        IconButton(onClick = delete) {
+            Icon(
+                imageVector = Icons.Outlined.Delete,
+                contentDescription = null
+            )
+        }
         Switch(
             checked = alarmModel.isActive,
             onCheckedChange = onToggle
