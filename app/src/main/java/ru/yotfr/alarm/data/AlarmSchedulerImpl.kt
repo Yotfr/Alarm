@@ -17,20 +17,26 @@ class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler {
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
     @SuppressLint("MissingPermission")
     override fun scheduleAlarm(triggerTime: LocalDateTime, id: Long) {
-        val activityIntent = Intent(context, MainActivity::class.java)
-        val activityPendingIntent =
-            PendingIntent.getActivity(context, 0, activityIntent, PendingIntent.FLAG_IMMUTABLE)
-        val triggerTimeN = triggerTime.atZone(ZoneId.systemDefault()).toEpochSecond() * 1000
-        Log.d("TEST","triggerTimeN $triggerTimeN ldt $triggerTime")
         val alarmClockInfo = AlarmClockInfo(
-            triggerTimeN,
-            activityPendingIntent
+            triggerTime.atZone(ZoneId.systemDefault()).toEpochSecond() * 1000,
+            getClickIntent()
         )
-        val broadcastIntent = Intent(context, AlarmBroadcastReceiver::class.java)
-        val broadcastPendingIntent = PendingIntent.getBroadcast(context, id.toInt(), broadcastIntent, PendingIntent.FLAG_IMMUTABLE)
         alarmManager.setAlarmClock(
             alarmClockInfo,
-            broadcastPendingIntent
+            getAlarmIntent(id)
         )
+    }
+
+    override suspend fun cancelAlarm(id: Long) {
+        alarmManager.cancel(getAlarmIntent(id))
+    }
+
+    private fun getAlarmIntent(id: Long): PendingIntent {
+        val broadcastIntent = Intent(context, AlarmBroadcastReceiver::class.java)
+        return PendingIntent.getBroadcast(context, id.toInt(), broadcastIntent, PendingIntent.FLAG_IMMUTABLE)
+    }
+    private fun getClickIntent(): PendingIntent {
+        val activityIntent = Intent(context, MainActivity::class.java)
+        return PendingIntent.getActivity(context, 0, activityIntent, PendingIntent.FLAG_IMMUTABLE)
     }
 }

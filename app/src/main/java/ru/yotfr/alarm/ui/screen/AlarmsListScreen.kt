@@ -42,14 +42,21 @@ fun AlarmsListScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(state.alarms) { alarmModel ->
-                AlarmItem(alarmModel = alarmModel)
+                AlarmItem(
+                    alarmModel = alarmModel,
+                    onToggle = {
+                        vm.toggleAlarm(alarmModel, !it)
+                    }
+                )
             }
         }
         FloatingActionButton(
             onClick = navigateToCreateAlarmScreen,
-            modifier = Modifier.align(
-                Alignment.BottomEnd
-            ).padding(16.dp)
+            modifier = Modifier
+                .align(
+                    Alignment.BottomEnd
+                )
+                .padding(16.dp)
         ) {
             Icon(
                 imageVector = Icons.Outlined.Add,
@@ -61,7 +68,10 @@ fun AlarmsListScreen(
 }
 
 @Composable
-fun AlarmItem(alarmModel: AlarmModel) {
+fun AlarmItem(
+    alarmModel: AlarmModel,
+    onToggle: (Boolean) -> Unit
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -72,7 +82,7 @@ fun AlarmItem(alarmModel: AlarmModel) {
         )
         Switch(
             checked = alarmModel.isActive,
-            onCheckedChange = {}
+            onCheckedChange = onToggle
         )
     }
 }

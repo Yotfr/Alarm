@@ -8,6 +8,7 @@ import ru.yotfr.alarm.domain.AlarmRepository
 import ru.yotfr.alarm.domain.AlarmScheduler
 import ru.yotfr.alarm.domain.CreateNewAlarmUseCase
 import ru.yotfr.alarm.domain.GetAllAlarmsUseCase
+import ru.yotfr.alarm.domain.ToggleAlarmStatusUseCase
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -24,6 +25,17 @@ object UseCaseModule {
         alarmScheduler: AlarmScheduler
     ): CreateNewAlarmUseCase {
         return CreateNewAlarmUseCase(
+            alarmRepository,
+            alarmScheduler
+        )
+    }
+
+    @Provides
+    fun provideToggleAlarmStatusUseCase(
+        alarmRepository: AlarmRepository,
+        alarmScheduler: AlarmScheduler
+    ): ToggleAlarmStatusUseCase {
+        return ToggleAlarmStatusUseCase(
             alarmRepository,
             alarmScheduler
         )

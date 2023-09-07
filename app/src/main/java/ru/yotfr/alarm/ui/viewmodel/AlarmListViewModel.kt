@@ -8,13 +8,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ru.yotfr.alarm.domain.AlarmModel
 import ru.yotfr.alarm.domain.GetAllAlarmsUseCase
+import ru.yotfr.alarm.domain.ToggleAlarmStatusUseCase
 import ru.yotfr.alarm.ui.state.AlarmsListScreenState
 import javax.inject.Inject
 
 @HiltViewModel
 class AlarmListViewModel @Inject constructor(
-    private val getAllAlarmsUseCase: GetAllAlarmsUseCase
+    private val getAllAlarmsUseCase: GetAllAlarmsUseCase,
+    private val toggleAlarmStatusUseCase: ToggleAlarmStatusUseCase
 ) : ViewModel() {
     private val _screenState = MutableStateFlow(AlarmsListScreenState())
     val screenState = _screenState.asStateFlow()
@@ -27,6 +30,12 @@ class AlarmListViewModel @Inject constructor(
                     )
                 }
             }
+        }
+    }
+
+    fun toggleAlarm(alarmModel: AlarmModel, value: Boolean) {
+        viewModelScope.launch {
+            toggleAlarmStatusUseCase(alarmModel, value)
         }
     }
 
