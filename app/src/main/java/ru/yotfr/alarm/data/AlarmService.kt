@@ -5,8 +5,10 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.core.net.toUri
 import ru.yotfr.alarm.MainActivity
 import ru.yotfr.alarm.R
+import ru.yotfr.alarm.ui.navigation.MY_URI_RING
 
 class AlarmService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
@@ -26,10 +28,15 @@ class AlarmService : Service() {
             .addAction(androidx.core.R.drawable.ic_call_decline, "", getCancelIntent())
             .setAutoCancel(true)
             .build()
-        val startActivityIntent = Intent(this, MainActivity::class.java).addFlags(
-            Intent.FLAG_ACTIVITY_NEW_TASK
+        val startScreenIntent = Intent(
+            Intent.ACTION_VIEW,
+            MY_URI_RING.toUri(),
+            this,
+            MainActivity::class.java
+        ).addFlags(
+            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         )
-        startActivity(startActivityIntent)
+        startActivity(startScreenIntent)
         startForeground(3, notification)
         return START_STICKY
     }
