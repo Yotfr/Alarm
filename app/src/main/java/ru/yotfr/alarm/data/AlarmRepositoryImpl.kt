@@ -36,4 +36,12 @@ class AlarmRepositoryImpl @Inject constructor(
     override suspend fun deleteAlarm(alarmModel: AlarmModel) {
         alarmDao.deleteAlarm(alarmModel.map())
     }
+
+    override suspend fun updateAlarm(alarmModel: AlarmModel) {
+        alarmDao.updateAlarm(alarmModel.map())
+    }
+
+    override suspend fun getAlarmById(id: Long): AlarmModel {
+        return alarmDao.getById(id).map()
+    }
 }

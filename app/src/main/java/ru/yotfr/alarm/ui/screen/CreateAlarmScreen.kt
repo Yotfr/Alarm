@@ -11,30 +11,60 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.flow.collectLatest
 import ru.yotfr.alarm.custom.TimePicker
+import ru.yotfr.alarm.ui.event.CreateAlarmEvent
 import ru.yotfr.alarm.ui.viewmodel.CreateAlarmViewModel
-
-
-@Preview
-@Composable
-fun CreateAlarmScreenPreview() {
-    CreateAlarmScreen()
-}
 
 @Composable
 fun CreateAlarmScreen(
-    vm: CreateAlarmViewModel = hiltViewModel()
+    vm: CreateAlarmViewModel = hiltViewModel(),
+    alarmId: Long?,
+    navigateBack: () -> Unit
 ) {
+
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+
+    LaunchedEffect(Unit) {
+        vm.enterScreen(alarmId)
+    }
+
+    LaunchedEffect(Unit) {
+        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            vm.event.collectLatest {
+                when (it) {
+                    CreateAlarmEvent.NavigateBack -> {
+                        navigateBack()
+                    }
+                }
+            }
+        }
+    }
+
+    val alarm by vm.screenState.collectAsState()
 
     val currentHour = remember { mutableStateOf(0) }
     val currentMinute = remember { mutableStateOf(0) }
+
+    LaunchedEffect(alarm) {
+        alarm?.let {
+            currentHour.value = it.triggerTime.hour
+            currentMinute.value = it.triggerTime.minute
+        }
+    }
+
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -60,7 +90,7 @@ fun CreateAlarmScreen(
         }
         Spacer(modifier = Modifier.height(32.dp))
         TextButton(onClick = {
-            vm.createNewAlarm(
+            vm.applyChanges(
                 hour = currentHour.value,
                 minute = currentMinute.value,
             )
@@ -68,7 +98,6 @@ fun CreateAlarmScreen(
             Text(text = "Create")
         }
     }
-
 
 
 }

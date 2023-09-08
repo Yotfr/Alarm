@@ -1,5 +1,6 @@
 package ru.yotfr.alarm.ui.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -30,7 +31,7 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun AlarmsListScreen(
     vm: AlarmListViewModel = hiltViewModel(),
-    navigateToCreateAlarmScreen: () -> Unit
+    navigateToCreateAlarmScreen: (Long?) -> Unit
 ) {
     val state by vm.screenState.collectAsState()
 
@@ -51,12 +52,15 @@ fun AlarmsListScreen(
                     },
                     delete = {
                         vm.deleteAlarm(alarmModel)
+                    },
+                    onClick = {
+                        navigateToCreateAlarmScreen(alarmModel.id)
                     }
                 )
             }
         }
         FloatingActionButton(
-            onClick = navigateToCreateAlarmScreen,
+            onClick = { navigateToCreateAlarmScreen(null) },
             modifier = Modifier
                 .align(
                     Alignment.BottomEnd
@@ -76,10 +80,12 @@ fun AlarmsListScreen(
 fun AlarmItem(
     alarmModel: AlarmModel,
     onToggle: (Boolean) -> Unit,
-    delete: () -> Unit
+    delete: () -> Unit,
+    onClick: () -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth()
+            .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
