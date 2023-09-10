@@ -4,14 +4,14 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import ru.yotfr.alarm.domain.AlarmRepository
-import ru.yotfr.alarm.domain.AlarmScheduler
-import ru.yotfr.alarm.domain.ChangeAlarmTriggerTimeUseCase
-import ru.yotfr.alarm.domain.CreateNewAlarmUseCase
-import ru.yotfr.alarm.domain.DeleteAlarmUseCase
-import ru.yotfr.alarm.domain.GetAlarmByIdUseCase
-import ru.yotfr.alarm.domain.GetAllAlarmsUseCase
-import ru.yotfr.alarm.domain.ToggleAlarmStatusUseCase
+import ru.yotfr.alarm.domain.repository.AlarmRepository
+import ru.yotfr.alarm.domain.repository.AlarmScheduler
+import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
+import ru.yotfr.alarm.domain.usecase.CreateNewAlarmUseCase
+import ru.yotfr.alarm.domain.usecase.DeleteAlarmUseCase
+import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
+import ru.yotfr.alarm.domain.usecase.GetAllAlarmsUseCase
+import ru.yotfr.alarm.domain.usecase.ToggleAlarmStatusUseCase
 
 @Module
 @InstallIn(ViewModelComponent::class)

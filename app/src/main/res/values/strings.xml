@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Alarm</string>
+
+    <string name="alarms">Alarms</string>
+    <string name="ring_in">Ring in</string>
+    <string name="repeat">Repeat</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+
+    <string name="days">days</string>
+    <string name="day">day</string>
+    <string name="minute">minute</string>
+    <string name="minutes">minutes</string>
+    <string name="hour">hour</string>
+    <string name="hours">hours</string>
+    <string name="less_than">less than 1 minute</string>
 </resources>

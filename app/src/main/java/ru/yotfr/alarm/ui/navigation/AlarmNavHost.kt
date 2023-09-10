@@ -7,8 +7,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import ru.yotfr.alarm.ui.screen.AlarmRingScreen
-import ru.yotfr.alarm.ui.screen.AlarmsListScreen
-import ru.yotfr.alarm.ui.screen.CreateAlarmScreen
+import ru.yotfr.alarm.ui.alarmlist.screen.AlarmsListScreen
+import ru.yotfr.alarm.ui.createalarm.screen.CreateAlarmScreen
 
 const val MY_URI_RING = "https://yotfr.com/ring"
 

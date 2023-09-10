@@ -29,8 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".data.AlarmBroadcastReceiver"/>
-        <service android:name=".data.AlarmService"/>
+        <receiver android:name=".data.receiver.AlarmBroadcastReceiver"/>
+        <service android:name=".data.service.AlarmService"/>
     </application>
 
 </manifest>

@@ -67,6 +67,9 @@ dependencies {
     val espressoVersion = "3.5.1"
     val hiltNavVersion = "1.0.0"
 
+    // TimePicker
+    implementation("com.github.commandiron:WheelPickerCompose:1.1.11")
+
     // Desugaring
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 

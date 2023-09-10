@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ru.yotfr.alarm.data.AlarmDao
-import ru.yotfr.alarm.data.AlarmDatabase
+import ru.yotfr.alarm.data.datasource.AlarmDao
+import ru.yotfr.alarm.data.datasource.AlarmDatabase
 import javax.inject.Singleton
 
 @Module

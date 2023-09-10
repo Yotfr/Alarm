@@ -10,10 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import ru.yotfr.alarm.data.AlarmService
+import ru.yotfr.alarm.data.service.AlarmService
 
 @Composable
-fun AlarmRingScreen() {
+fun AlarmRingScreen(
+) {
     val context = LocalContext.current
 
     Row (
