@@ -24,109 +24,109 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-@Preview
-@Composable
-fun AlarmFABPreview() {
-    AlarmTheme() {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = Color.Black)
-        ) {
-            AlarmFAB({})
-        }
-
-    }
-}
-
-@Composable
-fun AlarmFAB(
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = Modifier.size(78.dp)
-            .clickable(
-                indication = null,
-                interactionSource = remember { MutableInteractionSource() }
-            ) {
-                onClick()
-            }
-            .shadow(
-                elevation = 8.dp,
-                shape = CircleShape,
-                clip = false,
-                spotColor = AlarmTheme.colors.shadow
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        Surface(
-            modifier = Modifier
-                .size(78.dp)
-                .background(
-                    brush = Brush.radialGradient(
-                        colors = listOf(
-                            AlarmTheme.colors.primary,
-                            AlarmTheme.colors.surface,
-                        )
-                    ),
-                    shape = CircleShape
-                ),
-            color = Color.Transparent,
-            shape = CircleShape
-        ) {}
-        Surface(
-            modifier = Modifier
-                .size(64.dp)
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = listOf(
-                            AlarmTheme.colors.shadow.copy(
-                                alpha = 0.6f
-                            ),
-                            AlarmTheme.colors.shadow
-                        ),
-                        start = Offset(0f, 0f),
-                        end = Offset(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
-                    ),
-                    shape = CircleShape
-                ),
-            color = Color.Transparent,
-            shape = CircleShape
-        ) {}
-        Surface(
-            modifier = Modifier
-                .size(60.dp)
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = listOf(
-                            AlarmTheme.colors.primary,
-                            AlarmTheme.colors.primarySecond
-                        ),
-                        start = Offset(0f, 0f),
-                        end = Offset(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
-                    ),
-                    shape = CircleShape
-                )
-                .border(
-                    width = 3.dp,
-                    brush = Brush.linearGradient(
-                        colors = listOf(
-                            AlarmTheme.colors.primarySecond,
-                            AlarmTheme.colors.primary
-                        ),
-                        start = Offset(0f, 0f),
-                        end = Offset(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
-                    ),
-                    shape = CircleShape
-                )
-            ,
-            color = Color.Transparent,
-            shape = CircleShape
-        ) {}
-        Icon(
-            imageVector = Icons.Filled.Add,
-            contentDescription = null,
-            tint = AlarmTheme.colors.background
-        )
-    }
-}
+//@Preview
+//@Composable
+//fun AlarmFABPreview() {
+//    AlarmTheme() {
+//        Box(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .background(color = Color.Black)
+//        ) {
+//            AlarmFAB({})
+//        }
+//
+//    }
+//}
+//
+//@Composable
+//fun AlarmFAB(
+//    onClick: () -> Unit
+//) {
+//    Box(
+//        modifier = Modifier.size(78.dp)
+//            .clickable(
+//                indication = null,
+//                interactionSource = remember { MutableInteractionSource() }
+//            ) {
+//                onClick()
+//            }
+//            .shadow(
+//                elevation = 8.dp,
+//                shape = CircleShape,
+//                clip = false,
+//                spotColor = AlarmTheme.colors.shadow
+//            ),
+//        contentAlignment = Alignment.Center
+//    ) {
+//        Surface(
+//            modifier = Modifier
+//                .size(78.dp)
+//                .background(
+//                    brush = Brush.radialGradient(
+//                        colors = listOf(
+//                            AlarmTheme.colors.primary,
+//                            AlarmTheme.colors.surface,
+//                        )
+//                    ),
+//                    shape = CircleShape
+//                ),
+//            color = Color.Transparent,
+//            shape = CircleShape
+//        ) {}
+//        Surface(
+//            modifier = Modifier
+//                .size(64.dp)
+//                .background(
+//                    brush = Brush.linearGradient(
+//                        colors = listOf(
+//                            AlarmTheme.colors.shadow.copy(
+//                                alpha = 0.6f
+//                            ),
+//                            AlarmTheme.colors.shadow
+//                        ),
+//                        start = Offset(0f, 0f),
+//                        end = Offset(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
+//                    ),
+//                    shape = CircleShape
+//                ),
+//            color = Color.Transparent,
+//            shape = CircleShape
+//        ) {}
+//        Surface(
+//            modifier = Modifier
+//                .size(60.dp)
+//                .background(
+//                    brush = Brush.linearGradient(
+//                        colors = listOf(
+//                            AlarmTheme.colors.primary,
+//                            AlarmTheme.colors.primarySecond
+//                        ),
+//                        start = Offset(0f, 0f),
+//                        end = Offset(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
+//                    ),
+//                    shape = CircleShape
+//                )
+//                .border(
+//                    width = 3.dp,
+//                    brush = Brush.linearGradient(
+//                        colors = listOf(
+//                            AlarmTheme.colors.primarySecond,
+//                            AlarmTheme.colors.primary
+//                        ),
+//                        start = Offset(0f, 0f),
+//                        end = Offset(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY)
+//                    ),
+//                    shape = CircleShape
+//                )
+//            ,
+//            color = Color.Transparent,
+//            shape = CircleShape
+//        ) {}
+//        Icon(
+//            imageVector = Icons.Filled.Add,
+//            contentDescription = null,
+//            tint = AlarmTheme.colors.background
+//        )
+//    }
+//}

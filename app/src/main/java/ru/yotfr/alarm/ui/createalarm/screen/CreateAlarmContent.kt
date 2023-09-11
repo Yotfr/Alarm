@@ -95,10 +95,10 @@ fun CreateAlarmContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(
-                        color = AlarmTheme.colors.surface,
-                        shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
-                    )
+//                    .background(
+//                        color = AlarmTheme.colors.surface,
+//                        shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
+//                    )
                     .border(
                         1.dp,
                         shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
@@ -115,10 +115,10 @@ fun CreateAlarmContent(
                     modifier = Modifier.align(Alignment.Start)
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                WeekDayRow(
-                    activeWeekDays = activeWeekDays,
-                    onWeekDayClicked = onWeekDayClicked
-                )
+//                WeekDayRow(
+//                    activeWeekDays = activeWeekDays,
+//                    onWeekDayClicked = onWeekDayClicked
+//                )
             }
         }
     }

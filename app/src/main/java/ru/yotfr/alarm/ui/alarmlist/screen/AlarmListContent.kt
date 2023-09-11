@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
@@ -55,7 +54,9 @@ fun AlarmListContent(
             .background(
                 color = AlarmTheme.colors.background
             ),
-        floatingActionButton = { AlarmFAB(onClick = onPlusClicked) },
+        floatingActionButton = {
+
+        },
         topBar = { AlarmListTopAppBar() },
         floatingActionButtonPosition = FabPosition.Center
     ) { paddingValues ->
@@ -64,14 +65,14 @@ fun AlarmListContent(
             verticalArrangement = Arrangement.spacedBy(22.dp),
             modifier = Modifier.padding(paddingValues)
         ) {
-            items(alarms) { alarmModel ->
-                AlarmItem (
-                    alarmModel = alarmModel,
-                    switchCheckedChange = { switchChecked(alarmModel, it) },
-                    onClick = onAlarmClicked,
-                    onDeleteClicked = onDeleteClicked
-                )
-            }
+//            items(alarms) { alarmModel ->
+//                AlarmItem (
+//                    alarmModel = alarmModel,
+//                    switchCheckedChange = { switchChecked(alarmModel, it) },
+//                    onClick = onAlarmClicked,
+//                    onDeleteClicked = onDeleteClicked
+//                )
+//            }
         }
     }
 }

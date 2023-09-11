@@ -1,75 +1,29 @@
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-val light_primary = Color(0xFF785A00)
-val light_onPrimary = Color(0xFFFFFFFF)
-val light_primaryContainer = Color(0xFFFFDF9C)
-val light_onPrimaryContainer = Color(0xFF251A00)
-val light_secondary = Color(0xFF6B5D3F)
-val light_onSecondary = Color(0xFFFFFFFF)
-val light_secondaryContainer = Color(0xFFF4E0BB)
-val light_onSecondaryContainer = Color(0xFF241A04)
-val light_tertiary = Color(0xFF4A6547)
-val light_onTertiary = Color(0xFFFFFFFF)
-val light_tertiaryContainer = Color(0xFFCBEBC5)
-val light_onTertiaryContainer = Color(0xFF072109)
-val light_error = Color(0xFFBA1A1A)
-val light_errorContainer = Color(0xFFFFDAD6)
-val light_onError = Color(0xFFFFFFFF)
-val light_onErrorContainer = Color(0xFF410002)
-val light_background = Color(0xFFFFFBFF)
-val light_onBackground = Color(0xFF1E1B16)
-val light_surface = Color(0xFFFFFBFF)
-val light_onSurface = Color(0xFF1E1B16)
-val light_surfaceVariant = Color(0xFFEDE1CF)
-val light_onSurfaceVariant = Color(0xFF4D4639)
-val light_outline = Color(0xFF7F7667)
-val light_inverseOnSurface = Color(0xFFF7F0E7)
-val light_inverseSurface = Color(0xFF33302A)
-val light_inversePrimary = Color(0xFFF1C048)
-val light_shadow = Color(0xFF000000)
-val light_surfaceTint = Color(0xFF785A00)
-val light_outlineVariant = Color(0xFFD0C5B4)
-val light_scrim = Color(0xFF000000)
+@Immutable
+data class AlarmColors(
+    val background: Color,
+    val text: Color,
+    val accent: Color,
+    val lightShadow: Color,
+    val darkShadow: Color
+)
 
-val dark_primary = Color(0xFFF1C048)
-val dark_onPrimary = Color(0xFF3F2E00)
-val dark_primaryContainer = Color(0xFF5B4300)
-val dark_onPrimaryContainer = Color(0xFFFFDF9C)
-val dark_secondary = Color(0xFFD7C4A0)
-val dark_onSecondary = Color(0xFF3A2F15)
-val dark_secondaryContainer = Color(0xFF52452A)
-val dark_onSecondaryContainer = Color(0xFFF4E0BB)
-val dark_tertiary = Color(0xFFB0CFAA)
-val dark_onTertiary = Color(0xFF1C361C)
-val dark_tertiaryContainer = Color(0xFF324D31)
-val dark_onTertiaryContainer = Color(0xFFCBEBC5)
-val dark_error = Color(0xFFFFB4AB)
-val dark_errorContainer = Color(0xFF93000A)
-val dark_onError = Color(0xFF690005)
-val dark_onErrorContainer = Color(0xFFFFDAD6)
-val dark_background = Color(0xFF1E1B16)
-val dark_onBackground = Color(0xFFE9E1D9)
-val dark_surface = Color(0xFF1E1B16)
-val dark_onSurface = Color(0xFFE9E1D9)
-val dark_surfaceVariant = Color(0xFF4D4639)
-val dark_onSurfaceVariant = Color(0xFFD0C5B4)
-val dark_outline = Color(0xFF999080)
-val dark_inverseOnSurface = Color(0xFF1E1B16)
-val dark_inverseSurface = Color(0xFFE9E1D9)
-val dark_inversePrimary = Color(0xFF785A00)
-val dark_shadow = Color(0xFF000000)
-val dark_surfaceTint = Color(0xFFF1C048)
-val dark_outlineVariant = Color(0xFF4D4639)
-val dark_scrim = Color(0xFF000000)
+val LocalColors = staticCompositionLocalOf {
+    AlarmColors(
+        background = Color.Unspecified,
+        text = Color.Unspecified,
+        accent = Color.Unspecified,
+        lightShadow = Color.Unspecified,
+        darkShadow = Color.Unspecified
+    )
+}
 
 
-
-
-
-val background = Color(0xFFE2E4EA)
-val surface = Color(0xFFEEF0F5)
-val primary = Color(0xFFFD2A22)
-val primarySecond = Color(0xFFFE6C57)
-val text = Color(0xFF646E82)
-val shadow = Color(0x25A6B4C8)
-val accentBorder = Color(0xFFFDFDFE)
+val backgroundColor = Color(0xFFEDEDED)
+val textColor = Color(0xFF828E94)
+val accentColor = Color(0xFFFF6B00)
+val lightShadowColor = Color(0xFFFFFFFF)
+val darkShadowColor = Color(0x25000000)
