@@ -44,15 +44,18 @@ fun SnoozeSoundSection(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .fillMaxWidth()
-            .pressedShadow(
+            .punchedShadow(
                 offsetX = AlarmTheme.shadowOffset.default,
                 offsetY = AlarmTheme.shadowOffset.default,
                 blurRadius = AlarmTheme.shadowBlurRadius.default,
+                shape = Shape.RoundedRect,
                 darkColor = AlarmTheme.colors.darkShadow,
                 lightColor = AlarmTheme.colors.lightShadow,
-                shape = Shape.RoundedRect,
-                cornerRadius = AlarmTheme.shapeCornerRadius.default,
-                backgroundColor = AlarmTheme.colors.background
+                cornerRadius = AlarmTheme.shapeCornerRadius.default
+            )
+            .clip(AlarmTheme.shape.default)
+            .background(
+                color = AlarmTheme.colors.background
             )
             .padding(horizontal = 16.dp)
     ) {
@@ -77,18 +80,16 @@ fun SnoozeSoundSection(
                     ) {
                         isSnoozeDialogOpened = true
                     }
-                    .punchedShadow(
+                    .clip(AlarmTheme.shape.small)
+                    .pressedShadow(
                         offsetX = AlarmTheme.shadowOffset.default,
                         offsetY = AlarmTheme.shadowOffset.default,
                         blurRadius = AlarmTheme.shadowBlurRadius.default,
-                        shape = Shape.RoundedRect,
                         darkColor = AlarmTheme.colors.darkShadow,
                         lightColor = AlarmTheme.colors.lightShadow,
-                        cornerRadius = AlarmTheme.shapeCornerRadius.small
-                    )
-                    .clip(AlarmTheme.shape.small)
-                    .background(
-                        color = AlarmTheme.colors.background
+                        shape = Shape.RoundedRect,
+                        cornerRadius = AlarmTheme.shapeCornerRadius.small,
+                        backgroundColor = AlarmTheme.colors.background
                     )
                     .padding(
                         top = 4.dp,
@@ -131,18 +132,16 @@ fun SnoozeSoundSection(
                     ) {
                        //TODO
                     }
-                    .punchedShadow(
+                    .clip(AlarmTheme.shape.small)
+                    .pressedShadow(
                         offsetX = AlarmTheme.shadowOffset.default,
                         offsetY = AlarmTheme.shadowOffset.default,
                         blurRadius = AlarmTheme.shadowBlurRadius.default,
-                        shape = Shape.RoundedRect,
                         darkColor = AlarmTheme.colors.darkShadow,
                         lightColor = AlarmTheme.colors.lightShadow,
-                        cornerRadius = AlarmTheme.shapeCornerRadius.small
-                    )
-                    .clip(AlarmTheme.shape.small)
-                    .background(
-                        color = AlarmTheme.colors.background
+                        shape = Shape.RoundedRect,
+                        cornerRadius = AlarmTheme.shapeCornerRadius.small,
+                        backgroundColor = AlarmTheme.colors.background
                     )
                     .padding(
                         top = 4.dp,

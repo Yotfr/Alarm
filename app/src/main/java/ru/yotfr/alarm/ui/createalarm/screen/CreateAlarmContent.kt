@@ -88,8 +88,7 @@ fun CreateAlarmContent(
         containerColor = AlarmTheme.colors.background,
         floatingActionButton = {
             CreateAlarmFAB(
-                onClick = onSaveClicked,
-                gradient = true
+                onClick = onSaveClicked
             )
         },
         floatingActionButtonPosition = FabPosition.Center
@@ -106,7 +105,7 @@ fun CreateAlarmContent(
             TimePicker(
                 onTimeChanged = onTimeChanged
             )
-            Spacer(modifier = Modifier.height(42.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             WeekDaySection(
                 activeWeekDays = activeWeekDays,
                 onWeekDayClicked = onWeekDayClicked,
@@ -122,7 +121,7 @@ fun CreateAlarmContent(
                 snooze = alarmModel.snooze,
                 onSnoozeChanged = onSnoozeChanged
             )
-            Spacer(modifier = Modifier.height(80.dp))
+            Spacer(modifier = Modifier.height(100.dp))
         }
     }
 

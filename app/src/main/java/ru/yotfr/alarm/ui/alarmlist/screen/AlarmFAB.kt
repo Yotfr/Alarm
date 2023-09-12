@@ -36,8 +36,7 @@ fun AlarmFabPreview() {
         ) {
             AlarmFAB(
                 onClick = {},
-                isVisible = true,
-                gradient = true
+                isVisible = true
             )
         }
     }
@@ -46,41 +45,15 @@ fun AlarmFabPreview() {
 @Composable
 fun AlarmFAB(
     onClick: () -> Unit,
-    isVisible: Boolean,
-    //TODO: DELETE
-    gradient: Boolean = false
+    isVisible: Boolean
 ) {
     AnimatedVisibility(
         visible = isVisible,
         enter = slideInVertically(initialOffsetY = { it * 2 }),
         exit = slideOutVertically(targetOffsetY = { it * 2 })
     ) {
-        val modifier = if (gradient) {
-            Modifier
-                .size(48.dp)
-                .clickable(
-                    indication = null,
-                    interactionSource = remember { MutableInteractionSource() }
-                ) { onClick() }
-                .punchedShadow(
-                    offsetX = AlarmTheme.shadowOffset.extraLarge,
-                    offsetY = AlarmTheme.shadowOffset.extraLarge,
-                    blurRadius = AlarmTheme.shadowBlurRadius.large,
-                    shape = Shape.RoundedRect,
-                    darkColor = AlarmTheme.colors.darkShadow,
-                    lightColor = AlarmTheme.colors.lightShadow,
-                    cornerRadius = AlarmTheme.shapeCornerRadius.default
-                )
-                .clip(AlarmTheme.shape.default)
-                .angledGradient(
-                    colors = listOf(
-                        AlarmTheme.colors.disabledAccent,
-                        AlarmTheme.colors.accent
-                    ),
-                    angle = 315f
-                )
-        } else {
-            Modifier
+        Box(
+            modifier = Modifier
                 .size(48.dp)
                 .clickable(
                     indication = null,
@@ -98,10 +71,7 @@ fun AlarmFAB(
                 .clip(AlarmTheme.shape.default)
                 .background(
                     color = AlarmTheme.colors.accent
-                )
-        }
-        Box(
-            modifier = modifier,
+                ),
             contentAlignment = Alignment.Center
         ) {
             Icon(

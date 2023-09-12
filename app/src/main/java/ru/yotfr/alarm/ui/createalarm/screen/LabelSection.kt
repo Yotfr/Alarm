@@ -70,15 +70,18 @@ fun LabelSection(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .fillMaxWidth()
-            .pressedShadow(
+            .punchedShadow(
                 offsetX = AlarmTheme.shadowOffset.default,
                 offsetY = AlarmTheme.shadowOffset.default,
                 blurRadius = AlarmTheme.shadowBlurRadius.default,
+                shape = Shape.RoundedRect,
                 darkColor = AlarmTheme.colors.darkShadow,
                 lightColor = AlarmTheme.colors.lightShadow,
-                shape = Shape.RoundedRect,
-                cornerRadius = AlarmTheme.shapeCornerRadius.default,
-                backgroundColor = AlarmTheme.colors.background
+                cornerRadius = AlarmTheme.shapeCornerRadius.default
+            )
+            .clip(AlarmTheme.shape.default)
+            .background(
+                color = AlarmTheme.colors.background
             )
             .padding(horizontal = 16.dp)
     ) {
@@ -146,18 +149,16 @@ fun PressedTextField(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .punchedShadow(
+                    .clip(AlarmTheme.shape.default)
+                    .pressedShadow(
                         offsetX = AlarmTheme.shadowOffset.default,
                         offsetY = AlarmTheme.shadowOffset.default,
                         blurRadius = AlarmTheme.shadowBlurRadius.default,
-                        shape = Shape.RoundedRect,
                         darkColor = AlarmTheme.colors.darkShadow,
                         lightColor = AlarmTheme.colors.lightShadow,
-                        cornerRadius = AlarmTheme.shapeCornerRadius.default
-                    )
-                    .clip(AlarmTheme.shape.default)
-                    .background(
-                        color = AlarmTheme.colors.background
+                        shape = Shape.RoundedRect,
+                        cornerRadius = AlarmTheme.shapeCornerRadius.default,
+                        backgroundColor = AlarmTheme.colors.background
                     )
                     .padding(16.dp)
                     .animateContentSize()

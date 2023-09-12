@@ -19,7 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.R
 import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.angledGradient
 import ru.yotfr.alarm.ui.common.punchedShadow
 
 @Preview
@@ -33,8 +32,7 @@ fun CreateFabPreview() {
             contentAlignment = Alignment.Center
         ) {
             CreateAlarmFAB(
-                onClick = {},
-                gradient = true
+                onClick = {}
             )
         }
     }
@@ -42,38 +40,11 @@ fun CreateFabPreview() {
 
 @Composable
 fun CreateAlarmFAB(
-    onClick: () -> Unit,
-    //TODO: DELETE
-    gradient: Boolean = false
+    onClick: () -> Unit
 ) {
-    val modifier = if (gradient) {
-        Modifier
-            .padding(horizontal = 32.dp)
-            .fillMaxWidth()
-            .clickable(
-                indication = null,
-                interactionSource = remember { MutableInteractionSource() }
-            ) { onClick() }
-            .punchedShadow(
-                offsetX = AlarmTheme.shadowOffset.extraLarge,
-                offsetY = AlarmTheme.shadowOffset.extraLarge,
-                blurRadius = AlarmTheme.shadowBlurRadius.large,
-                shape = Shape.RoundedRect,
-                darkColor = AlarmTheme.colors.darkShadow,
-                lightColor = AlarmTheme.colors.lightShadow,
-                cornerRadius = AlarmTheme.shapeCornerRadius.default
-            )
-            .clip(AlarmTheme.shape.default)
-            .angledGradient(
-                colors = listOf(
-                    AlarmTheme.colors.disabledAccent,
-                    AlarmTheme.colors.accent
-                ),
-                angle = 315f
-            )
-    } else {
-        Modifier
-            .padding(horizontal = 32.dp)
+    Box(
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
             .fillMaxWidth()
             .clickable(
                 indication = null,
@@ -92,9 +63,6 @@ fun CreateAlarmFAB(
             .background(
                 color = AlarmTheme.colors.accent
             )
-    }
-    Box(
-        modifier = modifier
             .padding(vertical = 12.dp),
         contentAlignment = Alignment.Center
     ) {

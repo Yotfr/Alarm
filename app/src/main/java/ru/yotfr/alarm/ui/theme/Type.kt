@@ -16,6 +16,10 @@ val Geologica = FontFamily(
 
 @Immutable
 data class AlarmTypography(
+    val displayLarge: TextStyle = TextStyle(
+        fontSize = 50.sp,
+        fontFamily = Geologica
+    ),
     val display: TextStyle = TextStyle(
         fontSize = 34.sp,
         fontFamily = Geologica

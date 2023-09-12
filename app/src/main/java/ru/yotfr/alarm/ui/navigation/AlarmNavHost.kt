@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
-import ru.yotfr.alarm.ui.screen.AlarmRingScreen
+import ru.yotfr.alarm.ui.alarmring.AlarmRingScreen
 import ru.yotfr.alarm.ui.alarmlist.screen.AlarmsListScreen
 import ru.yotfr.alarm.ui.createalarm.screen.CreateAlarmScreen
 
@@ -42,7 +42,7 @@ fun AlarmNavHost() {
             route = "ring",
             deepLinks = listOf(navDeepLink { uriPattern = MY_URI_RING })
         ) {
-            AlarmRingScreen()
+            //AlarmRingScreen()
         }
     }
 }

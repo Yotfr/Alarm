@@ -3,6 +3,7 @@ package ru.yotfr.alarm.ui.createalarm.screen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -20,12 +21,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.R
 import ru.yotfr.alarm.domain.model.WeekDays
 import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.pressedShadow
+import ru.yotfr.alarm.ui.common.punchedShadow
 
 @Composable
 fun WeekDaySection(
@@ -37,15 +39,18 @@ fun WeekDaySection(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .fillMaxWidth()
-            .pressedShadow(
+            .punchedShadow(
                 offsetX = AlarmTheme.shadowOffset.default,
                 offsetY = AlarmTheme.shadowOffset.default,
                 blurRadius = AlarmTheme.shadowBlurRadius.default,
+                shape = Shape.RoundedRect,
                 darkColor = AlarmTheme.colors.darkShadow,
                 lightColor = AlarmTheme.colors.lightShadow,
-                shape = Shape.RoundedRect,
-                cornerRadius = AlarmTheme.shapeCornerRadius.default,
-                backgroundColor = AlarmTheme.colors.background
+                cornerRadius = AlarmTheme.shapeCornerRadius.default
+            )
+            .clip(AlarmTheme.shape.default)
+            .background(
+                color = AlarmTheme.colors.background
             )
             .padding(horizontal = 16.dp)
     ) {

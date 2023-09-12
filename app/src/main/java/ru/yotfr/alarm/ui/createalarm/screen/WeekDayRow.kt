@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.domain.model.WeekDays
 import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.punchedShadow
+import ru.yotfr.alarm.ui.common.pressedShadow
 import java.time.DayOfWeek
 import java.time.format.TextStyle
 import java.util.Locale
@@ -122,20 +122,18 @@ fun WeekDayCard(
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() }
             ) { onClick(weekDay) }
-            .punchedShadow(
+            .clip(AlarmTheme.shape.extraSmall)
+            .pressedShadow(
                 offsetX = AlarmTheme.shadowOffset.default,
                 offsetY = AlarmTheme.shadowOffset.default,
                 blurRadius = AlarmTheme.shadowBlurRadius.default,
-                shape = Shape.RoundedRect,
                 darkColor = AlarmTheme.colors.darkShadow,
                 lightColor = AlarmTheme.colors.lightShadow,
-                cornerRadius = AlarmTheme.shapeCornerRadius.extraSmall
+                shape = Shape.RoundedRect,
+                cornerRadius = AlarmTheme.shapeCornerRadius.extraSmall,
+                backgroundColor = AlarmTheme.colors.background
             )
-            .clip(AlarmTheme.shape.extraSmall)
-            .background(
-                color = AlarmTheme.colors.background
-            ),
-        contentAlignment = Alignment.Center
+        ,contentAlignment = Alignment.Center
     ) {
         Text(
             text = when (weekDay) {
