@@ -28,11 +28,21 @@ val LocalColors = staticCompositionLocalOf {
 }
 
 
-val backgroundColor = Color(0xFFEDEDED)
-val disabledBackgroundColor = Color(0x50EDEDED)
-val textColor = Color(0xFF828E94)
-val disabledTextColor = Color(0x50828E94)
-val accentColor = Color(0xFFFF6B00)
-val disabledAccentColor = Color(0x50FF6B00)
-val lightShadowColor = Color(0xFFFFFFFF)
-val darkShadowColor = Color(0x25000000)
+val lightBackgroundColor = Color(0xFFEDEDED)
+val lightDisabledBackgroundColor = Color(0x50EDEDED)
+val lightTextColor = Color(0xFF828E94)
+val lightDisabledTextColor = Color(0x50828E94)
+val lightAccentColor = Color(0xFFFF6B00)
+val lightDisabledAccentColor = Color(0x50FF6B00)
+val lightLightShadowColor = Color(0xFFFFFFFF)
+val lightDarkShadowColor = Color(0x25000000)
+
+
+val darkBackgroundColor = Color(0xFF828E94)
+val darkDisabledBackgroundColor = Color(0x50828E94)
+val darkTextColor = Color(0xFFEDEDED)
+val darkDisabledTextColor = Color(0x50EDEDED)
+val darkAccentColor = Color(0xFFFF6B00)
+val darkDisabledAccentColor = Color(0x50FF6B00)
+val darkLightShadowColor = Color(0xFFFFFFFF)
+val darkDarkShadowColor = Color(0x25000000)

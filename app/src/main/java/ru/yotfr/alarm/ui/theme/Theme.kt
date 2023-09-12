@@ -42,19 +42,34 @@ object AlarmTheme {
 
 @Composable
 fun AlarmTheme(
+    isDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
 
-    val colors = AlarmColors(
-        background = backgroundColor,
-        text = textColor,
-        accent = accentColor,
-        lightShadow = lightShadowColor,
-        darkShadow = darkShadowColor,
-        disabledText = disabledTextColor,
-        disabledAccent = disabledAccentColor,
-        disabledBackground = disabledBackgroundColor
-    )
+    val colors = if (isDarkTheme) {
+        AlarmColors(
+            background = darkBackgroundColor,
+            text = darkTextColor,
+            accent = darkAccentColor,
+            lightShadow = darkLightShadowColor,
+            darkShadow = darkDarkShadowColor,
+            disabledText = darkDisabledTextColor,
+            disabledAccent = darkDisabledAccentColor,
+            disabledBackground = darkDisabledBackgroundColor
+        )
+    } else {
+        AlarmColors(
+            background = lightBackgroundColor,
+            text = lightTextColor,
+            accent = lightAccentColor,
+            lightShadow = lightLightShadowColor,
+            darkShadow = lightDarkShadowColor,
+            disabledText = lightDisabledTextColor,
+            disabledAccent = lightDisabledAccentColor,
+            disabledBackground = lightDisabledBackgroundColor
+        )
+    }
+
     val shape = Shape()
     val spacing = Spacing()
     val shadowOffset = ShadowOffset()

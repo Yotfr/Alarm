@@ -21,7 +21,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.angledGradient
 import ru.yotfr.alarm.ui.common.punchedShadow
 
 @Preview
