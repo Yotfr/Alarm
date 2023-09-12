@@ -3,30 +3,30 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
 import AlarmTheme
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import ru.yotfr.alarm.R
+import ru.yotfr.alarm.domain.model.AlarmModel
+import ru.yotfr.alarm.domain.model.Snooze
 import ru.yotfr.alarm.domain.model.WeekDays
 import java.time.LocalTime
 
@@ -35,6 +35,8 @@ import java.time.LocalTime
 fun CreateAlarmContentPreview() {
     AlarmTheme {
         val activeList = remember { mutableStateListOf(WeekDays.MONDAY, WeekDays.SATURDAY) }
+        var alarm by remember { mutableStateOf(AlarmModel()) }
+        var snooze by remember { mutableStateOf(Snooze.FIVE) }
         CreateAlarmContent(
             remainTime = "1 day",
             onBackPressed = {},
@@ -45,7 +47,16 @@ fun CreateAlarmContentPreview() {
                 } else {
                     activeList.add(it)
                 }
-            }, {}, {}
+            }, {}, {},
+            onLabelChanged = {
+                alarm = alarm.copy(
+                    label = it
+                )
+            },
+            alarmModel = alarm,
+            onSnoozeChanged = { snooze = it },
+            label = "",
+            onClearedWeekDays = { activeList.removeAll { true } }
         )
     }
 }
@@ -57,7 +68,12 @@ fun CreateAlarmContent(
     activeWeekDays: List<WeekDays>,
     onWeekDayClicked: (WeekDays) -> Unit,
     onSaveClicked: () -> Unit,
-    onTimeChanged: (LocalTime) -> Unit
+    onTimeChanged: (LocalTime) -> Unit,
+    label: String,
+    alarmModel: AlarmModel,
+    onLabelChanged: (String) -> Unit,
+    onSnoozeChanged: (Snooze) -> Unit,
+    onClearedWeekDays: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -66,60 +82,47 @@ fun CreateAlarmContent(
                 onBackPressed = onBackPressed
             )
         },
-        modifier = Modifier.fillMaxSize(),
-        contentColor = Color.Transparent,
+        modifier = Modifier
+            .fillMaxSize()
+            .nestedScroll(rememberNestedScrollInteropConnection()),
+        containerColor = AlarmTheme.colors.background,
         floatingActionButton = {
-            Button(onClick = onSaveClicked) {
-                Text(
-                    text = stringResource(id = R.string.save),
-                    fontSize = 18.sp,
-                    color = AlarmTheme.colors.text,
-                    textAlign = TextAlign.Start
-                )
-            }
-        }
+            CreateAlarmFAB(
+                onClick = onSaveClicked,
+                gradient = true
+            )
+        },
+        floatingActionButtonPosition = FabPosition.Center
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues),
+                .verticalScroll(rememberScrollState())
+                .padding(paddingValues)
+                .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(22.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             TimePicker(
-                modifier = Modifier,
                 onTimeChanged = onTimeChanged
             )
             Spacer(modifier = Modifier.height(42.dp))
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxSize()
-//                    .background(
-//                        color = AlarmTheme.colors.surface,
-//                        shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
-//                    )
-                    .border(
-                        1.dp,
-                        shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
-                        color = Color.White
-                    )
-                    .padding(horizontal = 16.dp)
-            ) {
-                Spacer(modifier = Modifier.height(22.dp))
-                Text(
-                    text = stringResource(id = R.string.repeat),
-                    fontSize = 18.sp,
-                    color = AlarmTheme.colors.text,
-                    textAlign = TextAlign.Start,
-                    modifier = Modifier.align(Alignment.Start)
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-//                WeekDayRow(
-//                    activeWeekDays = activeWeekDays,
-//                    onWeekDayClicked = onWeekDayClicked
-//                )
-            }
+            WeekDaySection(
+                activeWeekDays = activeWeekDays,
+                onWeekDayClicked = onWeekDayClicked,
+                onClearWeekDaysClicked = onClearedWeekDays
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            LabelSection(
+                value = label,
+                onValueChange = onLabelChanged
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            SnoozeSoundSection(
+                snooze = alarmModel.snooze,
+                onSnoozeChanged = onSnoozeChanged
+            )
+            Spacer(modifier = Modifier.height(80.dp))
         }
     }
 

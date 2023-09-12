@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 data class Shape(
     val default: Shape = RoundedCornerShape(12.dp),
     val small: Shape = RoundedCornerShape(8.dp),
+    val extraSmall: Shape = RoundedCornerShape(4.dp),
     val circle: Shape = CircleShape
 )
 

@@ -1,5 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -9,6 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.flow.collectLatest
+import ru.yotfr.alarm.domain.model.AlarmModel
 import ru.yotfr.alarm.ui.createalarm.event.CreateAlarmEvent
 import ru.yotfr.alarm.ui.createalarm.event.CreateAlarmScreenEvent
 import ru.yotfr.alarm.ui.createalarm.mapper.remainTime
@@ -46,6 +48,11 @@ fun CreateAlarmScreen(
         activeWeekDays = alarm.activeDays,
         onWeekDayClicked = { vm.onEvent(CreateAlarmEvent.OnWeekDayClicked(it)) },
         onSaveClicked = { vm.onEvent(CreateAlarmEvent.SaveClicked) },
-        onTimeChanged = { vm.onEvent(CreateAlarmEvent.OnTriggerTimeChanged(it)) }
+        onTimeChanged = { vm.onEvent(CreateAlarmEvent.OnTriggerTimeChanged(it)) },
+        alarmModel = AlarmModel(),
+        onLabelChanged = { vm.onEvent(CreateAlarmEvent.OnLabelChanged(it)) },
+        onSnoozeChanged = { vm.onEvent(CreateAlarmEvent.OnSnoozeChanged(it)) },
+        label = alarm.label,
+        onClearedWeekDays = { vm.onEvent(CreateAlarmEvent.WeekDaysCleared) }
     )
 }

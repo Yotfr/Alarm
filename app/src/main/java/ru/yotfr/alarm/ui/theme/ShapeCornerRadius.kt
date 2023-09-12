@@ -8,7 +8,8 @@ import androidx.compose.ui.unit.dp
 @Immutable
 data class ShapeCornerRadius(
     val default: Dp = 12.dp,
-    val small: Dp = 8.dp
+    val small: Dp = 8.dp,
+    val extraSmall: Dp = 4.dp
 )
 
 val LocalShapeCornerRadius = compositionLocalOf { ShapeCornerRadius() }

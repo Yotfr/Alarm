@@ -10,5 +10,6 @@ data class AlarmEntity(
     @PrimaryKey(autoGenerate = true) val id: Long,
     val triggerTime: LocalDateTime,
     val isActive: Boolean,
-    val activeWeekDays: List<WeekDays>
+    val activeWeekDays: List<WeekDays>,
+    val label: String
 )

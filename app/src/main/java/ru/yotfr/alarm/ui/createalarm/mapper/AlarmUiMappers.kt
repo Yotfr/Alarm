@@ -3,6 +3,7 @@ package ru.yotfr.alarm.ui.createalarm.mapper
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import ru.yotfr.alarm.R
+import ru.yotfr.alarm.domain.model.Snooze
 import ru.yotfr.alarm.domain.model.WeekDays
 import java.time.DayOfWeek
 import java.time.LocalDateTime
@@ -51,5 +52,18 @@ fun WeekDays.toDayOfWeek(): DayOfWeek {
         WeekDays.FRIDAY -> DayOfWeek.FRIDAY
         WeekDays.SATURDAY -> DayOfWeek.SATURDAY
         WeekDays.SUNDAY -> DayOfWeek.SUNDAY
+    }
+}
+
+@Composable
+fun Snooze.stringResource(): String {
+    return when(this) {
+        Snooze.FIVE -> stringResource(R.string.five)
+        Snooze.TEN -> stringResource(R.string.ten)
+        Snooze.FIFTEEN -> stringResource(R.string.fifteen)
+        Snooze.TWENTY -> stringResource(R.string.twenty)
+        Snooze.TWENTY_FIVE -> stringResource(R.string.twenty_five)
+        Snooze.THIRTY -> stringResource(R.string.thirty)
+        Snooze.OFF -> stringResource(R.string.snooze_off)
     }
 }

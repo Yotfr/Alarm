@@ -8,7 +8,8 @@ fun AlarmEntity.map(): AlarmModel {
         id = id,
         triggerTime = triggerTime,
         isActive = isActive,
-        activeDays = activeWeekDays
+        activeDays = activeWeekDays,
+        label = label
     )
 }
 
@@ -17,6 +18,7 @@ fun AlarmModel.map(): AlarmEntity {
         id = id,
         triggerTime = triggerTime,
         isActive = isActive,
-        activeWeekDays = activeDays
+        activeWeekDays = activeDays,
+        label = label
     )
 }

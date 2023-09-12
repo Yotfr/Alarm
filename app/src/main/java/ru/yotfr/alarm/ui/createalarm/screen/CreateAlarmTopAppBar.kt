@@ -1,21 +1,24 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
 import AlarmTheme
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import ru.yotfr.alarm.R
+import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun CreateAlarmTopAppBarPreview() {
@@ -34,21 +37,22 @@ fun CreateAlarmTopAppBar(
         title = {
             Text(
                 text = remainTime,
-                fontSize = 18.sp,
-                color = AlarmTheme.colors.text,
-                textAlign = TextAlign.Center
+                style = AlarmTheme.typography.headline,
+                color = AlarmTheme.colors.text
             )
         },
         navigationIcon = {
-            IconButton(
-                onClick = onBackPressed
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.KeyboardArrowLeft,
-                    contentDescription = null,
-                    tint = AlarmTheme.colors.text
-                )
-            }
+            Icon(
+                imageVector = Icons.Filled.KeyboardArrowLeft,
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) { onBackPressed() },
+                tint = AlarmTheme.colors.text
+            )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = AlarmTheme.colors.background

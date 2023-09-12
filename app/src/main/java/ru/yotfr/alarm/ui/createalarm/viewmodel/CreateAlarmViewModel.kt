@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.yotfr.alarm.domain.model.AlarmModel
+import ru.yotfr.alarm.domain.model.Snooze
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
 import ru.yotfr.alarm.domain.usecase.CreateNewAlarmUseCase
 import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
@@ -52,6 +53,18 @@ class CreateAlarmViewModel @Inject constructor(
             CreateAlarmEvent.SaveClicked -> {
                 saveChanges()
             }
+
+            is CreateAlarmEvent.OnLabelChanged -> {
+                labelChanged(event.newLabel)
+            }
+
+            is CreateAlarmEvent.OnSnoozeChanged -> {
+                snoozeChanged(event.snooze)
+            }
+
+            CreateAlarmEvent.WeekDaysCleared -> {
+                clearWeekDays()
+            }
         }
     }
 
@@ -73,6 +86,31 @@ class CreateAlarmViewModel @Inject constructor(
             )
         }
         timeChanged(_screenState.value.triggerTime.toLocalTime())
+    }
+
+    private fun clearWeekDays() {
+        _screenState.update {
+            it.copy(
+                activeDays = emptyList()
+            )
+        }
+        timeChanged(_screenState.value.triggerTime.toLocalTime())
+    }
+
+    private fun labelChanged(label: String) {
+        _screenState.update {
+            it.copy(
+                label = label
+            )
+        }
+    }
+
+    private fun snoozeChanged(snooze: Snooze) {
+        _screenState.update {
+            it.copy(
+                snooze = snooze
+            )
+        }
     }
 
     private fun timeChanged(triggerTime: LocalTime) {
