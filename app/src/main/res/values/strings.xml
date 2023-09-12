@@ -18,6 +18,7 @@
     <string name="snooze_off">Off</string>
     <string name="snooze">Snooze</string>
     <string name="sound">Sound</string>
+    <string name="dismiss">Dismiss</string>
     <string name="no_alarms">No alarms\n Click + to create your alarm</string>
 
     <string name="days">days</string>
