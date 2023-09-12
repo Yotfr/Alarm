@@ -2,11 +2,17 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import ru.yotfr.alarm.ui.theme.AlarmTypography
+import ru.yotfr.alarm.ui.theme.LocalShadowBlurRadius
 import ru.yotfr.alarm.ui.theme.LocalShadowOffset
+import ru.yotfr.alarm.ui.theme.LocalShapeCornerRadius
 import ru.yotfr.alarm.ui.theme.LocalShapes
 import ru.yotfr.alarm.ui.theme.LocalSpacing
+import ru.yotfr.alarm.ui.theme.LocalTypography
+import ru.yotfr.alarm.ui.theme.ShadowBlurRadius
 import ru.yotfr.alarm.ui.theme.ShadowOffset
 import ru.yotfr.alarm.ui.theme.Shape
+import ru.yotfr.alarm.ui.theme.ShapeCornerRadius
 import ru.yotfr.alarm.ui.theme.Spacing
 
 
@@ -23,27 +29,46 @@ object AlarmTheme {
     val shadowOffset: ShadowOffset
         @Composable
         get() = LocalShadowOffset.current
+    val typography: AlarmTypography
+        @Composable
+        get() = LocalTypography.current
+    val shadowBlurRadius: ShadowBlurRadius
+        @Composable
+        get() = LocalShadowBlurRadius.current
+    val shapeCornerRadius: ShapeCornerRadius
+        @Composable
+        get() = LocalShapeCornerRadius.current
 }
 
 @Composable
 fun AlarmTheme(
     content: @Composable () -> Unit
 ) {
+
     val colors = AlarmColors(
         background = backgroundColor,
         text = textColor,
         accent = accentColor,
         lightShadow = lightShadowColor,
-        darkShadow = darkShadowColor
+        darkShadow = darkShadowColor,
+        disabledText = disabledTextColor,
+        disabledAccent = disabledAccentColor,
+        disabledBackground = disabledBackgroundColor
     )
     val shape = Shape()
     val spacing = Spacing()
     val shadowOffset = ShadowOffset()
+    val typography = AlarmTypography()
+    val blurRadius = ShadowBlurRadius()
+    val shapeCornerRadius = ShapeCornerRadius()
     CompositionLocalProvider(
         LocalShadowOffset provides shadowOffset,
         LocalSpacing provides spacing,
         LocalShapes provides shape,
-        LocalColors provides colors
+        LocalColors provides colors,
+        LocalTypography provides typography,
+        LocalShadowBlurRadius provides blurRadius,
+        LocalShapeCornerRadius provides shapeCornerRadius
     ) {
         MaterialTheme(
             content = content

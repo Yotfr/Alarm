@@ -1,40 +1,76 @@
 package ru.yotfr.alarm.ui.alarmlist.screen
 
 import AlarmTheme
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.domain.model.AlarmModel
+import ru.yotfr.alarm.domain.model.WeekDays
 import java.time.LocalDateTime
 
 @Preview
 @Composable
 fun AlarmListContentPreview() {
-    val alarm = AlarmModel(
-        id = 0L,
+    fun alarm(id: Long) = AlarmModel(
+        id = id,
         triggerTime = LocalDateTime.now(),
         isActive = true,
         activeDays = emptyList()
     )
-    val alarms = listOf(
-        alarm, alarm, alarm, alarm, alarm, alarm, alarm
+
+    fun testAlarm(id: Long) = AlarmModel(
+        id = id,
+        triggerTime = LocalDateTime.now(),
+        isActive = true,
+        activeDays = listOf(
+            WeekDays.FRIDAY, WeekDays.MONDAY
+        )
     )
+
+    var alarms by remember {
+        mutableStateOf(
+            listOf(
+                alarm(0), testAlarm(1), alarm(2), testAlarm(3),
+                alarm(4), alarm(5), alarm(6), testAlarm(7),
+                alarm(8), testAlarm(9), testAlarm(10), alarm(11)
+            )
+        )
+    }
     AlarmTheme {
         AlarmListContent(
             alarms = alarms,
-            onPlusClicked = {},
+            onFABClicked = {},
             onAlarmClicked = {},
-            switchChecked = { _, _ -> }, {}
+            switchChecked = { alarm, state ->
+                alarms = alarms.map {
+                    if (it.id == alarm.id) {
+                        it.copy(
+                            isActive = state
+                        )
+                    } else it
+                }
+            },
+            onDeleteClicked = {}
         )
     }
 }
@@ -43,36 +79,74 @@ fun AlarmListContentPreview() {
 @Composable
 fun AlarmListContent(
     alarms: List<AlarmModel>,
-    onPlusClicked: () -> Unit,
+    onFABClicked: () -> Unit,
     onAlarmClicked: (AlarmModel) -> Unit,
     switchChecked: (AlarmModel, Boolean) -> Unit,
     onDeleteClicked: (AlarmModel) -> Unit
 ) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+    var isFABVisible by remember { mutableStateOf(true) }
+    var isInEditMode by remember { mutableStateOf(false) }
+
+    val nestedScrollConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                if (available.y < -1) {
+                    isFABVisible = false
+                }
+                if (available.y > 1) {
+                    isFABVisible = true
+                }
+                return Offset.Zero
+            }
+        }
+    }
+
     Scaffold(
         modifier = Modifier
-            .fillMaxSize()
-            .background(
-                color = AlarmTheme.colors.background
-            ),
+            .fillMaxSize(),
+        containerColor = AlarmTheme.colors.background,
         floatingActionButton = {
-
+            AlarmFAB(
+                onClick = onFABClicked,
+                isVisible = isFABVisible,
+                gradient = true
+            )
         },
-        topBar = { AlarmListTopAppBar() },
+        topBar = {
+            AlarmListTopAppBar(
+                scrollBehavior = scrollBehavior,
+                onEditClicked = {
+                    isInEditMode = !isInEditMode
+                },
+                isInEditMode = isInEditMode
+            )
+        },
         floatingActionButtonPosition = FabPosition.Center
     ) { paddingValues ->
         LazyColumn(
             contentPadding = PaddingValues(22.dp),
             verticalArrangement = Arrangement.spacedBy(22.dp),
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier
+                .padding(paddingValues)
+                .nestedScroll(scrollBehavior.nestedScrollConnection)
+                .nestedScroll(nestedScrollConnection)
         ) {
-//            items(alarms) { alarmModel ->
-//                AlarmItem (
-//                    alarmModel = alarmModel,
-//                    switchCheckedChange = { switchChecked(alarmModel, it) },
-//                    onClick = onAlarmClicked,
-//                    onDeleteClicked = onDeleteClicked
-//                )
-//            }
+            items(alarms) { alarmModel ->
+                AlarmItem(
+                    alarmModel = alarmModel,
+                    onActiveChanged = {
+                        switchChecked(alarmModel, it)
+                    },
+                    onClick = {
+                        onAlarmClicked(alarmModel)
+                    },
+                    isInEditMode = isInEditMode,
+                    onDeleteClicked = {
+                        onDeleteClicked(alarmModel)
+                    }
+                )
+            }
         }
     }
 }

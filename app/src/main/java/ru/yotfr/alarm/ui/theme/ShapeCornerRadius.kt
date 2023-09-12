@@ -6,11 +6,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Immutable
-data class ShadowOffset(
-    val small: Dp = 1.dp,
-    val default: Dp = 3.dp,
-    val large: Dp = 4.dp,
-    val extraLarge: Dp = 8.dp
+data class ShapeCornerRadius(
+    val default: Dp = 12.dp,
+    val small: Dp = 8.dp
 )
 
-val LocalShadowOffset = compositionLocalOf { ShadowOffset() }
+val LocalShapeCornerRadius = compositionLocalOf { ShapeCornerRadius() }

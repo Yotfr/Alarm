@@ -17,14 +17,13 @@ fun AlarmsListScreen(
 
     AlarmListContent(
         alarms = state.alarms,
-        onPlusClicked = { navigateToCreateAlarmScreen(null) },
+        onFABClicked = { navigateToCreateAlarmScreen(null) },
         onAlarmClicked = { navigateToCreateAlarmScreen(it.id) },
         switchChecked = { alarm, newValue ->
             vm.onEvent(AlarmListEvent.ToggleAlarm(alarm, newValue))
         },
         onDeleteClicked = { vm.onEvent(AlarmListEvent.DeleteAlarm(it)) }
     )
-
 }
 
 

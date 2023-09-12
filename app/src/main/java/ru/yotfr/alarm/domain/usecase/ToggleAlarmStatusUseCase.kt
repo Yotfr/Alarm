@@ -11,11 +11,11 @@ class ToggleAlarmStatusUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(alarmModel: AlarmModel, value: Boolean) {
         if (value) {
-            alarmRepository.cancelAlarm(alarmModel)
-            alarmScheduler.cancelAlarm(alarmModel.id)
-        } else {
             alarmRepository.activateAlarm(alarmModel)
             alarmScheduler.scheduleAlarm(alarmModel.triggerTime, alarmModel.id)
+        } else {
+            alarmRepository.cancelAlarm(alarmModel)
+            alarmScheduler.cancelAlarm(alarmModel.id)
         }
     }
 }

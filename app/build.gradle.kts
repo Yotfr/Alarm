@@ -60,7 +60,7 @@ dependencies {
     val timberVersion = "5.0.1"
     val coreKTXVersion = "1.10.1"
     val lifecycleRuntimeKTXVersion = "2.6.1"
-    val activityComposeVersion = "1.7.2"
+    val activityComposeVersion = "1.8.0-alpha07"
     val composeBomVersion = "2023.03.00"
     val jUnitVersion = "4.13.2"
     val androidJUnitVersion = "1.1.5"
