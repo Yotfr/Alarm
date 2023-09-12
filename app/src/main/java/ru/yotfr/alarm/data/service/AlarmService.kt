@@ -3,6 +3,10 @@ package ru.yotfr.alarm.data.service
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.MediaPlayer
+import android.media.MediaPlayer.OnPreparedListener
+import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.core.net.toUri
@@ -32,6 +36,16 @@ class AlarmService : Service() {
     private val job = SupervisorJob()
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
+    private var mediaPlayer: MediaPlayer? = null
+
+    private val onPreparedListener = OnPreparedListener { mediaPlayer?.start() }
+
+    override fun onCreate() {
+        super.onCreate()
+        mediaPlayer = MediaPlayer()
+        mediaPlayer?.isLooping = true
+    }
+
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -44,6 +58,14 @@ class AlarmService : Service() {
                     val alarm = alarmRepository.getAlarmById(it)
                     scheduleNewAlarm(alarm)
                 }
+                mediaPlayer?.setDataSource(this, Uri.parse("android.resource://" + this.packageName + "/" + R.raw.alarm))
+                mediaPlayer?.setAudioAttributes(
+                    AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build()
+                )
+                mediaPlayer?.prepareAsync()
+                mediaPlayer?.setOnPreparedListener(onPreparedListener)
                 val notification = NotificationCompat.Builder(this, "NOTIFICATION_CHANNEL_SERVICE")
                     .setContentTitle("Alarm")
                     .setContentText("Ringing...")
@@ -67,6 +89,14 @@ class AlarmService : Service() {
 
         }
         return START_STICKY
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.stop()
+        mediaPlayer?.reset()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 
     private fun getCancelIntent(): PendingIntent {
