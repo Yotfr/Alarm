@@ -1,0 +1,5 @@
+![4](https://github.com/Yotfr/Alarm/assets/112001717/5e701bea-802b-439c-bae2-b6335fed1937)
+![5](https://github.com/Yotfr/Alarm/assets/112001717/2ded2562-dce8-419a-9bb4-cdd354ef6afb)
+![1](https://github.com/Yotfr/Alarm/assets/112001717/34719866-40b7-43e6-bc61-b742c1c0d4f3)
+![2](https://github.com/Yotfr/Alarm/assets/112001717/cc74683d-74f8-4e16-a939-aa5e2a346cbf)
+![3](https://github.com/Yotfr/Alarm/assets/112001717/ce6f421a-15d4-4e11-8ecd-5ffaadbdec92)
