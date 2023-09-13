@@ -15,6 +15,7 @@ import java.time.ZoneId
 class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler {
 
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
     @SuppressLint("MissingPermission")
     override fun scheduleAlarm(triggerTime: LocalDateTime, id: Long) {
         val alarmClockInfo = AlarmClockInfo(
@@ -32,11 +33,22 @@ class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler {
     }
 
     private fun getAlarmIntent(id: Long): PendingIntent {
-        val broadcastIntent = Intent(context, AlarmBroadcastReceiver::class.java).putExtra("ID",id)
-        return PendingIntent.getBroadcast(context, id.toInt(), broadcastIntent, PendingIntent.FLAG_IMMUTABLE)
+        val broadcastIntent = Intent(
+            context,
+            AlarmBroadcastReceiver::class.java
+        ).putExtra(AlarmBroadcastReceiver.ALARM_ID_INTENT_EXTRA_KEY, id)
+        return PendingIntent.getBroadcast(
+            context,
+            id.toInt(),
+            broadcastIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
     }
+
     private fun getClickIntent(): PendingIntent {
-        val activityIntent = Intent(context, MainActivity::class.java)
+        val activityIntent = Intent(context, MainActivity::class.java).addFlags(
+            Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        )
         return PendingIntent.getActivity(context, 0, activityIntent, PendingIntent.FLAG_IMMUTABLE)
     }
 }

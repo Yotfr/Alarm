@@ -22,4 +22,8 @@ class AlarmBroadcastReceiver : BroadcastReceiver() {
             }
         }
     }
+
+    companion object {
+        const val ALARM_ID_INTENT_EXTRA_KEY = "ID"
+    }
 }
