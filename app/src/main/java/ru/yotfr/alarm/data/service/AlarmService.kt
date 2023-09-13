@@ -119,4 +119,8 @@ class AlarmService : Service() {
         alarmScheduler.scheduleAlarm(updatedAlarmModel.triggerTime, updatedAlarmModel.id)
     }
 
+    companion object {
+        const val ALARM_ID_INTENT_EXTRA_KEY = "ID"
+    }
+
 }
