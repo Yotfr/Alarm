@@ -9,6 +9,7 @@ import ru.yotfr.alarm.domain.repository.AlarmScheduler
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
 import ru.yotfr.alarm.domain.usecase.CreateNewAlarmUseCase
 import ru.yotfr.alarm.domain.usecase.DeleteAlarmUseCase
+import ru.yotfr.alarm.domain.usecase.DismissAlarmUseCase
 import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
 import ru.yotfr.alarm.domain.usecase.GetAllAlarmsUseCase
 import ru.yotfr.alarm.domain.usecase.ToggleAlarmStatusUseCase
@@ -63,6 +64,17 @@ object UseCaseModule {
         return ChangeAlarmTriggerTimeUseCase(
             alarmRepository,
             alarmScheduler
+        )
+    }
+
+    @Provides
+    fun provideDismissAlarmUseCase(
+        alarmRepository: AlarmRepository,
+        alarmScheduler: AlarmScheduler
+    ): DismissAlarmUseCase {
+        return DismissAlarmUseCase(
+            alarmScheduler,
+            alarmRepository
         )
     }
 

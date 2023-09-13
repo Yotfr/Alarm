@@ -9,6 +9,7 @@ import android.content.Intent
 import ru.yotfr.alarm.MainActivity
 import ru.yotfr.alarm.receiver.AlarmBroadcastReceiver
 import ru.yotfr.alarm.domain.repository.AlarmScheduler
+import ru.yotfr.alarm.service.AlarmService
 import java.time.LocalDateTime
 import java.time.ZoneId
 
@@ -26,6 +27,11 @@ class AlarmSchedulerImpl(private val context: Context) : AlarmScheduler {
             alarmClockInfo,
             getAlarmIntent(id)
         )
+    }
+
+    override fun dismissAlarm() {
+        val stopServiceIntent = Intent(context, AlarmService::class.java)
+        context.stopService(stopServiceIntent)
     }
 
     override suspend fun cancelAlarm(id: Long) {

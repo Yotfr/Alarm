@@ -7,8 +7,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import ru.yotfr.alarm.ui.alarmlist.screen.AlarmsListScreen
+import ru.yotfr.alarm.ui.alarmring.screen.AlarmRingScreen
 import ru.yotfr.alarm.ui.createalarm.screen.CreateAlarmScreen
-
 
 
 @Composable
@@ -55,8 +55,10 @@ fun AlarmNavHost() {
                     "${NavigationConstants.MY_URI_RING}/${NavigationConstants.ALARM_ID_ARGUMENT_KEY}={${NavigationConstants.ALARM_ID_ARGUMENT_KEY}}"
             })
         ) { backStackEntry ->
-
-            //AlarmRingScreen()
+            backStackEntry.arguments?.getString(NavigationConstants.ALARM_ID_ARGUMENT_KEY)
+                ?.toLong()?.let { alarmId ->
+                    AlarmRingScreen(alarmId = alarmId)
+                }
         }
     }
 }

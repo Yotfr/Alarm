@@ -1,4 +1,4 @@
-package ru.yotfr.alarm.ui.alarmring
+package ru.yotfr.alarm.ui.alarmring.screen
 
 import AlarmTheme
 import androidx.compose.foundation.background

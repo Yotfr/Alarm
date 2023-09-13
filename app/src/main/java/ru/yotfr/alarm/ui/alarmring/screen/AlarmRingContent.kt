@@ -1,6 +1,5 @@
-package ru.yotfr.alarm.ui.alarmring
+package ru.yotfr.alarm.ui.alarmring.screen
 
-import AlarmTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,26 +8,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.yotfr.alarm.domain.model.AlarmModel
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-@Preview
 @Composable
-fun AlarmRingScreenPreview() {
-    AlarmTheme {
-        AlarmRingScreen(
-            alarmModel = AlarmModel(
-                label = "Test"
-            )
-        )
-    }
-}
-
-@Composable
-fun AlarmRingScreen(
-    alarmModel: AlarmModel
+fun AlarmRingContent(
+    triggerTime: LocalDateTime,
+    label: String,
+    onSnoozeClicked: () -> Unit,
+    onDismissClicked: () -> Unit,
+    isSnoozeActive: Boolean
 ) {
     Column(
         modifier = Modifier
@@ -39,19 +29,19 @@ fun AlarmRingScreen(
         Spacer(modifier = Modifier.height(32.dp))
         TimeSection(
             modifier = Modifier.weight(3f),
-            time = alarmModel.triggerTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+            time = triggerTime.format(DateTimeFormatter.ofPattern("HH:mm"))
         )
         Spacer(modifier = Modifier.height(16.dp))
         LabelSection(
             modifier = Modifier.weight(3f),
-            label = alarmModel.label
+            label = label
         )
         Spacer(modifier = Modifier.height(16.dp))
         ButtonSection(
             modifier = Modifier.weight(2f),
-            onSnoozeClicked = {  },
-            onDismissClicked = {  },
-            isSnoozeActive = false
+            onSnoozeClicked = onSnoozeClicked,
+            onDismissClicked = onDismissClicked,
+            isSnoozeActive = isSnoozeActive
         )
         Spacer(modifier = Modifier.height(32.dp))
     }
