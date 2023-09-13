@@ -28,6 +28,20 @@ fun AlarmModel.validateTriggerTime(): AlarmModel {
     return copy(triggerTime = newTriggerTime)
 }
 
+/**
+ * Returns next trigger time, or null if alarm one-off
+ */
+fun AlarmModel.getNextTriggerTime(): LocalDateTime? {
+    val currentDateTime = LocalDateTime.now()
+    if (activeDays.isEmpty()) return null
+    val closestActiveDay = activeDays.findClosestActiveDay(false)
+    var newTriggerTime = triggerTime
+    do {
+        newTriggerTime = newTriggerTime.plusDays(1)
+    } while (newTriggerTime.dayOfWeek != closestActiveDay)
+    return newTriggerTime
+}
+
 fun List<DayOfWeek>.findClosestActiveDay(includeCurrent: Boolean): DayOfWeek? {
     if (isEmpty()) return null
     val currentDateTime = LocalDateTime.now()

@@ -7,7 +7,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import ru.yotfr.alarm.MainActivity
-import ru.yotfr.alarm.data.receiver.AlarmBroadcastReceiver
+import ru.yotfr.alarm.receiver.AlarmBroadcastReceiver
 import ru.yotfr.alarm.domain.repository.AlarmScheduler
 import java.time.LocalDateTime
 import java.time.ZoneId

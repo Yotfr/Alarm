@@ -1,10 +1,10 @@
-package ru.yotfr.alarm.data.receiver
+package ru.yotfr.alarm.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import ru.yotfr.alarm.data.service.AlarmService
+import ru.yotfr.alarm.service.AlarmService
 
 class AlarmBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {

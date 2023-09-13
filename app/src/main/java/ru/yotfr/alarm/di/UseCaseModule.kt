@@ -3,7 +3,7 @@ package ru.yotfr.alarm.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 import ru.yotfr.alarm.domain.repository.AlarmRepository
 import ru.yotfr.alarm.domain.repository.AlarmScheduler
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
@@ -14,7 +14,7 @@ import ru.yotfr.alarm.domain.usecase.GetAllAlarmsUseCase
 import ru.yotfr.alarm.domain.usecase.ToggleAlarmStatusUseCase
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 object UseCaseModule {
 
     @Provides
