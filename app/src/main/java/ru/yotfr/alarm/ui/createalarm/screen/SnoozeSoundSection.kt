@@ -28,17 +28,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.R
 import ru.yotfr.alarm.domain.model.Snooze
+import ru.yotfr.alarm.domain.model.Sound
 import ru.yotfr.alarm.ui.common.Shape
 import ru.yotfr.alarm.ui.common.pressedShadow
 import ru.yotfr.alarm.ui.common.punchedShadow
+import ru.yotfr.alarm.ui.common.stringResource
 import ru.yotfr.alarm.ui.createalarm.mapper.stringResource
 
 @Composable
 fun SnoozeSoundSection(
     snooze: Snooze,
-    onSnoozeChanged: (Snooze) -> Unit
+    onSnoozeChanged: (Snooze) -> Unit,
+    sound: Sound,
+    onSoundChanged: (Sound) -> Unit,
+    vibrate: Boolean,
+    onVibrateChange: (Boolean) -> Unit
 ) {
     var isSnoozeDialogOpened by remember { mutableStateOf(false) }
+    var isSoundDialogOpened by remember { mutableStateOf(false) }
 
     Column(
         horizontalAlignment = Alignment.Start,
@@ -66,7 +73,7 @@ fun SnoozeSoundSection(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(id = R.string.label),
+                text = stringResource(id = R.string.snooze),
                 style = AlarmTheme.typography.headline,
                 color = AlarmTheme.colors.text
             )
@@ -130,7 +137,7 @@ fun SnoozeSoundSection(
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }
                     ) {
-                       //TODO
+                        //TODO
                     }
                     .clip(AlarmTheme.shape.small)
                     .pressedShadow(
@@ -151,7 +158,7 @@ fun SnoozeSoundSection(
                     )
             ) {
                 Text(
-                    text = "TODO",
+                    text = sound.stringResource(),
                     style = AlarmTheme.typography.caption,
                     color = AlarmTheme.colors.text
                 )

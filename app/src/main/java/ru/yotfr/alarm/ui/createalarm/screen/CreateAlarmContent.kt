@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.domain.model.AlarmModel
 import ru.yotfr.alarm.domain.model.Snooze
+import ru.yotfr.alarm.domain.model.Sound
 import java.time.DayOfWeek
 import java.time.LocalTime
 
@@ -119,7 +120,11 @@ fun CreateAlarmContent(
             Spacer(modifier = Modifier.height(16.dp))
             SnoozeSoundSection(
                 snooze = alarmModel.snooze,
-                onSnoozeChanged = onSnoozeChanged
+                onSnoozeChanged = onSnoozeChanged,
+                sound = Sound.FIRST,
+                onSoundChanged = {},
+                vibrate = false,
+                onVibrateChange = {}
             )
             Spacer(modifier = Modifier.height(100.dp))
         }

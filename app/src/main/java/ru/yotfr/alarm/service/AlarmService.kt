@@ -118,7 +118,7 @@ class AlarmService : Service() {
     private fun configureAndPrepareMediaPlayer() {
         mediaPlayer?.setDataSource(
             this,
-            Uri.parse("android.resource://" + this.packageName + "/" + R.raw.alarm)
+            Uri.parse("android.resource://" + this.packageName + "/" + R.raw.first_sound)
         )
         mediaPlayer?.setAudioAttributes(
             AudioAttributes.Builder()

@@ -9,6 +9,8 @@
     <string name="done">Done</string>
     <string name="label">Label</string>
     <string name="label_placeholder">Alarm name</string>
+
+
     <string name="five">5 minutes</string>
     <string name="ten">10 minutes</string>
     <string name="fifteen">15 minutes</string>
@@ -16,10 +18,16 @@
     <string name="twenty_five">25 minutes</string>
     <string name="thirty">30 minutes</string>
     <string name="snooze_off">Off</string>
+
+
     <string name="snooze">Snooze</string>
     <string name="sound">Sound</string>
     <string name="dismiss">Dismiss</string>
     <string name="no_alarms">No alarms\n Click + to create your alarm</string>
+
+    <string name="first_sound">First</string>
+    <string name="second_sound">Second</string>
+    <string name="third_sound">Third</string>
 
     <string name="days">days</string>
     <string name="day">day</string>
