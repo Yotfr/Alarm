@@ -57,7 +57,12 @@ fun AlarmNavHost() {
         ) { backStackEntry ->
             backStackEntry.arguments?.getString(NavigationConstants.ALARM_ID_ARGUMENT_KEY)
                 ?.toLong()?.let { alarmId ->
-                    AlarmRingScreen(alarmId = alarmId)
+                    AlarmRingScreen(
+                        alarmId = alarmId,
+                        navigateBack = {
+                            navController.popBackStack()
+                        }
+                    )
                 }
         }
     }

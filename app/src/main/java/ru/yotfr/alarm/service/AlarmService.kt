@@ -8,7 +8,6 @@ import android.media.MediaPlayer
 import android.media.MediaPlayer.OnPreparedListener
 import android.net.Uri
 import android.os.IBinder
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.net.toUri
 import dagger.hilt.android.AndroidEntryPoint

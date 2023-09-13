@@ -23,7 +23,8 @@ fun ActiveWeekDaysText(
     if (activeDays.isEmpty()) {
         Text(
             text = triggerTime.format(DateTimeFormatter.ofPattern("EEE, dd MMM")),
-            color = AlarmTheme.colors.text,
+            color = if (isActive) AlarmTheme.colors.text
+            else AlarmTheme.colors.disabledText,
             style = AlarmTheme.typography.caption
         )
     } else {

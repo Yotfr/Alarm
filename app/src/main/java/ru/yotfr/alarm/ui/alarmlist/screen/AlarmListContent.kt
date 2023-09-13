@@ -125,7 +125,8 @@ fun AlarmListContent(
                 onEditClicked = {
                     isInEditMode = !isInEditMode
                 },
-                isInEditMode = isInEditMode
+                isInEditMode = isInEditMode,
+                isEditVisible = alarms.isNotEmpty()
             )
         },
         floatingActionButtonPosition = FabPosition.Center

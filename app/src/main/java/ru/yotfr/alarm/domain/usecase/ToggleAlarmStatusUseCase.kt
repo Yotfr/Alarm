@@ -11,15 +11,16 @@ class ToggleAlarmStatusUseCase @Inject constructor(
     private val alarmScheduler: AlarmScheduler
 ) {
     suspend operator fun invoke(alarmModel: AlarmModel, newState: Boolean) {
+        val validatedAlarmModel = alarmModel.validateTriggerTime()
         alarmRepository.updateAlarm(
-            alarmModel.validateTriggerTime().copy(
+            validatedAlarmModel.copy(
                 isActive = newState
             )
         )
         if (newState) {
-            alarmScheduler.scheduleAlarm(alarmModel.triggerTime, alarmModel.id)
+            alarmScheduler.scheduleAlarm(validatedAlarmModel.triggerTime, validatedAlarmModel.id)
         } else {
-            alarmScheduler.cancelAlarm(alarmModel.id)
+            alarmScheduler.cancelAlarm(validatedAlarmModel.id)
         }
     }
 }
