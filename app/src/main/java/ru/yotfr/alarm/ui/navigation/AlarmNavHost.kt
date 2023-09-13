@@ -6,42 +6,56 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
-import ru.yotfr.alarm.ui.alarmring.AlarmRingScreen
 import ru.yotfr.alarm.ui.alarmlist.screen.AlarmsListScreen
 import ru.yotfr.alarm.ui.createalarm.screen.CreateAlarmScreen
 
-const val MY_URI_RING = "https://yotfr.com/ring"
+
 
 @Composable
 fun AlarmNavHost() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "list") {
-        composable("list") {
+    NavHost(
+        navController = navController,
+        startDestination = Screen.AlarmList.route
+    ) {
+        composable(
+            route = Screen.AlarmList.route
+        ) {
             AlarmsListScreen(
-                navigateToCreateAlarmScreen = {
+                navigateToCreateAlarmScreen = { id ->
                     navController.navigate(
-                        it?.let {
-                            "create?alarmId=$it"
-                        } ?: "create"
+                        route = Screen.CreateAlarm.passId(id)
                     )
                 }
             )
         }
         composable(
-            route = "create?alarmId={alarmId}",
-            arguments = listOf(navArgument("alarmId") {
-                nullable = true
-            })
+            route = Screen.CreateAlarm.route,
+            arguments = listOf(
+                navArgument(NavigationConstants.ALARM_ID_ARGUMENT_KEY) {
+                    nullable = true
+                }
+            )
         ) { backStackEntry ->
             CreateAlarmScreen(
-                alarmId = backStackEntry.arguments?.getString("alarmId")?.toLong(),
+                alarmId = backStackEntry.arguments?.getString(NavigationConstants.ALARM_ID_ARGUMENT_KEY)
+                    ?.toLong(),
                 navigateBack = { navController.popBackStack() }
             )
         }
         composable(
-            route = "ring",
-            deepLinks = listOf(navDeepLink { uriPattern = MY_URI_RING })
-        ) {
+            route = Screen.AlarmRing.route,
+            arguments = listOf(
+                navArgument(NavigationConstants.ALARM_ID_ARGUMENT_KEY) {
+                    nullable = true
+                }
+            ),
+            deepLinks = listOf(navDeepLink {
+                uriPattern =
+                    "${NavigationConstants.MY_URI_RING}/${NavigationConstants.ALARM_ID_ARGUMENT_KEY}={${NavigationConstants.ALARM_ID_ARGUMENT_KEY}}"
+            })
+        ) { backStackEntry ->
+
             //AlarmRingScreen()
         }
     }

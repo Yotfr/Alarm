@@ -14,10 +14,9 @@ import ru.yotfr.alarm.domain.model.Snooze
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
 import ru.yotfr.alarm.domain.usecase.CreateNewAlarmUseCase
 import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
-import ru.yotfr.alarm.domain.model.WeekDays
 import ru.yotfr.alarm.ui.createalarm.event.CreateAlarmEvent
 import ru.yotfr.alarm.ui.createalarm.event.CreateAlarmScreenEvent
-import ru.yotfr.alarm.ui.createalarm.mapper.toDayOfWeek
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -75,7 +74,7 @@ class CreateAlarmViewModel @Inject constructor(
             }
         }
     }
-    private fun onWeekDayClicked(weekDay: WeekDays) {
+    private fun onWeekDayClicked(weekDay: DayOfWeek) {
         _screenState.update {
             it.copy(
                 activeDays = if (it.activeDays.contains(weekDay)) {
@@ -129,7 +128,7 @@ class CreateAlarmViewModel @Inject constructor(
             var nowDate = LocalDate.now()
             do {
                 nowDate = nowDate.plusDays(1)
-            } while (!_screenState.value.activeDays.map { it.toDayOfWeek() }.contains(nowDate.dayOfWeek))
+            } while (!_screenState.value.activeDays.contains(nowDate.dayOfWeek))
             _screenState.update {
                 it.copy(
                     triggerTime = triggerTime.atDate(nowDate)
@@ -146,7 +145,7 @@ class CreateAlarmViewModel @Inject constructor(
                 return
             }
             var nowDate = LocalDate.now()
-            while (!_screenState.value.activeDays.map { it.toDayOfWeek() }.contains(nowDate.dayOfWeek)) {
+            while (!_screenState.value.activeDays.contains(nowDate.dayOfWeek)) {
                 nowDate = nowDate.plusDays(1)
             }
             _screenState.update {

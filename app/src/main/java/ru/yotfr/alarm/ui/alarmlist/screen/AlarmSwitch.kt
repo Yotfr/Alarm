@@ -1,7 +1,6 @@
 package ru.yotfr.alarm.ui.alarmlist.screen
 
 import AlarmTheme
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -24,9 +23,7 @@ import ru.yotfr.alarm.ui.common.punchedShadow
 fun AlarmSwitch(
     modifier: Modifier = Modifier,
     isChecked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
-    // TODO: DELETE
-    gradient: Boolean = false
+    onCheckedChange: (Boolean) -> Unit
 ) {
     Box(
         modifier = modifier
@@ -57,8 +54,8 @@ fun AlarmSwitch(
                     else AlarmTheme.colors.background
                 )
         )
-        val modifierG = if (gradient) {
-            Modifier
+        Box(
+            modifier = Modifier
                 .size(24.dp)
                 .align(
                     if (isChecked) Alignment.CenterEnd else Alignment.CenterStart
@@ -75,30 +72,10 @@ fun AlarmSwitch(
                 .angledGradient(
                     colors = listOf(
                         AlarmTheme.colors.disabledText,
-                        AlarmTheme.colors.text,
-                        //AlarmTheme.colors.darkShadow
+                        AlarmTheme.colors.text
                     ),
                     angle = 315f
                 )
-        } else {
-            Modifier
-                .size(24.dp)
-                .align(
-                    if (isChecked) Alignment.CenterEnd else Alignment.CenterStart
-                )
-                .punchedShadow(
-                    offsetX = AlarmTheme.shadowOffset.default,
-                    offsetY = AlarmTheme.shadowOffset.default,
-                    blurRadius = AlarmTheme.shadowBlurRadius.default,
-                    shape = Shape.Circle,
-                    darkColor = AlarmTheme.colors.darkShadow,
-                    lightColor = AlarmTheme.colors.lightShadow,
-                )
-                .clip(CircleShape)
-                .background(
-                    color = AlarmTheme.colors.text
-                )
-        }
-        Box(modifier = modifierG)
+        )
     }
 }

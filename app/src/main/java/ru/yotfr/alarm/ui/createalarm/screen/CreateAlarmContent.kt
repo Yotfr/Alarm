@@ -27,14 +27,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.domain.model.AlarmModel
 import ru.yotfr.alarm.domain.model.Snooze
-import ru.yotfr.alarm.domain.model.WeekDays
+import java.time.DayOfWeek
 import java.time.LocalTime
 
 @Preview
 @Composable
 fun CreateAlarmContentPreview() {
     AlarmTheme {
-        val activeList = remember { mutableStateListOf(WeekDays.MONDAY, WeekDays.SATURDAY) }
+        val activeList = remember { mutableStateListOf(DayOfWeek.MONDAY, DayOfWeek.SATURDAY) }
         var alarm by remember { mutableStateOf(AlarmModel()) }
         var snooze by remember { mutableStateOf(Snooze.FIVE) }
         CreateAlarmContent(
@@ -65,8 +65,8 @@ fun CreateAlarmContentPreview() {
 fun CreateAlarmContent(
     remainTime: String,
     onBackPressed: () -> Unit,
-    activeWeekDays: List<WeekDays>,
-    onWeekDayClicked: (WeekDays) -> Unit,
+    activeWeekDays: List<DayOfWeek>,
+    onWeekDayClicked: (DayOfWeek) -> Unit,
     onSaveClicked: () -> Unit,
     onTimeChanged: (LocalTime) -> Unit,
     label: String,

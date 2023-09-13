@@ -4,8 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import ru.yotfr.alarm.R
 import ru.yotfr.alarm.domain.model.Snooze
-import ru.yotfr.alarm.domain.model.WeekDays
-import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
@@ -41,18 +39,6 @@ fun LocalDateTime.remainTime(): String {
     return if (remainTimeMinutes == 1L) {
         stringResource(id = R.string.ring_in) + " " + remainTimeMinutes.toString() + " " + stringResource(id = R.string.minute)
     } else  stringResource(id = R.string.ring_in) + " " + remainTimeMinutes.toString() + " " + stringResource(id = R.string.minutes)
-}
-
-fun WeekDays.toDayOfWeek(): DayOfWeek {
-    return when(this) {
-        WeekDays.MONDAY -> DayOfWeek.MONDAY
-        WeekDays.TUESDAY -> DayOfWeek.TUESDAY
-        WeekDays.WEDNESDAY -> DayOfWeek.WEDNESDAY
-        WeekDays.THURSDAY -> DayOfWeek.THURSDAY
-        WeekDays.FRIDAY -> DayOfWeek.FRIDAY
-        WeekDays.SATURDAY -> DayOfWeek.SATURDAY
-        WeekDays.SUNDAY -> DayOfWeek.SUNDAY
-    }
 }
 
 @Composable

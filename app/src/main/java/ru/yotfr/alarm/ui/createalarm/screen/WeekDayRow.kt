@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.yotfr.alarm.domain.model.WeekDays
 import ru.yotfr.alarm.ui.common.Shape
 import ru.yotfr.alarm.ui.common.pressedShadow
 import java.time.DayOfWeek
@@ -32,7 +31,7 @@ import java.util.Locale
 @Composable
 fun WeekDayRowPreview() {
     AlarmTheme {
-        val activeList = remember { mutableStateListOf(WeekDays.MONDAY, WeekDays.SATURDAY) }
+        val activeList = remember { mutableStateListOf(DayOfWeek.MONDAY, DayOfWeek.SATURDAY) }
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -56,8 +55,8 @@ fun WeekDayRowPreview() {
 @Composable
 fun WeekDayRow(
     modifier: Modifier = Modifier,
-    activeWeekDays: List<WeekDays>,
-    onWeekDayClicked: (WeekDays) -> Unit
+    activeWeekDays: List<DayOfWeek>,
+    onWeekDayClicked: (DayOfWeek) -> Unit
 ) {
     val spacing = 8.dp
     Row(
@@ -66,44 +65,44 @@ fun WeekDayRow(
         modifier = modifier.fillMaxWidth()
     ) {
         WeekDayCard(
-            active = activeWeekDays.contains(WeekDays.MONDAY),
-            weekDay = WeekDays.MONDAY,
+            active = activeWeekDays.contains(DayOfWeek.MONDAY),
+            weekDay = DayOfWeek.MONDAY,
             onClick = onWeekDayClicked
         )
         Spacer(modifier = Modifier.width(spacing))
         WeekDayCard(
-            active = activeWeekDays.contains(WeekDays.TUESDAY),
-            weekDay = WeekDays.TUESDAY,
+            active = activeWeekDays.contains(DayOfWeek.TUESDAY),
+            weekDay = DayOfWeek.TUESDAY,
             onClick = onWeekDayClicked
         )
         Spacer(modifier = Modifier.width(spacing))
         WeekDayCard(
-            active = activeWeekDays.contains(WeekDays.WEDNESDAY),
-            weekDay = WeekDays.WEDNESDAY,
+            active = activeWeekDays.contains(DayOfWeek.WEDNESDAY),
+            weekDay = DayOfWeek.WEDNESDAY,
             onClick = onWeekDayClicked
         )
         Spacer(modifier = Modifier.width(spacing))
         WeekDayCard(
-            active = activeWeekDays.contains(WeekDays.THURSDAY),
-            weekDay = WeekDays.THURSDAY,
+            active = activeWeekDays.contains(DayOfWeek.THURSDAY),
+            weekDay = DayOfWeek.THURSDAY,
             onClick = onWeekDayClicked
         )
         Spacer(modifier = Modifier.width(spacing))
         WeekDayCard(
-            active = activeWeekDays.contains(WeekDays.FRIDAY),
-            weekDay = WeekDays.FRIDAY,
+            active = activeWeekDays.contains(DayOfWeek.FRIDAY),
+            weekDay = DayOfWeek.FRIDAY,
             onClick = onWeekDayClicked
         )
         Spacer(modifier = Modifier.width(spacing))
         WeekDayCard(
-            active = activeWeekDays.contains(WeekDays.SATURDAY),
-            weekDay = WeekDays.SATURDAY,
+            active = activeWeekDays.contains(DayOfWeek.SATURDAY),
+            weekDay = DayOfWeek.SATURDAY,
             onClick = onWeekDayClicked
         )
         Spacer(modifier = Modifier.width(spacing))
         WeekDayCard(
-            active = activeWeekDays.contains(WeekDays.SUNDAY),
-            weekDay = WeekDays.SUNDAY,
+            active = activeWeekDays.contains(DayOfWeek.SUNDAY),
+            weekDay = DayOfWeek.SUNDAY,
             onClick = onWeekDayClicked
         )
     }
@@ -112,8 +111,8 @@ fun WeekDayRow(
 @Composable
 fun WeekDayCard(
     active: Boolean,
-    weekDay: WeekDays,
-    onClick: (WeekDays) -> Unit
+    weekDay: DayOfWeek,
+    onClick: (DayOfWeek) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -137,13 +136,13 @@ fun WeekDayCard(
     ) {
         Text(
             text = when (weekDay) {
-                WeekDays.MONDAY -> DayOfWeek.MONDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
-                WeekDays.TUESDAY -> DayOfWeek.TUESDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
-                WeekDays.WEDNESDAY -> DayOfWeek.WEDNESDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
-                WeekDays.THURSDAY -> DayOfWeek.THURSDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
-                WeekDays.FRIDAY -> DayOfWeek.FRIDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
-                WeekDays.SATURDAY -> DayOfWeek.SATURDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
-                WeekDays.SUNDAY -> DayOfWeek.SUNDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
+                DayOfWeek.MONDAY -> DayOfWeek.MONDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
+                DayOfWeek.TUESDAY -> DayOfWeek.TUESDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
+                DayOfWeek.WEDNESDAY -> DayOfWeek.WEDNESDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
+                DayOfWeek.THURSDAY -> DayOfWeek.THURSDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
+                DayOfWeek.FRIDAY -> DayOfWeek.FRIDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
+                DayOfWeek.SATURDAY -> DayOfWeek.SATURDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
+                DayOfWeek.SUNDAY -> DayOfWeek.SUNDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
             },
             style = AlarmTheme.typography.headline,
             color = if (!active) AlarmTheme.colors.disabledText else AlarmTheme.colors.text

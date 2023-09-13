@@ -34,7 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.R
 import ru.yotfr.alarm.domain.model.AlarmModel
-import ru.yotfr.alarm.domain.model.WeekDays
+import java.time.DayOfWeek
 import java.time.LocalDateTime
 
 @Preview
@@ -46,16 +46,14 @@ fun AlarmListContentPreview() {
         isActive = true,
         activeDays = emptyList()
     )
-
     fun testAlarm(id: Long) = AlarmModel(
         id = id,
         triggerTime = LocalDateTime.now(),
         isActive = true,
         activeDays = listOf(
-            WeekDays.FRIDAY, WeekDays.MONDAY
+            DayOfWeek.SUNDAY, DayOfWeek.MONDAY
         )
     )
-
     var alarms by remember {
         mutableStateOf(
             listOf(

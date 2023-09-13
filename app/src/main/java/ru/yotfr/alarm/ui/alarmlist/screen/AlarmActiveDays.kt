@@ -7,7 +7,6 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
-import ru.yotfr.alarm.domain.model.WeekDays
 import ru.yotfr.alarm.ui.theme.Geologica
 import java.time.DayOfWeek
 import java.time.LocalDateTime
@@ -17,7 +16,7 @@ import java.util.Locale
 
 @Composable
 fun ActiveWeekDaysText(
-    activeDays: List<WeekDays>,
+    activeDays: List<DayOfWeek>,
     triggerTime: LocalDateTime,
     isActive: Boolean
 ) {
@@ -32,7 +31,7 @@ fun ActiveWeekDaysText(
             buildAnnotatedString {
                 withStyle(
                     style = SpanStyle(
-                        color = if (activeDays.contains(WeekDays.MONDAY)) {
+                        color = if (activeDays.contains(DayOfWeek.MONDAY)) {
                             if (isActive) {
                                 AlarmTheme.colors.accent
                             } else {
@@ -55,7 +54,7 @@ fun ActiveWeekDaysText(
                 }
                 withStyle(
                     style = SpanStyle(
-                        color = if (activeDays.contains(WeekDays.TUESDAY)) {
+                        color = if (activeDays.contains(DayOfWeek.TUESDAY)) {
                             if (isActive) {
                                 AlarmTheme.colors.accent
                             } else {
@@ -79,7 +78,7 @@ fun ActiveWeekDaysText(
                 }
                 withStyle(
                     style = SpanStyle(
-                        color = if (activeDays.contains(WeekDays.WEDNESDAY)) {
+                        color = if (activeDays.contains(DayOfWeek.WEDNESDAY)) {
                             if (isActive) {
                                 AlarmTheme.colors.accent
                             } else {
@@ -103,7 +102,7 @@ fun ActiveWeekDaysText(
                 }
                 withStyle(
                     style = SpanStyle(
-                        color = if (activeDays.contains(WeekDays.THURSDAY)) {
+                        color = if (activeDays.contains(DayOfWeek.THURSDAY)) {
                             if (isActive) {
                                 AlarmTheme.colors.accent
                             } else {
@@ -127,7 +126,7 @@ fun ActiveWeekDaysText(
                 }
                 withStyle(
                     style = SpanStyle(
-                        color = if (activeDays.contains(WeekDays.FRIDAY)) {
+                        color = if (activeDays.contains(DayOfWeek.FRIDAY)) {
                             if (isActive) {
                                 AlarmTheme.colors.accent
                             } else {
@@ -150,7 +149,7 @@ fun ActiveWeekDaysText(
                 }
                 withStyle(
                     style = SpanStyle(
-                        color = if (activeDays.contains(WeekDays.SATURDAY)) {
+                        color = if (activeDays.contains(DayOfWeek.SATURDAY)) {
                             if (isActive) {
                                 AlarmTheme.colors.accent
                             } else {
@@ -174,7 +173,7 @@ fun ActiveWeekDaysText(
                 }
                 withStyle(
                     style = SpanStyle(
-                        color = if (activeDays.contains(WeekDays.SUNDAY)) {
+                        color = if (activeDays.contains(DayOfWeek.SUNDAY)) {
                             if (isActive) {
                                 AlarmTheme.colors.accent
                             } else {

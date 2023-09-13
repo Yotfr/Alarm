@@ -20,7 +20,7 @@ fun AlarmRingScreenPreview() {
     AlarmTheme {
         AlarmRingScreen(
             alarmModel = AlarmModel(
-                label = "GHEw WEgbweb w ew we ew vWE bwe bweb WE bw e BWeb wenbwe hbwe hwe"
+                label = "Test"
             )
         )
     }

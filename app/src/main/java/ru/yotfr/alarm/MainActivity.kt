@@ -15,8 +15,6 @@ import ru.yotfr.alarm.ui.navigation.AlarmNavHost
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO: Понять зачем может быть нужно до setContent
-        // enableEdgeToEdge()
         setContent {
             AlarmTheme {
                 val backgroundArgbColor = AlarmTheme.colors.background.toArgb()

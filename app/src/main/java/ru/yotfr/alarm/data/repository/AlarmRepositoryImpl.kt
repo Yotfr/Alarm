@@ -19,22 +19,6 @@ class AlarmRepositoryImpl @Inject constructor(
         return alarmDao.insertAlarm(alarmModel.map())
     }
 
-    override suspend fun cancelAlarm(alarmModel: AlarmModel) {
-        alarmDao.updateAlarm(
-            alarmModel.copy(
-                isActive = false
-            ).map()
-        )
-    }
-
-    override suspend fun activateAlarm(alarmModel: AlarmModel) {
-        alarmDao.updateAlarm(
-            alarmModel.copy(
-                isActive = true
-            ).map()
-        )
-    }
-
     override suspend fun deleteAlarm(alarmModel: AlarmModel) {
         alarmDao.deleteAlarm(alarmModel.map())
     }

@@ -25,14 +25,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.R
-import ru.yotfr.alarm.domain.model.WeekDays
 import ru.yotfr.alarm.ui.common.Shape
 import ru.yotfr.alarm.ui.common.punchedShadow
+import java.time.DayOfWeek
 
 @Composable
 fun WeekDaySection(
-    activeWeekDays: List<WeekDays>,
-    onWeekDayClicked: (WeekDays) -> Unit,
+    activeWeekDays: List<DayOfWeek>,
+    onWeekDayClicked: (DayOfWeek) -> Unit,
     onClearWeekDaysClicked: () -> Unit
 ) {
     Column(

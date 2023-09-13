@@ -47,9 +47,12 @@ class AlarmListViewModel @Inject constructor(
         }
     }
 
-    private fun toggleAlarm(alarmModel: AlarmModel, value: Boolean) {
+    private fun toggleAlarm(alarmModel: AlarmModel, newState: Boolean) {
         viewModelScope.launch {
-            toggleAlarmStatusUseCase(alarmModel, value)
+            toggleAlarmStatusUseCase(
+                alarmModel,
+                newState
+            )
         }
     }
 
