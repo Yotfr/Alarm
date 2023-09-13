@@ -1,7 +1,7 @@
 package ru.yotfr.alarm.data.datasource
 
 import androidx.room.TypeConverter
-import ru.yotfr.alarm.domain.model.WeekDays
+import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 class AlarmTypeConverter {
@@ -17,13 +17,13 @@ class AlarmTypeConverter {
     }
 
     @TypeConverter
-    fun toWeekDays(value: String): List<WeekDays> {
+    fun toWeekDays(value: String): List<DayOfWeek> {
         if (value.isBlank()) return emptyList()
         return value.split(",").map { enumValueOf(it) }
     }
 
     @TypeConverter
-    fun fromWeekDays(value: List<WeekDays>): String {
+    fun fromWeekDays(value: List<DayOfWeek>): String {
         if (value.isEmpty()) return ""
         return value.joinToString(separator = ",") { it.name }
     }

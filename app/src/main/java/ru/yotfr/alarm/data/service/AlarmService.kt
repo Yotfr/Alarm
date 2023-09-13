@@ -20,8 +20,7 @@ import ru.yotfr.alarm.R
 import ru.yotfr.alarm.domain.model.AlarmModel
 import ru.yotfr.alarm.domain.repository.AlarmRepository
 import ru.yotfr.alarm.domain.repository.AlarmScheduler
-import ru.yotfr.alarm.ui.createalarm.mapper.toDayOfWeek
-import ru.yotfr.alarm.ui.navigation.MY_URI_RING
+import ru.yotfr.alarm.ui.navigation.NavigationConstants
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -77,7 +76,7 @@ class AlarmService : Service() {
                     .build()
                 val startScreenIntent = Intent(
                     Intent.ACTION_VIEW,
-                    MY_URI_RING.toUri(),
+                    "${NavigationConstants.MY_URI_RING}/${NavigationConstants.ALARM_ID_ARGUMENT_KEY}=$it".toUri(),
                     this,
                     MainActivity::class.java
                 ).addFlags(
@@ -111,7 +110,7 @@ class AlarmService : Service() {
         var nowDate = LocalDate.now()
         do {
             nowDate = nowDate.plusDays(1)
-        } while (!alarmModel.activeDays.map { it.toDayOfWeek() }.contains(nowDate.dayOfWeek))
+        } while (!alarmModel.activeDays.contains(nowDate.dayOfWeek))
         val updatedAlarmModel = alarmModel.copy(
             triggerTime = alarmModel.triggerTime.toLocalTime().atDate(nowDate)
         )

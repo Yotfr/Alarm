@@ -11,7 +11,6 @@ class ChangeAlarmTriggerTimeUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(alarmModel: AlarmModel) {
         alarmRepository.updateAlarm(alarmModel)
-        alarmScheduler.cancelAlarm(alarmModel.id)
         alarmScheduler.scheduleAlarm(alarmModel.triggerTime, alarmModel.id)
     }
 }
