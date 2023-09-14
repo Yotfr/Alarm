@@ -3,7 +3,6 @@ package ru.yotfr.alarm.mediaplayer
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.MediaPlayer
-import android.util.Log
 import ru.yotfr.alarm.domain.model.Sound
 
 class AlarmMediaPlayer(
@@ -42,14 +41,14 @@ class AlarmMediaPlayer(
 
     private fun initializeMediaPlayer() {
         mediaPlayer = MediaPlayer()
-
     }
 
     private fun configureMediaPlayer() {
         mediaPlayer?.isLooping = isLooping
         mediaPlayer?.setAudioAttributes(
             AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_ALARM)
                 .build()
         )
         mediaPlayer?.setOnPreparedListener(onPreparedListener)
