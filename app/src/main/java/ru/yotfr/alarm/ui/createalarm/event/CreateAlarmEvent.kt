@@ -15,4 +15,5 @@ sealed interface CreateAlarmEvent {
     data object SaveClicked : CreateAlarmEvent
     data class OnVibrateChanged(val newVibrate: Boolean) : CreateAlarmEvent
     data class OnSoundChanged(val newSound: Sound) : CreateAlarmEvent
+    data class SoundLevelChanged(val newSoundLevel: Float) : CreateAlarmEvent
 }

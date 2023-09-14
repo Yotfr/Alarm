@@ -12,7 +12,8 @@ fun AlarmEntity.map(): AlarmModel {
         label = label,
         snooze = snooze,
         sound = sound,
-        vibrate = vibrate
+        vibrate = vibrate,
+        volume = volume
     )
 }
 
@@ -25,6 +26,7 @@ fun AlarmModel.map(): AlarmEntity {
         label = label,
         snooze = snooze,
         sound = sound,
-        vibrate = vibrate
+        vibrate = vibrate,
+        volume = volume
     )
 }

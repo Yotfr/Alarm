@@ -55,6 +55,8 @@ fun CreateAlarmScreen(
         sound = alarm.sound,
         vibrate = alarm.vibrate,
         onSoundChanged = { vm.onEvent(CreateAlarmEvent.OnSoundChanged(it)) },
-        onVibrateChanged = { vm.onEvent(CreateAlarmEvent.OnVibrateChanged(it)) }
+        onVibrateChanged = { vm.onEvent(CreateAlarmEvent.OnVibrateChanged(it)) },
+        soundLevel = alarm.volume,
+        onSoundLevelChanged = { vm.onEvent(CreateAlarmEvent.SoundLevelChanged(it)) }
     )
 }

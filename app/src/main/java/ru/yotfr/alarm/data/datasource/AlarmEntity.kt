@@ -16,5 +16,6 @@ data class AlarmEntity(
     val label: String,
     val snooze: Snooze,
     val sound: Sound,
-    val vibrate: Boolean
+    val vibrate: Boolean,
+    val volume: Float
 )

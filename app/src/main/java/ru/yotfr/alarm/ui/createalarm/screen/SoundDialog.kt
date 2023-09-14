@@ -1,7 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
 import AlarmTheme
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -42,7 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import ru.yotfr.alarm.R
 import ru.yotfr.alarm.domain.model.Sound
-import ru.yotfr.alarm.mediaplayer.AlarmMediaPlayer
+import ru.yotfr.alarm.mediaplayer.AlarmPlayer
 import ru.yotfr.alarm.ui.common.Shape
 import ru.yotfr.alarm.ui.common.pressedShadow
 import ru.yotfr.alarm.ui.common.punchedShadow
@@ -87,16 +86,17 @@ fun SoundDialog(
     onSoundLevelChanged: (Float) -> Unit,
 ) {
     val context = LocalContext.current
-    var alarmMediaPlayer by remember { mutableStateOf<AlarmMediaPlayer?>(null) }
+    var alarmPlayer by remember { mutableStateOf<AlarmPlayer?>(null) }
 
     DisposableEffect(Unit) {
-        alarmMediaPlayer = AlarmMediaPlayer(
+        alarmPlayer = AlarmPlayer(
             isLooping = false,
-            context = context
+            context = context,
+            soundLevel = soundLevelPercent
         )
         onDispose {
-            alarmMediaPlayer?.destroyMediaPlayer()
-            alarmMediaPlayer = null
+            alarmPlayer?.destroyAlarmPlayer()
+            alarmPlayer = null
         }
     }
 
@@ -140,7 +140,7 @@ fun SoundDialog(
                         sound = sound,
                         selected = selectedSound == sound,
                         onCLick =  {
-                            alarmMediaPlayer?.playSound(it)
+                            alarmPlayer?.playSound(it)
                             onSoundChanged(it)
                         }
                     )
@@ -152,7 +152,10 @@ fun SoundDialog(
                 vibrate = vibrate,
                 onVibrateChanged = onVibrateChanged,
                 soundLevelPercent = soundLevelPercent,
-                onSoundLevelChanged = onSoundLevelChanged
+                onSoundLevelChanged = {
+                    alarmPlayer?.setVolume(it)
+                    onSoundLevelChanged(it)
+                }
             )
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -178,17 +181,20 @@ fun SoundLevelRow(
             modifier = Modifier.weight(4f)
         ) {
             Icon(
-                painter = if (soundLevelPercent == 0f) painterResource(id = R.drawable.ic_volume_off)
-                else painterResource(id = R.drawable.ic_volume),
+                painter = painterResource(id = R.drawable.ic_volume),
                 contentDescription = null,
                 tint = AlarmTheme.colors.text
             )
             Spacer(modifier = Modifier.width(4.dp))
             Slider(
                 value = soundLevelPercent,
-                onValueChange = onSoundLevelChanged,
-                valueRange = 0f..100f,
-                steps = 100,
+                onValueChange = {
+                    if (it >= 0.1f) {
+                        onSoundLevelChanged(it)
+                    }
+                },
+                valueRange = 0f..1f,
+                steps = 10,
                 colors = SliderDefaults.colors(
                     activeTrackColor = AlarmTheme.colors.text,
                     activeTickColor = AlarmTheme.colors.text,

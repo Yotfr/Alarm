@@ -61,7 +61,9 @@ fun CreateAlarmContentPreview() {
             sound = Sound.FIRST,
             onSoundChanged = {},
             onVibrateChanged = {},
-            vibrate = false
+            vibrate = false,
+            soundLevel = 43f,
+            onSoundLevelChanged = {}
         )
     }
 }
@@ -82,7 +84,9 @@ fun CreateAlarmContent(
     sound: Sound,
     onSoundChanged: (Sound) -> Unit,
     vibrate: Boolean,
-    onVibrateChanged: (Boolean) -> Unit
+    onVibrateChanged: (Boolean) -> Unit,
+    soundLevel: Float,
+    onSoundLevelChanged: (Float) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -132,7 +136,9 @@ fun CreateAlarmContent(
                 sound = sound,
                 onSoundChanged = onSoundChanged,
                 vibrate = vibrate,
-                onVibrateChange = onVibrateChanged
+                onVibrateChange = onVibrateChanged,
+                soundLevel = soundLevel,
+                onSoundLevelChanged = onSoundLevelChanged
             )
             Spacer(modifier = Modifier.height(100.dp))
         }

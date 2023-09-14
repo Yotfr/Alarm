@@ -2,14 +2,19 @@ package ru.yotfr.alarm.mediaplayer
 
 import android.content.Context
 import android.media.AudioAttributes
+import android.media.AudioManager
 import android.media.MediaPlayer
+import android.util.Log
 import ru.yotfr.alarm.domain.model.Sound
 
-class AlarmMediaPlayer(
+class AlarmPlayer(
     val isLooping: Boolean = false,
-    val context: Context
+    val context: Context,
+    val soundLevel: Float
 ) {
     private var mediaPlayer: MediaPlayer? = null
+    private var audioManager: AudioManager? = null
+    private var initialVolume: Int = 0
 
     private val onPreparedListener = MediaPlayer.OnPreparedListener {
         startPlayingSound()
@@ -17,7 +22,9 @@ class AlarmMediaPlayer(
 
     init {
         initializeMediaPlayer()
+        initializeAudioManager()
         configureMediaPlayer()
+        initVolume()
     }
 
     fun playSound(sound: Sound) {
@@ -32,15 +39,43 @@ class AlarmMediaPlayer(
         mediaPlayer?.prepareAsync()
     }
 
-    fun destroyMediaPlayer() {
+    fun initVolume() {
+        audioManager?.let {
+            val currentVolume = it.getStreamVolume(AudioManager.STREAM_ALARM)
+            initialVolume = currentVolume
+            val maxVolume = it.getStreamMaxVolume(AudioManager.STREAM_ALARM)
+            val requiredInitVolume = (maxVolume * soundLevel).toInt()
+            it.setStreamVolume(AudioManager.STREAM_ALARM, requiredInitVolume, 0)
+        }
+    }
+
+    fun setVolume(soundLevel: Float) {
+        audioManager?.let {
+            val maxVolume = it.getStreamMaxVolume(AudioManager.STREAM_ALARM)
+            val requiredVolume = (maxVolume * soundLevel).toInt()
+            it.setStreamVolume(AudioManager.STREAM_ALARM, requiredVolume, 0)
+        }
+    }
+
+    private fun returnInitialVolume() {
+        audioManager?.setStreamVolume(AudioManager.STREAM_ALARM, initialVolume, 0)
+    }
+
+    fun destroyAlarmPlayer() {
         mediaPlayer?.stop()
         mediaPlayer?.reset()
         mediaPlayer?.release()
         mediaPlayer = null
+        returnInitialVolume()
+        audioManager = null
     }
 
     private fun initializeMediaPlayer() {
         mediaPlayer = MediaPlayer()
+    }
+
+    private fun initializeAudioManager() {
+        audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     }
 
     private fun configureMediaPlayer() {

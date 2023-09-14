@@ -73,6 +73,18 @@ class CreateAlarmViewModel @Inject constructor(
             is CreateAlarmEvent.OnVibrateChanged -> {
                 vibrateChanged(event.newVibrate)
             }
+
+            is CreateAlarmEvent.SoundLevelChanged -> {
+                soundLevelChanged(event.newSoundLevel)
+            }
+        }
+    }
+
+    private fun soundLevelChanged(soundLevel: Float) {
+        _screenState.update {
+            it.copy(
+                volume = soundLevel
+            )
         }
     }
 

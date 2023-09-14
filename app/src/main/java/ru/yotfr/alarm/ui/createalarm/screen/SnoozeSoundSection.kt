@@ -42,7 +42,9 @@ fun SnoozeSoundSection(
     sound: Sound,
     onSoundChanged: (Sound) -> Unit,
     vibrate: Boolean,
-    onVibrateChange: (Boolean) -> Unit
+    onVibrateChange: (Boolean) -> Unit,
+    soundLevel: Float,
+    onSoundLevelChanged: (Float) -> Unit
 ) {
     var isSnoozeDialogOpened by remember { mutableStateOf(false) }
     var isSoundDialogOpened by remember { mutableStateOf(false) }
@@ -189,8 +191,8 @@ fun SnoozeSoundSection(
             selectedSound = sound,
             vibrate = vibrate,
             onVibrateChanged = onVibrateChange,
-            soundLevelPercent = 31f,
-            onSoundLevelChanged = {}
+            soundLevelPercent = soundLevel,
+            onSoundLevelChanged = onSoundLevelChanged
         )
     }
 }

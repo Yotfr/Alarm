@@ -11,7 +11,8 @@ data class AlarmModel(
     val label: String = "",
     val snooze: Snooze = Snooze.OFF,
     val sound: Sound = Sound.FIRST,
-    val vibrate: Boolean = false
+    val vibrate: Boolean = false,
+    val volume: Float = 1f
 )
 
 /**
