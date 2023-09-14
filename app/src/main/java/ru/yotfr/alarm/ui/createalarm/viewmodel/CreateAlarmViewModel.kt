@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.yotfr.alarm.domain.model.AlarmModel
 import ru.yotfr.alarm.domain.model.Snooze
+import ru.yotfr.alarm.domain.model.Sound
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
 import ru.yotfr.alarm.domain.usecase.CreateNewAlarmUseCase
 import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
@@ -64,6 +65,30 @@ class CreateAlarmViewModel @Inject constructor(
             CreateAlarmEvent.WeekDaysCleared -> {
                 clearWeekDays()
             }
+
+            is CreateAlarmEvent.OnSoundChanged -> {
+                soundChanged(event.newSound)
+            }
+
+            is CreateAlarmEvent.OnVibrateChanged -> {
+                vibrateChanged(event.newVibrate)
+            }
+        }
+    }
+
+    private fun soundChanged(sound: Sound) {
+        _screenState.update {
+            it.copy(
+                sound = sound
+            )
+        }
+    }
+
+    private fun vibrateChanged(vibrate: Boolean) {
+        _screenState.update {
+            it.copy(
+                vibrate = vibrate
+            )
         }
     }
 

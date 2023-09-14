@@ -54,10 +54,14 @@ fun CreateAlarmContentPreview() {
                     label = it
                 )
             },
-            alarmModel = alarm,
             onSnoozeChanged = { snooze = it },
             label = "",
-            onClearedWeekDays = { activeList.removeAll { true } }
+            onClearedWeekDays = { activeList.removeAll { true } },
+            snooze = Snooze.OFF,
+            sound = Sound.FIRST,
+            onSoundChanged = {},
+            onVibrateChanged = {},
+            vibrate = false
         )
     }
 }
@@ -71,10 +75,14 @@ fun CreateAlarmContent(
     onSaveClicked: () -> Unit,
     onTimeChanged: (LocalTime) -> Unit,
     label: String,
-    alarmModel: AlarmModel,
     onLabelChanged: (String) -> Unit,
     onSnoozeChanged: (Snooze) -> Unit,
-    onClearedWeekDays: () -> Unit
+    onClearedWeekDays: () -> Unit,
+    snooze: Snooze,
+    sound: Sound,
+    onSoundChanged: (Sound) -> Unit,
+    vibrate: Boolean,
+    onVibrateChanged: (Boolean) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -119,12 +127,12 @@ fun CreateAlarmContent(
             )
             Spacer(modifier = Modifier.height(16.dp))
             SnoozeSoundSection(
-                snooze = alarmModel.snooze,
+                snooze = snooze,
                 onSnoozeChanged = onSnoozeChanged,
-                sound = Sound.FIRST,
-                onSoundChanged = {},
-                vibrate = false,
-                onVibrateChange = {}
+                sound = sound,
+                onSoundChanged = onSoundChanged,
+                vibrate = vibrate,
+                onVibrateChange = onVibrateChanged
             )
             Spacer(modifier = Modifier.height(100.dp))
         }

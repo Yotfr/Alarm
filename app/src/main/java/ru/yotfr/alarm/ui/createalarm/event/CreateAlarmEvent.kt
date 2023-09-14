@@ -1,6 +1,7 @@
 package ru.yotfr.alarm.ui.createalarm.event
 
 import ru.yotfr.alarm.domain.model.Snooze
+import ru.yotfr.alarm.domain.model.Sound
 import java.time.DayOfWeek
 import java.time.LocalTime
 
@@ -12,4 +13,6 @@ sealed interface CreateAlarmEvent {
     data class OnSnoozeChanged(val snooze: Snooze) : CreateAlarmEvent
     data object WeekDaysCleared : CreateAlarmEvent
     data object SaveClicked : CreateAlarmEvent
+    data class OnVibrateChanged(val newVibrate: Boolean) : CreateAlarmEvent
+    data class OnSoundChanged(val newSound: Sound) : CreateAlarmEvent
 }

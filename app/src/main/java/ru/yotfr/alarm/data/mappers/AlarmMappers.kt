@@ -9,7 +9,10 @@ fun AlarmEntity.map(): AlarmModel {
         triggerTime = triggerTime,
         isActive = isActive,
         activeDays = activeWeekDays,
-        label = label
+        label = label,
+        snooze = snooze,
+        sound = sound,
+        vibrate = vibrate
     )
 }
 
@@ -19,6 +22,9 @@ fun AlarmModel.map(): AlarmEntity {
         triggerTime = triggerTime,
         isActive = isActive,
         activeWeekDays = activeDays,
-        label = label
+        label = label,
+        snooze = snooze,
+        sound = sound,
+        vibrate = vibrate
     )
 }

@@ -9,7 +9,9 @@ data class AlarmModel(
     val isActive: Boolean = true,
     val activeDays: List<DayOfWeek> = emptyList(),
     val label: String = "",
-    val snooze: Snooze = Snooze.OFF
+    val snooze: Snooze = Snooze.OFF,
+    val sound: Sound = Sound.FIRST,
+    val vibrate: Boolean = false
 )
 
 /**
@@ -32,7 +34,6 @@ fun AlarmModel.validateTriggerTime(): AlarmModel {
  * Returns next trigger time, or null if alarm one-off
  */
 fun AlarmModel.getNextTriggerTime(): LocalDateTime? {
-    val currentDateTime = LocalDateTime.now()
     if (activeDays.isEmpty()) return null
     val closestActiveDay = activeDays.findClosestActiveDay(false)
     var newTriggerTime = triggerTime

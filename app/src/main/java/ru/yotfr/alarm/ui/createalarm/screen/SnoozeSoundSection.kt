@@ -137,7 +137,7 @@ fun SnoozeSoundSection(
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }
                     ) {
-                        //TODO
+                        isSoundDialogOpened = true
                     }
                     .clip(AlarmTheme.shape.small)
                     .pressedShadow(
@@ -172,7 +172,6 @@ fun SnoozeSoundSection(
         }
         Spacer(modifier = Modifier.height(22.dp))
     }
-
     if (isSnoozeDialogOpened) {
         SnoozeDialog(
             onDismissRequest = { isSnoozeDialogOpened = false },
@@ -181,6 +180,17 @@ fun SnoozeSoundSection(
                 isSnoozeDialogOpened = false
             },
             selectedSnooze = snooze
+        )
+    }
+    if (isSoundDialogOpened) {
+        SoundDialog(
+            onDismissRequest = { isSoundDialogOpened = false },
+            onSoundChanged = onSoundChanged,
+            selectedSound = sound,
+            vibrate = vibrate,
+            onVibrateChanged = onVibrateChange,
+            soundLevelPercent = 31f,
+            onSoundLevelChanged = {}
         )
     }
 }

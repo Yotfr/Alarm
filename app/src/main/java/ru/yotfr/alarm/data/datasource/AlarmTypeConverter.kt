@@ -1,6 +1,8 @@
 package ru.yotfr.alarm.data.datasource
 
 import androidx.room.TypeConverter
+import ru.yotfr.alarm.domain.model.Snooze
+import ru.yotfr.alarm.domain.model.Sound
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -26,6 +28,26 @@ class AlarmTypeConverter {
     fun fromWeekDays(value: List<DayOfWeek>): String {
         if (value.isEmpty()) return ""
         return value.joinToString(separator = ",") { it.name }
+    }
+
+    @TypeConverter
+    fun fromSnooze(value: Snooze): String {
+        return value.name
+    }
+
+    @TypeConverter
+    fun toSnooze(value: String): Snooze {
+        return enumValueOf(value)
+    }
+
+    @TypeConverter
+    fun fromSound(value: Sound): String {
+        return value.name
+    }
+
+    @TypeConverter
+    fun toSound(value: String): Sound {
+        return enumValueOf(value)
     }
 
 }
