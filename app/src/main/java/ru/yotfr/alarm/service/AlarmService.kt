@@ -19,9 +19,11 @@ import ru.yotfr.alarm.AlarmApp
 import ru.yotfr.alarm.MainActivity
 import ru.yotfr.alarm.R
 import ru.yotfr.alarm.domain.model.AlarmModel
+import ru.yotfr.alarm.domain.model.Sound
 import ru.yotfr.alarm.domain.model.getNextTriggerTime
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
 import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
+import ru.yotfr.alarm.mediaplayer.AlarmPlayer
 import ru.yotfr.alarm.ui.navigation.NavigationConstants
 import javax.inject.Inject
 
@@ -36,13 +38,12 @@ class AlarmService : Service() {
 
     private val job = SupervisorJob()
     private val scope = CoroutineScope(Dispatchers.IO + job)
-    private var mediaPlayer: MediaPlayer? = null
-    private val onPreparedListener = OnPreparedListener { startPlayingSound() }
+    private var alarmPlayer: AlarmPlayer? = null
     private var alarmID: Long? = null
 
     override fun onCreate() {
         super.onCreate()
-        initializeMediaPlayer()
+        initializeAlarmPlayer()
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
@@ -59,10 +60,12 @@ class AlarmService : Service() {
                 scope.launch {
                     val alarm = getAlarmByIdUseCase(alarmId)
                     scheduleNewAlarm(alarm)
+                    configureAlarmPlayerSound(alarm.volume)
+                    playAlarmSound(alarm.sound)
                 }
-                configureAndPrepareMediaPlayer()
                 startActivity(getStartScreenIntent(alarmId))
                 startForeground(alarmId.toInt(), getServiceNotification())
+
                 AlarmRingStatus.isRinging = true
             }
         }
@@ -72,9 +75,9 @@ class AlarmService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         AlarmRingStatus.isRinging = false
-        destroyMediaPlayer()
         job.cancel()
         alarmID = null
+        destroyAlarmPlayer()
     }
 
     private fun getStartScreenIntent(alarmId: Long, recreate: Boolean = false): Intent {
@@ -101,6 +104,25 @@ class AlarmService : Service() {
             .build()
     }
 
+    private fun initializeAlarmPlayer() {
+        alarmPlayer = AlarmPlayer(
+            isLooping = true,
+            context = this
+        )
+    }
+
+    private fun playAlarmSound(sound: Sound) {
+        alarmPlayer?.playSound(sound)
+    }
+
+    private fun configureAlarmPlayerSound(volume: Float) {
+        alarmPlayer?.configureVolume(volume)
+    }
+
+    private fun destroyAlarmPlayer() {
+        alarmPlayer?.destroyAlarmPlayer()
+    }
+
     private suspend fun scheduleNewAlarm(alarmModel: AlarmModel) {
         alarmModel.getNextTriggerTime()?.let { nextTriggerTime ->
             changeAlarmTriggerTimeUseCase(
@@ -109,36 +131,6 @@ class AlarmService : Service() {
                 )
             )
         }
-    }
-
-    private fun startPlayingSound() {
-        mediaPlayer?.start()
-    }
-
-    private fun configureAndPrepareMediaPlayer() {
-        mediaPlayer?.setDataSource(
-            this,
-            Uri.parse("android.resource://" + this.packageName + "/" + R.raw.first_sound)
-        )
-        mediaPlayer?.setAudioAttributes(
-            AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .build()
-        )
-        mediaPlayer?.prepareAsync()
-        mediaPlayer?.setOnPreparedListener(onPreparedListener)
-    }
-
-    private fun initializeMediaPlayer() {
-        mediaPlayer = MediaPlayer()
-        mediaPlayer?.isLooping = true
-    }
-
-    private fun destroyMediaPlayer() {
-        mediaPlayer?.stop()
-        mediaPlayer?.reset()
-        mediaPlayer?.release()
-        mediaPlayer = null
     }
 
     companion object {

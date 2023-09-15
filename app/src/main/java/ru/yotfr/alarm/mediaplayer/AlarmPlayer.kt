@@ -10,11 +10,13 @@ import ru.yotfr.alarm.domain.model.Sound
 class AlarmPlayer(
     val isLooping: Boolean = false,
     val context: Context,
-    val soundLevel: Float
+    val soundLevel: Float? = 1f
 ) {
     private var mediaPlayer: MediaPlayer? = null
     private var audioManager: AudioManager? = null
     private var initialVolume: Int = 0
+
+    private var volume = soundLevel ?: 1f
 
     private val onPreparedListener = MediaPlayer.OnPreparedListener {
         startPlayingSound()
@@ -25,6 +27,10 @@ class AlarmPlayer(
         initializeAudioManager()
         configureMediaPlayer()
         initVolume()
+    }
+
+    fun configureVolume(volumeLevel: Float) {
+        volume = volumeLevel
     }
 
     fun playSound(sound: Sound) {
@@ -39,12 +45,12 @@ class AlarmPlayer(
         mediaPlayer?.prepareAsync()
     }
 
-    fun initVolume() {
+    private fun initVolume() {
         audioManager?.let {
             val currentVolume = it.getStreamVolume(AudioManager.STREAM_ALARM)
             initialVolume = currentVolume
             val maxVolume = it.getStreamMaxVolume(AudioManager.STREAM_ALARM)
-            val requiredInitVolume = (maxVolume * soundLevel).toInt()
+            val requiredInitVolume = (maxVolume * volume).toInt()
             it.setStreamVolume(AudioManager.STREAM_ALARM, requiredInitVolume, 0)
         }
     }
