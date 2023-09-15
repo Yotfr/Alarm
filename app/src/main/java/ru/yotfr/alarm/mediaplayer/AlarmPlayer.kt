@@ -1,9 +1,11 @@
 package ru.yotfr.alarm.mediaplayer
 
 import android.content.Context
+import android.health.connect.datatypes.units.Volume
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.os.Build
 import android.util.Log
 import ru.yotfr.alarm.domain.model.Sound
 
@@ -43,6 +45,19 @@ class AlarmPlayer(
             sound.uri(context)
         )
         mediaPlayer?.prepareAsync()
+    }
+
+    fun playSoundIncreaseVolume(sound: Sound, targetVolume: Volume) {
+        if (mediaPlayer?.isPlaying == true) {
+            mediaPlayer?.stop()
+        }
+        mediaPlayer?.reset()
+        mediaPlayer?.setDataSource(
+            context,
+            sound.uri(context)
+        )
+        mediaPlayer?.prepareAsync()
+
     }
 
     private fun initVolume() {
