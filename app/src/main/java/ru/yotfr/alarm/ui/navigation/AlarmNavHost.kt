@@ -1,5 +1,6 @@
 package ru.yotfr.alarm.ui.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,6 +24,7 @@ fun AlarmNavHost() {
         ) {
             AlarmsListScreen(
                 navigateToCreateAlarmScreen = { id ->
+                    Log.d("TEST","Start navigating from list to create")
                     navController.navigate(
                         route = Screen.CreateAlarm.passId(id)
                     )
@@ -37,9 +39,12 @@ fun AlarmNavHost() {
                 }
             )
         ) { backStackEntry ->
+            Log.d("TEST"," Start composable CreateAlarm ( Navigation )")
+            val alarmId = backStackEntry.arguments?.getString(NavigationConstants.ALARM_ID_ARGUMENT_KEY)
+                ?.toLong()
+            Log.d("TEST","AlarmID received $alarmId")
             CreateAlarmScreen(
-                alarmId = backStackEntry.arguments?.getString(NavigationConstants.ALARM_ID_ARGUMENT_KEY)
-                    ?.toLong(),
+                alarmId = alarmId,
                 navigateBack = { navController.popBackStack() }
             )
         }

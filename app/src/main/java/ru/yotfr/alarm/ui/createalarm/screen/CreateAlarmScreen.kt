@@ -1,5 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -25,6 +26,7 @@ fun CreateAlarmScreen(
     val lifecycle = LocalLifecycleOwner.current.lifecycle
 
     LaunchedEffect(Unit) {
+        Log.d("TEST","Enter Screen launched")
         vm.onEvent(CreateAlarmEvent.EnterScreen(alarmId))
     }
 

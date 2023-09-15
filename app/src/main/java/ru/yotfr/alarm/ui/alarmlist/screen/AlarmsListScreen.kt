@@ -1,5 +1,6 @@
 package ru.yotfr.alarm.ui.alarmlist.screen
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,8 +18,14 @@ fun AlarmsListScreen(
 
     AlarmListContent(
         alarms = state.alarms,
-        onFABClicked = { navigateToCreateAlarmScreen(null) },
-        onAlarmClicked = { navigateToCreateAlarmScreen(it.id) },
+        onFABClicked = {
+            Log.d("TEST"," FAB clicked Null")
+            navigateToCreateAlarmScreen(null)
+                       },
+        onAlarmClicked = {
+            Log.d("TEST"," FAB clicked ID")
+            navigateToCreateAlarmScreen(it.id)
+                         },
         switchChecked = { alarm, newValue ->
             vm.onEvent(AlarmListEvent.ToggleAlarm(alarm, newValue))
         },

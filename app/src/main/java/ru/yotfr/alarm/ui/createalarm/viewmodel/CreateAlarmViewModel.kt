@@ -1,5 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -105,6 +106,7 @@ class CreateAlarmViewModel @Inject constructor(
     }
 
     private fun enterScreen(id: Long?) {
+        Log.d("TEST","Entering Screen")
         id?.let {
             viewModelScope.launch {
                 _screenState.value = getAlarmByIdUseCase(it)
