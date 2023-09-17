@@ -28,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import ru.yotfr.alarm.R
-import ru.yotfr.alarm.domain.model.Snooze
+import ru.yotfr.model.Snooze
 import ru.yotfr.alarm.ui.common.Shape
 import ru.yotfr.alarm.ui.common.pressedShadow
 import ru.yotfr.alarm.ui.common.punchedShadow
@@ -47,7 +47,7 @@ fun SnoozeDialogPreview() {
             SnoozeDialog(
                 onDismissRequest = {},
                 onConfirmation = {},
-                selectedSnooze = Snooze.FIFTEEN
+                selectedSnooze = ru.yotfr.model.Snooze.FIFTEEN
             )
         }
     }
@@ -56,8 +56,8 @@ fun SnoozeDialogPreview() {
 @Composable
 fun SnoozeDialog(
     onDismissRequest: () -> Unit,
-    onConfirmation: (Snooze) -> Unit,
-    selectedSnooze: Snooze
+    onConfirmation: (ru.yotfr.model.Snooze) -> Unit,
+    selectedSnooze: ru.yotfr.model.Snooze
 ) {
     Dialog(
         onDismissRequest = onDismissRequest
@@ -77,7 +77,7 @@ fun SnoozeDialog(
                 color = AlarmTheme.colors.text
             )
             Spacer(modifier = Modifier.height(32.dp))
-            Snooze.values().forEach { snooze ->
+            ru.yotfr.model.Snooze.values().forEach { snooze ->
                 SnoozeItem(
                     snooze = snooze,
                     selected = selectedSnooze == snooze,
@@ -92,9 +92,9 @@ fun SnoozeDialog(
 
 @Composable
 fun SnoozeItem(
-    snooze: Snooze,
+    snooze: ru.yotfr.model.Snooze,
     selected: Boolean,
-    onCLick: (Snooze) -> Unit
+    onCLick: (ru.yotfr.model.Snooze) -> Unit
 ) {
     Row(
         modifier = Modifier

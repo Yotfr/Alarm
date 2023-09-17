@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Icon
@@ -40,7 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import ru.yotfr.alarm.R
-import ru.yotfr.alarm.domain.model.Sound
+import ru.yotfr.model.Sound
 import ru.yotfr.alarm.mediaplayer.AlarmPlayer
 import ru.yotfr.alarm.ui.common.Shape
 import ru.yotfr.alarm.ui.common.pressedShadow
@@ -54,7 +53,7 @@ fun SoundDialogPreview() {
 
         var progress by remember { mutableStateOf(0f) }
         var vibrate by remember { mutableStateOf(false) }
-        var sound by remember { mutableStateOf(Sound.FIRST) }
+        var sound by remember { mutableStateOf(ru.yotfr.model.Sound.FIRST) }
 
         Box(
             modifier = Modifier
@@ -78,8 +77,8 @@ fun SoundDialogPreview() {
 @Composable
 fun SoundDialog(
     onDismissRequest: () -> Unit,
-    onSoundChanged: (Sound) -> Unit,
-    selectedSound: Sound,
+    onSoundChanged: (ru.yotfr.model.Sound) -> Unit,
+    selectedSound: ru.yotfr.model.Sound,
     vibrate:Boolean,
     onVibrateChanged: (Boolean) -> Unit,
     soundLevelPercent: Float,
@@ -135,7 +134,7 @@ fun SoundDialog(
             }
             Spacer(modifier = Modifier.height(32.dp))
             LazyColumn {
-                items(Sound.values()) { sound ->
+                items(ru.yotfr.model.Sound.values()) { sound ->
                     SoundItem(
                         sound = sound,
                         selected = selectedSound == sound,
@@ -252,9 +251,9 @@ fun SoundLevelRow(
 
 @Composable
 fun SoundItem(
-    sound: Sound,
+    sound: ru.yotfr.model.Sound,
     selected: Boolean,
-    onCLick: (Sound) -> Unit
+    onCLick: (ru.yotfr.model.Sound) -> Unit
 ) {
     Row(
         modifier = Modifier

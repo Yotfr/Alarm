@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.yotfr.alarm.domain.model.AlarmModel
+import ru.yotfr.model.AlarmModel
 import ru.yotfr.alarm.domain.usecase.DeleteAlarmUseCase
 import ru.yotfr.alarm.domain.usecase.GetAllAlarmsUseCase
 import ru.yotfr.alarm.domain.usecase.ToggleAlarmStatusUseCase
@@ -47,7 +47,7 @@ class AlarmListViewModel @Inject constructor(
         }
     }
 
-    private fun toggleAlarm(alarmModel: AlarmModel, newState: Boolean) {
+    private fun toggleAlarm(alarmModel: ru.yotfr.model.AlarmModel, newState: Boolean) {
         viewModelScope.launch {
             toggleAlarmStatusUseCase(
                 alarmModel,
@@ -56,7 +56,7 @@ class AlarmListViewModel @Inject constructor(
         }
     }
 
-    private fun deleteAlarm(alarmModel: AlarmModel) {
+    private fun deleteAlarm(alarmModel: ru.yotfr.model.AlarmModel) {
         viewModelScope.launch {
             deleteAlarmUseCase(alarmModel)
         }

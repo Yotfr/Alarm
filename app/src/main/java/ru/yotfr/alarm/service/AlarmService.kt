@@ -3,10 +3,6 @@ package ru.yotfr.alarm.service
 import android.app.Notification
 import android.app.Service
 import android.content.Intent
-import android.media.AudioAttributes
-import android.media.MediaPlayer
-import android.media.MediaPlayer.OnPreparedListener
-import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.core.net.toUri
@@ -18,9 +14,9 @@ import kotlinx.coroutines.launch
 import ru.yotfr.alarm.AlarmApp
 import ru.yotfr.alarm.MainActivity
 import ru.yotfr.alarm.R
-import ru.yotfr.alarm.domain.model.AlarmModel
-import ru.yotfr.alarm.domain.model.Sound
-import ru.yotfr.alarm.domain.model.getNextTriggerTime
+import ru.yotfr.model.AlarmModel
+import ru.yotfr.model.Sound
+import ru.yotfr.model.getNextTriggerTime
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
 import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
 import ru.yotfr.alarm.mediaplayer.AlarmPlayer
@@ -111,7 +107,7 @@ class AlarmService : Service() {
         )
     }
 
-    private fun playAlarmSound(sound: Sound) {
+    private fun playAlarmSound(sound: ru.yotfr.model.Sound) {
         alarmPlayer?.playSound(sound)
     }
 
@@ -123,7 +119,7 @@ class AlarmService : Service() {
         alarmPlayer?.destroyAlarmPlayer()
     }
 
-    private suspend fun scheduleNewAlarm(alarmModel: AlarmModel) {
+    private suspend fun scheduleNewAlarm(alarmModel: ru.yotfr.model.AlarmModel) {
         alarmModel.getNextTriggerTime()?.let { nextTriggerTime ->
             changeAlarmTriggerTimeUseCase(
                 alarmModel.copy(

@@ -5,9 +5,7 @@ import android.health.connect.datatypes.units.Volume
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
-import android.os.Build
-import android.util.Log
-import ru.yotfr.alarm.domain.model.Sound
+import ru.yotfr.model.Sound
 
 class AlarmPlayer(
     val isLooping: Boolean = false,
@@ -35,7 +33,7 @@ class AlarmPlayer(
         volume = volumeLevel
     }
 
-    fun playSound(sound: Sound) {
+    fun playSound(sound: ru.yotfr.model.Sound) {
         if (mediaPlayer?.isPlaying == true) {
             mediaPlayer?.stop()
         }
@@ -47,7 +45,7 @@ class AlarmPlayer(
         mediaPlayer?.prepareAsync()
     }
 
-    fun playSoundIncreaseVolume(sound: Sound, targetVolume: Volume) {
+    fun playSoundIncreaseVolume(sound: ru.yotfr.model.Sound, targetVolume: Volume) {
         if (mediaPlayer?.isPlaying == true) {
             mediaPlayer?.stop()
         }

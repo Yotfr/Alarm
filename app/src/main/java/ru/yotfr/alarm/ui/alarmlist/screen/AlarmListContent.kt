@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
@@ -33,20 +32,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.R
-import ru.yotfr.alarm.domain.model.AlarmModel
+import ru.yotfr.model.AlarmModel
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 
 @Preview
 @Composable
 fun AlarmListContentPreview() {
-    fun alarm(id: Long) = AlarmModel(
+    fun alarm(id: Long) = ru.yotfr.model.AlarmModel(
         id = id,
         triggerTime = LocalDateTime.now(),
         isActive = true,
         activeDays = emptyList()
     )
-    fun testAlarm(id: Long) = AlarmModel(
+    fun testAlarm(id: Long) = ru.yotfr.model.AlarmModel(
         id = id,
         triggerTime = LocalDateTime.now(),
         isActive = true,
@@ -85,11 +84,11 @@ fun AlarmListContentPreview() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlarmListContent(
-    alarms: List<AlarmModel>,
+    alarms: List<ru.yotfr.model.AlarmModel>,
     onFABClicked: () -> Unit,
-    onAlarmClicked: (AlarmModel) -> Unit,
-    switchChecked: (AlarmModel, Boolean) -> Unit,
-    onDeleteClicked: (AlarmModel) -> Unit
+    onAlarmClicked: (ru.yotfr.model.AlarmModel) -> Unit,
+    switchChecked: (ru.yotfr.model.AlarmModel, Boolean) -> Unit,
+    onDeleteClicked: (ru.yotfr.model.AlarmModel) -> Unit
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     var isFABVisible by remember { mutableStateOf(true) }

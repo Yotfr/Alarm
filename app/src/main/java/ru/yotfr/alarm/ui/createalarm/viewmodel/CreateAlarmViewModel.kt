@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.yotfr.alarm.domain.model.AlarmModel
-import ru.yotfr.alarm.domain.model.Snooze
-import ru.yotfr.alarm.domain.model.Sound
+import ru.yotfr.model.AlarmModel
+import ru.yotfr.model.Snooze
+import ru.yotfr.model.Sound
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
 import ru.yotfr.alarm.domain.usecase.CreateNewAlarmUseCase
 import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
@@ -31,7 +31,7 @@ class CreateAlarmViewModel @Inject constructor(
     private val getAlarmByIdUseCase: GetAlarmByIdUseCase
 ) : ViewModel() {
 
-    private val _screenState = MutableStateFlow(AlarmModel())
+    private val _screenState = MutableStateFlow(ru.yotfr.model.AlarmModel())
     val screenState = _screenState.asStateFlow()
 
     private val _event = Channel<CreateAlarmScreenEvent>()
@@ -89,7 +89,7 @@ class CreateAlarmViewModel @Inject constructor(
         }
     }
 
-    private fun soundChanged(sound: Sound) {
+    private fun soundChanged(sound: ru.yotfr.model.Sound) {
         _screenState.update {
             it.copy(
                 sound = sound
@@ -143,7 +143,7 @@ class CreateAlarmViewModel @Inject constructor(
         }
     }
 
-    private fun snoozeChanged(snooze: Snooze) {
+    private fun snoozeChanged(snooze: ru.yotfr.model.Snooze) {
         _screenState.update {
             it.copy(
                 snooze = snooze

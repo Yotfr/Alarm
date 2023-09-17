@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ru.yotfr.alarm.data.datasource.AlarmDao
-import ru.yotfr.alarm.data.datasource.AlarmDatabase
+import ru.yotfr.database.dao.AlarmDao
+import ru.yotfr.database.database.AlarmDatabase
 import javax.inject.Singleton
 
 @Module
@@ -19,10 +19,10 @@ object DatabaseModule {
     @Singleton
     fun provideAlarmDatabase(
         @ApplicationContext context: Context
-    ): AlarmDatabase {
+    ): ru.yotfr.database.database.AlarmDatabase {
         return Room.databaseBuilder(
             context,
-            AlarmDatabase::class.java,
+            ru.yotfr.database.database.AlarmDatabase::class.java,
             "alarms_db"
         ).build()
     }
@@ -30,8 +30,8 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideAlarmDao(
-        alarmDatabase: AlarmDatabase
-    ): AlarmDao {
+        alarmDatabase: ru.yotfr.database.database.AlarmDatabase
+    ): ru.yotfr.database.dao.AlarmDao {
         return alarmDatabase.alarmDao
     }
 

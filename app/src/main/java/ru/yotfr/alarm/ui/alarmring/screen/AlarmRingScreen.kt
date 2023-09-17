@@ -13,7 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.flow.collectLatest
-import ru.yotfr.alarm.domain.model.Snooze
+import ru.yotfr.model.Snooze
 import ru.yotfr.alarm.service.AlarmRingStatus
 import ru.yotfr.alarm.service.AlarmService
 import ru.yotfr.alarm.ui.alarmring.event.AlarmRingEvent
@@ -59,7 +59,7 @@ fun AlarmRingScreen(
         label = alarm.label,
         onSnoozeClicked = { vm.onEvent(AlarmRingEvent.SnoozeAlarm) },
         onDismissClicked = { vm.onEvent(AlarmRingEvent.DismissAlarm) },
-        isSnoozeActive = alarm.snooze != Snooze.OFF
+        isSnoozeActive = alarm.snooze != ru.yotfr.model.Snooze.OFF
     )
 }
 

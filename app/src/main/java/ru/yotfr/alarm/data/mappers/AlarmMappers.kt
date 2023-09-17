@@ -1,9 +1,9 @@
 package ru.yotfr.alarm.data.mappers
 
-import ru.yotfr.alarm.data.datasource.AlarmEntity
-import ru.yotfr.alarm.domain.model.AlarmModel
+import ru.yotfr.database.model.AlarmEntity
+import ru.yotfr.model.AlarmModel
 
-fun AlarmEntity.map(): AlarmModel {
+fun ru.yotfr.database.model.AlarmEntity.map(): ru.yotfr.model.AlarmModel {
     return AlarmModel(
         id = id,
         triggerTime = triggerTime,
@@ -17,8 +17,8 @@ fun AlarmEntity.map(): AlarmModel {
     )
 }
 
-fun AlarmModel.map(): AlarmEntity {
-    return AlarmEntity(
+fun ru.yotfr.model.AlarmModel.map(): ru.yotfr.database.model.AlarmEntity {
+    return ru.yotfr.database.model.AlarmEntity(
         id = id,
         triggerTime = triggerTime,
         isActive = isActive,

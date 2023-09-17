@@ -3,7 +3,7 @@ package ru.yotfr.alarm.ui.createalarm.mapper
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import ru.yotfr.alarm.R
-import ru.yotfr.alarm.domain.model.Snooze
+import ru.yotfr.model.Snooze
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
@@ -42,14 +42,14 @@ fun LocalDateTime.remainTime(): String {
 }
 
 @Composable
-fun Snooze.stringResource(): String {
+fun ru.yotfr.model.Snooze.stringResource(): String {
     return when(this) {
-        Snooze.FIVE -> stringResource(R.string.five)
-        Snooze.TEN -> stringResource(R.string.ten)
-        Snooze.FIFTEEN -> stringResource(R.string.fifteen)
-        Snooze.TWENTY -> stringResource(R.string.twenty)
-        Snooze.TWENTY_FIVE -> stringResource(R.string.twenty_five)
-        Snooze.THIRTY -> stringResource(R.string.thirty)
-        Snooze.OFF -> stringResource(R.string.snooze_off)
+        ru.yotfr.model.Snooze.FIVE -> stringResource(R.string.five)
+        ru.yotfr.model.Snooze.TEN -> stringResource(R.string.ten)
+        ru.yotfr.model.Snooze.FIFTEEN -> stringResource(R.string.fifteen)
+        ru.yotfr.model.Snooze.TWENTY -> stringResource(R.string.twenty)
+        ru.yotfr.model.Snooze.TWENTY_FIVE -> stringResource(R.string.twenty_five)
+        ru.yotfr.model.Snooze.THIRTY -> stringResource(R.string.thirty)
+        ru.yotfr.model.Snooze.OFF -> stringResource(R.string.snooze_off)
     }
 }

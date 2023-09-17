@@ -25,9 +25,9 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.yotfr.alarm.domain.model.AlarmModel
-import ru.yotfr.alarm.domain.model.Snooze
-import ru.yotfr.alarm.domain.model.Sound
+import ru.yotfr.model.AlarmModel
+import ru.yotfr.model.Snooze
+import ru.yotfr.model.Sound
 import java.time.DayOfWeek
 import java.time.LocalTime
 
@@ -36,8 +36,8 @@ import java.time.LocalTime
 fun CreateAlarmContentPreview() {
     AlarmTheme {
         val activeList = remember { mutableStateListOf(DayOfWeek.MONDAY, DayOfWeek.SATURDAY) }
-        var alarm by remember { mutableStateOf(AlarmModel()) }
-        var snooze by remember { mutableStateOf(Snooze.FIVE) }
+        var alarm by remember { mutableStateOf(ru.yotfr.model.AlarmModel()) }
+        var snooze by remember { mutableStateOf(ru.yotfr.model.Snooze.FIVE) }
         CreateAlarmContent(
             remainTime = "1 day",
             onBackPressed = {},
@@ -57,8 +57,8 @@ fun CreateAlarmContentPreview() {
             onSnoozeChanged = { snooze = it },
             label = "",
             onClearedWeekDays = { activeList.removeAll { true } },
-            snooze = Snooze.OFF,
-            sound = Sound.FIRST,
+            snooze = ru.yotfr.model.Snooze.OFF,
+            sound = ru.yotfr.model.Sound.FIRST,
             onSoundChanged = {},
             onVibrateChanged = {},
             vibrate = false,
@@ -78,11 +78,11 @@ fun CreateAlarmContent(
     onTimeChanged: (LocalTime) -> Unit,
     label: String,
     onLabelChanged: (String) -> Unit,
-    onSnoozeChanged: (Snooze) -> Unit,
+    onSnoozeChanged: (ru.yotfr.model.Snooze) -> Unit,
     onClearedWeekDays: () -> Unit,
-    snooze: Snooze,
-    sound: Sound,
-    onSoundChanged: (Sound) -> Unit,
+    snooze: ru.yotfr.model.Snooze,
+    sound: ru.yotfr.model.Sound,
+    onSoundChanged: (ru.yotfr.model.Sound) -> Unit,
     vibrate: Boolean,
     onVibrateChanged: (Boolean) -> Unit,
     soundLevel: Float,

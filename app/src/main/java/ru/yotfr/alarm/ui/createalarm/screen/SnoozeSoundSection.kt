@@ -27,8 +27,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.R
-import ru.yotfr.alarm.domain.model.Snooze
-import ru.yotfr.alarm.domain.model.Sound
+import ru.yotfr.model.Snooze
+import ru.yotfr.model.Sound
 import ru.yotfr.alarm.ui.common.Shape
 import ru.yotfr.alarm.ui.common.pressedShadow
 import ru.yotfr.alarm.ui.common.punchedShadow
@@ -37,10 +37,10 @@ import ru.yotfr.alarm.ui.createalarm.mapper.stringResource
 
 @Composable
 fun SnoozeSoundSection(
-    snooze: Snooze,
-    onSnoozeChanged: (Snooze) -> Unit,
-    sound: Sound,
-    onSoundChanged: (Sound) -> Unit,
+    snooze: ru.yotfr.model.Snooze,
+    onSnoozeChanged: (ru.yotfr.model.Snooze) -> Unit,
+    sound: ru.yotfr.model.Sound,
+    onSoundChanged: (ru.yotfr.model.Sound) -> Unit,
     vibrate: Boolean,
     onVibrateChange: (Boolean) -> Unit,
     soundLevel: Float,

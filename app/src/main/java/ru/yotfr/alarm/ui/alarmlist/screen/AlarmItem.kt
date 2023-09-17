@@ -27,7 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.yotfr.alarm.domain.model.AlarmModel
+import ru.yotfr.model.AlarmModel
 import ru.yotfr.alarm.ui.common.Shape
 import ru.yotfr.alarm.ui.common.punchedShadow
 import java.time.DayOfWeek
@@ -38,7 +38,7 @@ import java.time.format.DateTimeFormatter
 fun AlarmItemPreview() {
     var alarmModel by remember {
         mutableStateOf(
-            AlarmModel(
+            ru.yotfr.model.AlarmModel(
                 activeDays = listOf(
                     DayOfWeek.SUNDAY,
                     DayOfWeek.FRIDAY
@@ -70,7 +70,7 @@ fun AlarmItemPreview() {
 
 @Composable
 fun AlarmItem(
-    alarmModel: AlarmModel,
+    alarmModel: ru.yotfr.model.AlarmModel,
     onActiveChanged: (Boolean) -> Unit,
     onClick: () -> Unit,
     isInEditMode: Boolean = false,
