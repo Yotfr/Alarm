@@ -4,7 +4,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.yotfr.alarm.domain.repository.AlarmRepository
 import ru.yotfr.alarm.domain.repository.AlarmScheduler
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
 import ru.yotfr.alarm.domain.usecase.CreateNewAlarmUseCase

@@ -3,7 +3,6 @@ package ru.yotfr.alarm.domain.usecase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.yotfr.model.AlarmModel
-import ru.yotfr.alarm.domain.repository.AlarmRepository
 import javax.inject.Inject
 
 class GetAlarmByIdUseCase @Inject constructor(

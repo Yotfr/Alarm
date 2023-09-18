@@ -18,3 +18,4 @@ rootProject.name = "Alarm"
 include(":app")
 include(":core:database")
 include(":core:model")
+include(":core:data")

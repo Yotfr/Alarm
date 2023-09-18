@@ -4,7 +4,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import ru.yotfr.model.AlarmModel
-import ru.yotfr.alarm.domain.repository.AlarmRepository
 import javax.inject.Inject
 
 class GetAllAlarmsUseCase @Inject constructor(

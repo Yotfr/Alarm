@@ -1,14 +1,14 @@
-package ru.yotfr.alarm.data.mappers
+package ru.yotfr.data.util
 
 import ru.yotfr.database.model.AlarmEntity
-import ru.yotfr.model.AlarmModel
+import ru.yotfr.model.Alarm
 
-fun ru.yotfr.database.model.AlarmEntity.map(): ru.yotfr.model.AlarmModel {
-    return AlarmModel(
+fun Alarm.mapAsEntity(): AlarmEntity {
+    return AlarmEntity(
         id = id,
         triggerTime = triggerTime,
         isActive = isActive,
-        activeDays = activeWeekDays,
+        activeWeekDays = activeDays,
         label = label,
         snooze = snooze,
         sound = sound,
@@ -17,12 +17,12 @@ fun ru.yotfr.database.model.AlarmEntity.map(): ru.yotfr.model.AlarmModel {
     )
 }
 
-fun ru.yotfr.model.AlarmModel.map(): ru.yotfr.database.model.AlarmEntity {
-    return ru.yotfr.database.model.AlarmEntity(
+fun AlarmEntity.mapAsModel(): Alarm {
+    return Alarm(
         id = id,
         triggerTime = triggerTime,
         isActive = isActive,
-        activeWeekDays = activeDays,
+        activeDays = activeWeekDays,
         label = label,
         snooze = snooze,
         sound = sound,

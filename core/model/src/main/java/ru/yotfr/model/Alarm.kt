@@ -3,7 +3,7 @@ package ru.yotfr.model
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 
-data class AlarmModel(
+data class Alarm(
     val id: Long = 0,
     val triggerTime: LocalDateTime = LocalDateTime.now(),
     val isActive: Boolean = true,
@@ -19,7 +19,7 @@ data class AlarmModel(
  * Check if the trigger date is after current date, if not, finds correct trigger time
  * and return a copy of alarm
  */
-fun AlarmModel.validateTriggerTime(): AlarmModel {
+fun Alarm.validateTriggerTime(): Alarm {
     val currentDateTime = LocalDateTime.now()
     if (triggerTime.isAfter(currentDateTime)) return this
     if (activeDays.isEmpty()) return copy(triggerTime = triggerTime.plusDays(1))
@@ -34,7 +34,7 @@ fun AlarmModel.validateTriggerTime(): AlarmModel {
 /**
  * Returns next trigger time, or null if alarm one-off
  */
-fun AlarmModel.getNextTriggerTime(): LocalDateTime? {
+fun Alarm.getNextTriggerTime(): LocalDateTime? {
     if (activeDays.isEmpty()) return null
     val closestActiveDay = activeDays.findClosestActiveDay(false)
     var newTriggerTime = triggerTime
