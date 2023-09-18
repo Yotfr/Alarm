@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.yotfr.alarm.domain.repository.AlarmScheduler
+import ru.yotfr.alarmscheduler.AlarmScheduler
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
 import ru.yotfr.alarm.domain.usecase.CreateNewAlarmUseCase
 import ru.yotfr.alarm.domain.usecase.DeleteAlarmUseCase
@@ -25,7 +25,7 @@ object UseCaseModule {
     @Provides
     fun provideCreateNewAlarmUseCase(
         alarmRepository: AlarmRepository,
-        alarmScheduler: AlarmScheduler
+        alarmScheduler: ru.yotfr.alarmscheduler.AlarmScheduler
     ): CreateNewAlarmUseCase {
         return CreateNewAlarmUseCase(
             alarmRepository,
@@ -36,7 +36,7 @@ object UseCaseModule {
     @Provides
     fun provideToggleAlarmStatusUseCase(
         alarmRepository: AlarmRepository,
-        alarmScheduler: AlarmScheduler
+        alarmScheduler: ru.yotfr.alarmscheduler.AlarmScheduler
     ): ToggleAlarmStatusUseCase {
         return ToggleAlarmStatusUseCase(
             alarmRepository,
@@ -47,7 +47,7 @@ object UseCaseModule {
     @Provides
     fun provideDeleteAlarmUseCase(
         alarmRepository: AlarmRepository,
-        alarmScheduler: AlarmScheduler
+        alarmScheduler: ru.yotfr.alarmscheduler.AlarmScheduler
     ): DeleteAlarmUseCase {
         return DeleteAlarmUseCase(
             alarmRepository,
@@ -58,7 +58,7 @@ object UseCaseModule {
     @Provides
     fun provideAlarmTriggerTimeUseCase(
         alarmRepository: AlarmRepository,
-        alarmScheduler: AlarmScheduler
+        alarmScheduler: ru.yotfr.alarmscheduler.AlarmScheduler
     ): ChangeAlarmTriggerTimeUseCase {
         return ChangeAlarmTriggerTimeUseCase(
             alarmRepository,
@@ -69,7 +69,7 @@ object UseCaseModule {
     @Provides
     fun provideDismissAlarmUseCase(
         alarmRepository: AlarmRepository,
-        alarmScheduler: AlarmScheduler
+        alarmScheduler: ru.yotfr.alarmscheduler.AlarmScheduler
     ): DismissAlarmUseCase {
         return DismissAlarmUseCase(
             alarmScheduler,

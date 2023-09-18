@@ -1,4 +1,4 @@
-package ru.yotfr.alarm.domain.repository
+package ru.yotfr.alarmscheduler
 
 import java.time.LocalDateTime
 

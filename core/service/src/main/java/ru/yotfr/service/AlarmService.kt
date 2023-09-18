@@ -1,4 +1,4 @@
-package ru.yotfr.alarm.service
+package ru.yotfr.service
 
 import android.app.Notification
 import android.app.Service
@@ -13,14 +13,13 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import ru.yotfr.alarm.AlarmApp
 import ru.yotfr.alarm.MainActivity
-import ru.yotfr.alarm.R
 import ru.yotfr.model.AlarmModel
-import ru.yotfr.model.Sound
 import ru.yotfr.model.getNextTriggerTime
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
 import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
 import ru.yotfr.alarm.mediaplayer.AlarmPlayer
 import ru.yotfr.alarm.ui.navigation.NavigationConstants
+import ru.yotfr.model.Alarm
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -119,7 +118,7 @@ class AlarmService : Service() {
         alarmPlayer?.destroyAlarmPlayer()
     }
 
-    private suspend fun scheduleNewAlarm(alarmModel: ru.yotfr.model.AlarmModel) {
+    private suspend fun scheduleNewAlarm(alarmModel: Alarm) {
         alarmModel.getNextTriggerTime()?.let { nextTriggerTime ->
             changeAlarmTriggerTimeUseCase(
                 alarmModel.copy(

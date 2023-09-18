@@ -7,8 +7,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.yotfr.database.dao.AlarmDao
-import ru.yotfr.alarm.data.repository.AlarmSchedulerImpl
-import ru.yotfr.alarm.domain.repository.AlarmScheduler
+import ru.yotfr.alarmscheduler.AlarmSchedulerImpl
+import ru.yotfr.alarmscheduler.AlarmScheduler
 import javax.inject.Singleton
 
 @Module
@@ -26,8 +26,8 @@ object RepositoryModule {
     @Singleton
     fun provideAlarmScheduler(
         @ApplicationContext context: Context
-    ) : AlarmScheduler {
-        return AlarmSchedulerImpl(context)
+    ) : ru.yotfr.alarmscheduler.AlarmScheduler {
+        return ru.yotfr.alarmscheduler.AlarmSchedulerImpl(context)
     }
 
 }

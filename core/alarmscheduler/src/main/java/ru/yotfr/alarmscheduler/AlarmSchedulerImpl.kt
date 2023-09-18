@@ -1,4 +1,4 @@
-package ru.yotfr.alarm.data.repository
+package ru.yotfr.alarmscheduler
 
 import android.annotation.SuppressLint
 import android.app.AlarmManager
@@ -8,8 +8,8 @@ import android.content.Context
 import android.content.Intent
 import ru.yotfr.alarm.MainActivity
 import ru.yotfr.alarm.receiver.AlarmBroadcastReceiver
-import ru.yotfr.alarm.domain.repository.AlarmScheduler
 import ru.yotfr.alarm.service.AlarmService
+import ru.yotfr.receiver.AlarmBroadcastReceiver
 import java.time.LocalDateTime
 import java.time.ZoneId
 

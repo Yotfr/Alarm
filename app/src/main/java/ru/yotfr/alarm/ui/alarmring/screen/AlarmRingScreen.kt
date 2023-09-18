@@ -14,8 +14,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.flow.collectLatest
 import ru.yotfr.model.Snooze
-import ru.yotfr.alarm.service.AlarmRingStatus
-import ru.yotfr.alarm.service.AlarmService
+import ru.yotfr.service.AlarmRingStatus
+import ru.yotfr.service.AlarmService
 import ru.yotfr.alarm.ui.alarmring.event.AlarmRingEvent
 import ru.yotfr.alarm.ui.alarmring.viewmodel.AlarmRingViewModel
 import ru.yotfr.alarm.ui.common.OnPauseOnDestroyEffect
@@ -64,9 +64,9 @@ fun AlarmRingScreen(
 }
 
 private fun recreateActivity(context: Context) {
-    if (AlarmRingStatus.isRinging) {
-        val recreateActivityServiceIntent = Intent(context, AlarmService::class.java)
-            .putExtra(AlarmService.RECREATE_ACTIVITY_INTENT_EXTRA_KEY, true)
+    if (ru.yotfr.service.AlarmRingStatus.isRinging) {
+        val recreateActivityServiceIntent = Intent(context, ru.yotfr.service.AlarmService::class.java)
+            .putExtra(ru.yotfr.service.AlarmService.RECREATE_ACTIVITY_INTENT_EXTRA_KEY, true)
         context.startService(recreateActivityServiceIntent)
     }
 }

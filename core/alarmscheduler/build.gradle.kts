@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.yotfr.data"
+    namespace = "ru.yotfr.alarmscheduler"
     compileSdk = 34
 
     defaultConfig {
@@ -36,8 +36,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:database"))
     implementation(project(":core:model"))
+    implementation(project(":core:receiver"))
 
     core()
     hilt()

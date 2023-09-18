@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.yotfr.data"
+    namespace = "ru.yotfr.service"
     compileSdk = 34
 
     defaultConfig {
@@ -36,7 +36,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:database"))
     implementation(project(":core:model"))
 
     core()
