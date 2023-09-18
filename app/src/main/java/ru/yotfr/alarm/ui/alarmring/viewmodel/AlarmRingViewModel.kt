@@ -9,16 +9,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.yotfr.model.AlarmModel
-import ru.yotfr.alarm.domain.usecase.DismissAlarmUseCase
-import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
+import ru.yotfr.domain.DismissAlarmUseCase
+import ru.yotfr.domain.GetAlarmByIdUseCase
 import ru.yotfr.alarm.ui.alarmring.event.AlarmRingEvent
 import ru.yotfr.alarm.ui.createalarm.event.CreateAlarmScreenEvent
 import javax.inject.Inject
 
 @HiltViewModel
 class AlarmRingViewModel @Inject constructor(
-    private val getAlarmByIdUseCase: GetAlarmByIdUseCase,
-    private val dismissAlarmUseCase: DismissAlarmUseCase
+    private val getAlarmByIdUseCase: ru.yotfr.domain.GetAlarmByIdUseCase,
+    private val dismissAlarmUseCase: ru.yotfr.domain.DismissAlarmUseCase
 ) : ViewModel() {
 
     private val _alarm = MutableStateFlow(ru.yotfr.model.AlarmModel())

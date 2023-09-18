@@ -9,18 +9,18 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.yotfr.model.AlarmModel
-import ru.yotfr.alarm.domain.usecase.DeleteAlarmUseCase
-import ru.yotfr.alarm.domain.usecase.GetAllAlarmsUseCase
-import ru.yotfr.alarm.domain.usecase.ToggleAlarmStatusUseCase
+import ru.yotfr.domain.DeleteAlarmUseCase
+import ru.yotfr.domain.GetAllAlarmsUseCase
+import ru.yotfr.domain.ToggleAlarmStatusUseCase
 import ru.yotfr.alarm.ui.alarmlist.event.AlarmListEvent
 import ru.yotfr.alarm.ui.alarmlist.state.AlarmsListScreenState
 import javax.inject.Inject
 
 @HiltViewModel
 class AlarmListViewModel @Inject constructor(
-    private val getAllAlarmsUseCase: GetAllAlarmsUseCase,
-    private val toggleAlarmStatusUseCase: ToggleAlarmStatusUseCase,
-    private val deleteAlarmUseCase: DeleteAlarmUseCase
+    private val getAllAlarmsUseCase: ru.yotfr.domain.GetAllAlarmsUseCase,
+    private val toggleAlarmStatusUseCase: ru.yotfr.domain.ToggleAlarmStatusUseCase,
+    private val deleteAlarmUseCase: ru.yotfr.domain.DeleteAlarmUseCase
 ) : ViewModel() {
     private val _screenState = MutableStateFlow(AlarmsListScreenState())
     val screenState = _screenState.asStateFlow()

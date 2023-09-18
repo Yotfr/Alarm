@@ -13,9 +13,9 @@ import kotlinx.coroutines.launch
 import ru.yotfr.model.AlarmModel
 import ru.yotfr.model.Snooze
 import ru.yotfr.model.Sound
-import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
-import ru.yotfr.alarm.domain.usecase.CreateNewAlarmUseCase
-import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
+import ru.yotfr.domain.ChangeAlarmTriggerTimeUseCase
+import ru.yotfr.domain.CreateNewAlarmUseCase
+import ru.yotfr.domain.GetAlarmByIdUseCase
 import ru.yotfr.alarm.ui.createalarm.event.CreateAlarmEvent
 import ru.yotfr.alarm.ui.createalarm.event.CreateAlarmScreenEvent
 import java.time.DayOfWeek
@@ -26,9 +26,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateAlarmViewModel @Inject constructor(
-    private val createNewAlarmUseCase: CreateNewAlarmUseCase,
-    private val changeAlarmTriggerTimeUseCase: ChangeAlarmTriggerTimeUseCase,
-    private val getAlarmByIdUseCase: GetAlarmByIdUseCase
+    private val createNewAlarmUseCase: ru.yotfr.domain.CreateNewAlarmUseCase,
+    private val changeAlarmTriggerTimeUseCase: ru.yotfr.domain.ChangeAlarmTriggerTimeUseCase,
+    private val getAlarmByIdUseCase: ru.yotfr.domain.GetAlarmByIdUseCase
 ) : ViewModel() {
 
     private val _screenState = MutableStateFlow(ru.yotfr.model.AlarmModel())

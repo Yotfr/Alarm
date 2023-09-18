@@ -1,17 +1,18 @@
-package ru.yotfr.alarm.domain.usecase
+package ru.yotfr.domain
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import ru.yotfr.model.AlarmModel
-import ru.yotfr.model.validateTriggerTime
 import ru.yotfr.alarmscheduler.AlarmScheduler
+import ru.yotfr.data.repository.AlarmRepository
+import ru.yotfr.model.Alarm
+import ru.yotfr.model.validateTriggerTime
 import javax.inject.Inject
 
 class ToggleAlarmStatusUseCase @Inject constructor(
     private val alarmRepository: AlarmRepository,
-    private val alarmScheduler: ru.yotfr.alarmscheduler.AlarmScheduler
+    private val alarmScheduler: AlarmScheduler
 ) {
-    suspend operator fun invoke(alarmModel: ru.yotfr.model.AlarmModel, newState: Boolean) = withContext(Dispatchers.IO) {
+    suspend operator fun invoke(alarmModel: Alarm, newState: Boolean) = withContext(Dispatchers.IO) {
         val validatedAlarmModel = alarmModel.validateTriggerTime()
         alarmRepository.updateAlarm(
             validatedAlarmModel.copy(
