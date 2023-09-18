@@ -1,11 +1,10 @@
-package ru.yotfr.alarm.mediaplayer
+package ru.yotfr.mediaplayer
 
 import android.content.Context
 import android.health.connect.datatypes.units.Volume
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
-import ru.yotfr.model.Sound
 
 class AlarmPlayer(
     val isLooping: Boolean = false,

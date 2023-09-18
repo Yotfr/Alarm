@@ -1,4 +1,4 @@
-package ru.yotfr.alarm.mediaplayer
+package ru.yotfr.mediaplayer
 
 import android.content.Context
 import android.net.Uri

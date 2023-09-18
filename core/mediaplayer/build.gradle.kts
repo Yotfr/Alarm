@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.yotfr.service"
+    namespace = "ru.yotfr.mediaplayer"
     compileSdk = 34
 
     defaultConfig {
@@ -37,7 +37,6 @@ android {
 
 dependencies {
     implementation(project(":core:model"))
-    implementation(project(":core:mediaplayer"))
 
     core()
     hilt()

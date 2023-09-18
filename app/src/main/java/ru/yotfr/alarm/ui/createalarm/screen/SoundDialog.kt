@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import ru.yotfr.alarm.R
 import ru.yotfr.model.Sound
-import ru.yotfr.alarm.mediaplayer.AlarmPlayer
+import ru.yotfr.mediaplayer.AlarmPlayer
 import ru.yotfr.alarm.ui.common.Shape
 import ru.yotfr.alarm.ui.common.pressedShadow
 import ru.yotfr.alarm.ui.common.punchedShadow
@@ -85,10 +85,10 @@ fun SoundDialog(
     onSoundLevelChanged: (Float) -> Unit,
 ) {
     val context = LocalContext.current
-    var alarmPlayer by remember { mutableStateOf<AlarmPlayer?>(null) }
+    var alarmPlayer by remember { mutableStateOf<ru.yotfr.mediaplayer.AlarmPlayer?>(null) }
 
     DisposableEffect(Unit) {
-        alarmPlayer = AlarmPlayer(
+        alarmPlayer = ru.yotfr.mediaplayer.AlarmPlayer(
             isLooping = false,
             context = context,
             soundLevel = soundLevelPercent

@@ -38,6 +38,7 @@ android {
 dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:receiver"))
+    implementation(project(":core:service"))
 
     core()
     hilt()
