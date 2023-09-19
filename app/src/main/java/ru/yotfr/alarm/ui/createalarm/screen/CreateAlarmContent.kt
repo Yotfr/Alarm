@@ -2,7 +2,7 @@
 
 package ru.yotfr.alarm.ui.createalarm.screen
 
-import AlarmTheme
+import ru.yotfr.designsystem.theme.AlarmTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,7 +34,7 @@ import java.time.LocalTime
 @Preview
 @Composable
 fun CreateAlarmContentPreview() {
-    AlarmTheme {
+    ru.yotfr.designsystem.theme.AlarmTheme {
         val activeList = remember { mutableStateListOf(DayOfWeek.MONDAY, DayOfWeek.SATURDAY) }
         var alarm by remember { mutableStateOf(ru.yotfr.model.AlarmModel()) }
         var snooze by remember { mutableStateOf(ru.yotfr.model.Snooze.FIVE) }
@@ -98,7 +98,7 @@ fun CreateAlarmContent(
         modifier = Modifier
             .fillMaxSize()
             .nestedScroll(rememberNestedScrollInteropConnection()),
-        containerColor = AlarmTheme.colors.background,
+        containerColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.background,
         floatingActionButton = {
             CreateAlarmFAB(
                 onClick = onSaveClicked

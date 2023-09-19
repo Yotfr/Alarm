@@ -1,6 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
-import AlarmTheme
+import ru.yotfr.designsystem.theme.AlarmTheme
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.padding
@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 @Preview
 @Composable
 fun CreateAlarmTopAppBarPreview() {
-    AlarmTheme {
+    ru.yotfr.designsystem.theme.AlarmTheme {
         CreateAlarmTopAppBar(remainTime = "20 minutes", onBackPressed = {})
     }
 }
@@ -35,8 +35,8 @@ fun CreateAlarmTopAppBar(
         title = {
             Text(
                 text = remainTime,
-                style = AlarmTheme.typography.headline,
-                color = AlarmTheme.colors.text
+                style = ru.yotfr.designsystem.theme.AlarmTheme.typography.headline,
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
             )
         },
         navigationIcon = {
@@ -49,11 +49,11 @@ fun CreateAlarmTopAppBar(
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }
                     ) { onBackPressed() },
-                tint = AlarmTheme.colors.text
+                tint = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
             )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = AlarmTheme.colors.background
+            containerColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
         )
     )
 }

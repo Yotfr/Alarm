@@ -1,6 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
-import AlarmTheme
+import ru.yotfr.designsystem.theme.AlarmTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -29,19 +29,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import ru.yotfr.alarm.R
 import ru.yotfr.model.Snooze
-import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.pressedShadow
-import ru.yotfr.alarm.ui.common.punchedShadow
+import ru.yotfr.designsystem.component.Shape
+import ru.yotfr.designsystem.component.pressedShadow
+import ru.yotfr.designsystem.component.punchedShadow
 import ru.yotfr.alarm.ui.createalarm.mapper.stringResource
 
 @Preview
 @Composable
 fun SnoozeDialogPreview() {
-    AlarmTheme {
+    ru.yotfr.designsystem.theme.AlarmTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = AlarmTheme.colors.background),
+                .background(color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background),
             contentAlignment = Alignment.Center
         ) {
             SnoozeDialog(
@@ -65,16 +65,16 @@ fun SnoozeDialog(
         Column(
             modifier = Modifier
                 .background(
-                    color = AlarmTheme.colors.background,
-                    shape = AlarmTheme.shape.default
+                    color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background,
+                    shape = ru.yotfr.designsystem.theme.AlarmTheme.shape.default
                 )
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = stringResource(id = R.string.snooze),
-                style = AlarmTheme.typography.headline,
-                color = AlarmTheme.colors.text
+                style = ru.yotfr.designsystem.theme.AlarmTheme.typography.headline,
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
             )
             Spacer(modifier = Modifier.height(32.dp))
             ru.yotfr.model.Snooze.values().forEach { snooze ->
@@ -104,17 +104,17 @@ fun SnoozeItem(
                 interactionSource = remember { MutableInteractionSource() }
             ) { onCLick(snooze) }
             .punchedShadow(
-                offsetX = AlarmTheme.shadowOffset.default,
-                offsetY = AlarmTheme.shadowOffset.default,
-                blurRadius = AlarmTheme.shadowBlurRadius.default,
-                shape = Shape.RoundedRect,
-                darkColor = AlarmTheme.colors.darkShadow,
-                lightColor = AlarmTheme.colors.lightShadow,
-                cornerRadius = AlarmTheme.shapeCornerRadius.small
+                offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.small
             )
-            .clip(AlarmTheme.shape.small)
+            .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.small)
             .background(
-                color = AlarmTheme.colors.background
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
             )
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -124,18 +124,18 @@ fun SnoozeItem(
             modifier = Modifier
                 .size(16.dp)
                 .pressedShadow(
-                    offsetX = AlarmTheme.shadowOffset.large,
-                    offsetY = AlarmTheme.shadowOffset.large,
-                    blurRadius = AlarmTheme.shadowBlurRadius.default,
-                    shape = Shape.RoundedRect,
-                    darkColor = AlarmTheme.colors.darkShadow,
-                    lightColor = AlarmTheme.colors.lightShadow,
-                    cornerRadius = AlarmTheme.shapeCornerRadius.extraSmall,
-                    backgroundColor = AlarmTheme.colors.background
+                    offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.large,
+                    offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.large,
+                    blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                    shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                    darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                    lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                    cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.extraSmall,
+                    backgroundColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
                 )
-                .clip(AlarmTheme.shape.extraSmall)
+                .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.extraSmall)
                 .background(
-                    color = AlarmTheme.colors.background
+                    color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
                 ),
             contentAlignment = Alignment.Center
         ) {
@@ -143,14 +143,14 @@ fun SnoozeItem(
                 Icon(
                     imageVector = Icons.Filled.Done,
                     contentDescription = null,
-                    tint = AlarmTheme.colors.text
+                    tint = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
                 )
             }
         }
         Text(
             text = snooze.stringResource(),
-            style = AlarmTheme.typography.caption,
-            color = if (selected) AlarmTheme.colors.text else AlarmTheme.colors.disabledText
+            style = ru.yotfr.designsystem.theme.AlarmTheme.typography.caption,
+            color = if (selected) ru.yotfr.designsystem.theme.AlarmTheme.colors.text else ru.yotfr.designsystem.theme.AlarmTheme.colors.disabledText
         )
     }
 }

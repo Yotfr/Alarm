@@ -1,6 +1,6 @@
 package ru.yotfr.alarm.ui.quest
 
-import AlarmTheme
+import ru.yotfr.designsystem.theme.AlarmTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,17 +19,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.punchedShadow
+import ru.yotfr.designsystem.component.Shape
+import ru.yotfr.designsystem.component.punchedShadow
 
 @Preview
 @Composable
 fun QuestScreenPreview() {
-    AlarmTheme {
+    ru.yotfr.designsystem.theme.AlarmTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = AlarmTheme.colors.background)
+                .background(color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background)
         ) {
             QuestScreen()
         }
@@ -104,17 +104,17 @@ fun PuzzleGridCell(
     Box(
         modifier = modifier
             .punchedShadow(
-                offsetX = AlarmTheme.shadowOffset.default,
-                offsetY = AlarmTheme.shadowOffset.default,
-                blurRadius = AlarmTheme.shadowBlurRadius.default,
-                shape = Shape.RoundedRect,
-                darkColor = AlarmTheme.colors.darkShadow,
-                lightColor = AlarmTheme.colors.lightShadow,
-                cornerRadius = AlarmTheme.shapeCornerRadius.default
+                offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.default
             )
-            .clip(AlarmTheme.shape.default)
+            .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.default)
             .background(
-                color = AlarmTheme.colors.background
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
             )
     )
 }

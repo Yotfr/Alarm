@@ -1,6 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
-import AlarmTheme
+import ru.yotfr.designsystem.theme.AlarmTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -41,15 +41,15 @@ import androidx.compose.ui.window.Dialog
 import ru.yotfr.alarm.R
 import ru.yotfr.model.Sound
 import ru.yotfr.mediaplayer.AlarmPlayer
-import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.pressedShadow
-import ru.yotfr.alarm.ui.common.punchedShadow
+import ru.yotfr.designsystem.component.Shape
+import ru.yotfr.designsystem.component.pressedShadow
+import ru.yotfr.designsystem.component.punchedShadow
 import ru.yotfr.alarm.ui.common.stringResource
 
 @Preview
 @Composable
 fun SoundDialogPreview() {
-    AlarmTheme {
+    ru.yotfr.designsystem.theme.AlarmTheme {
 
         var progress by remember { mutableStateOf(0f) }
         var vibrate by remember { mutableStateOf(false) }
@@ -58,15 +58,15 @@ fun SoundDialogPreview() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = AlarmTheme.colors.background),
+                .background(color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background),
             contentAlignment = Alignment.Center
         ) {
             SoundDialog(
-                onDismissRequest = {  },
+                onDismissRequest = { },
                 onSoundChanged = { sound = it },
                 selectedSound = sound,
                 vibrate = vibrate,
-                onVibrateChanged = {  vibrate = it },
+                onVibrateChanged = { vibrate = it },
                 soundLevelPercent = progress,
                 onSoundLevelChanged = { progress = it }
             )
@@ -106,8 +106,8 @@ fun SoundDialog(
         Column(
             modifier = Modifier
                 .background(
-                    color = AlarmTheme.colors.background,
-                    shape = AlarmTheme.shape.default
+                    color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background,
+                    shape = ru.yotfr.designsystem.theme.AlarmTheme.shape.default
                 )
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -119,8 +119,8 @@ fun SoundDialog(
             ) {
                 Text(
                     text = stringResource(id = R.string.snooze),
-                    style = AlarmTheme.typography.headline,
-                    color = AlarmTheme.colors.text
+                    style = ru.yotfr.designsystem.theme.AlarmTheme.typography.headline,
+                    color = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
                 )
                 IconButton(
                     onClick = onDismissRequest
@@ -128,7 +128,7 @@ fun SoundDialog(
                     Icon(
                         imageVector = Icons.Filled.Done,
                         contentDescription = null,
-                        tint = AlarmTheme.colors.text
+                        tint = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
                     )
                 }
             }
@@ -182,7 +182,7 @@ fun SoundLevelRow(
             Icon(
                 painter = painterResource(id = R.drawable.ic_volume),
                 contentDescription = null,
-                tint = AlarmTheme.colors.text
+                tint = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
             )
             Spacer(modifier = Modifier.width(4.dp))
             Slider(
@@ -195,10 +195,10 @@ fun SoundLevelRow(
                 valueRange = 0f..1f,
                 steps = 10,
                 colors = SliderDefaults.colors(
-                    activeTrackColor = AlarmTheme.colors.text,
-                    activeTickColor = AlarmTheme.colors.text,
-                    thumbColor = AlarmTheme.colors.text,
-                    inactiveTickColor = AlarmTheme.colors.text
+                    activeTrackColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.text,
+                    activeTickColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.text,
+                    thumbColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.text,
+                    inactiveTickColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
                 )
             )
         }
@@ -211,7 +211,7 @@ fun SoundLevelRow(
             Icon(
                 painter = painterResource(id = R.drawable.ic_vibration),
                 contentDescription = null,
-                tint = AlarmTheme.colors.text
+                tint = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
             )
             Spacer(modifier = Modifier.width(8.dp))
             Box(
@@ -222,18 +222,18 @@ fun SoundLevelRow(
                         interactionSource = remember { MutableInteractionSource() }
                     ) { onVibrateChanged(!vibrate) }
                     .pressedShadow(
-                        offsetX = AlarmTheme.shadowOffset.large,
-                        offsetY = AlarmTheme.shadowOffset.large,
-                        blurRadius = AlarmTheme.shadowBlurRadius.default,
-                        shape = Shape.RoundedRect,
-                        darkColor = AlarmTheme.colors.darkShadow,
-                        lightColor = AlarmTheme.colors.lightShadow,
-                        cornerRadius = AlarmTheme.shapeCornerRadius.extraSmall,
-                        backgroundColor = AlarmTheme.colors.background
+                        offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.large,
+                        offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.large,
+                        blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                        shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                        darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                        lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                        cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.extraSmall,
+                        backgroundColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
                     )
-                    .clip(AlarmTheme.shape.extraSmall)
+                    .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.extraSmall)
                     .background(
-                        color = AlarmTheme.colors.background
+                        color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
                     ),
                 contentAlignment = Alignment.Center
             ) {
@@ -241,7 +241,7 @@ fun SoundLevelRow(
                     Icon(
                         imageVector = Icons.Filled.Done,
                         contentDescription = null,
-                        tint = AlarmTheme.colors.text
+                        tint = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
                     )
                 }
             }
@@ -263,17 +263,17 @@ fun SoundItem(
                 interactionSource = remember { MutableInteractionSource() }
             ) { onCLick(sound) }
             .punchedShadow(
-                offsetX = AlarmTheme.shadowOffset.default,
-                offsetY = AlarmTheme.shadowOffset.default,
-                blurRadius = AlarmTheme.shadowBlurRadius.default,
-                shape = Shape.RoundedRect,
-                darkColor = AlarmTheme.colors.darkShadow,
-                lightColor = AlarmTheme.colors.lightShadow,
-                cornerRadius = AlarmTheme.shapeCornerRadius.small
+                offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.small
             )
-            .clip(AlarmTheme.shape.small)
+            .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.small)
             .background(
-                color = AlarmTheme.colors.background
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
             )
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -283,18 +283,18 @@ fun SoundItem(
             modifier = Modifier
                 .size(16.dp)
                 .pressedShadow(
-                    offsetX = AlarmTheme.shadowOffset.large,
-                    offsetY = AlarmTheme.shadowOffset.large,
-                    blurRadius = AlarmTheme.shadowBlurRadius.default,
-                    shape = Shape.RoundedRect,
-                    darkColor = AlarmTheme.colors.darkShadow,
-                    lightColor = AlarmTheme.colors.lightShadow,
-                    cornerRadius = AlarmTheme.shapeCornerRadius.extraSmall,
-                    backgroundColor = AlarmTheme.colors.background
+                    offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.large,
+                    offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.large,
+                    blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                    shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                    darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                    lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                    cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.extraSmall,
+                    backgroundColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
                 )
-                .clip(AlarmTheme.shape.extraSmall)
+                .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.extraSmall)
                 .background(
-                    color = AlarmTheme.colors.background
+                    color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
                 ),
             contentAlignment = Alignment.Center
         ) {
@@ -302,14 +302,14 @@ fun SoundItem(
                 Icon(
                     imageVector = Icons.Filled.Done,
                     contentDescription = null,
-                    tint = AlarmTheme.colors.text
+                    tint = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
                 )
             }
         }
         Text(
             text = sound.stringResource(),
-            style = AlarmTheme.typography.caption,
-            color = if (selected) AlarmTheme.colors.text else AlarmTheme.colors.disabledText
+            style = ru.yotfr.designsystem.theme.AlarmTheme.typography.caption,
+            color = if (selected) ru.yotfr.designsystem.theme.AlarmTheme.colors.text else ru.yotfr.designsystem.theme.AlarmTheme.colors.disabledText
         )
     }
 }

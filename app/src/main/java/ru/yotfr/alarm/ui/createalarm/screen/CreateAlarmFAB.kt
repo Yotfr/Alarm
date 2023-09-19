@@ -1,6 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
-import AlarmTheme
+import ru.yotfr.designsystem.theme.AlarmTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -18,17 +18,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.R
-import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.punchedShadow
+import ru.yotfr.designsystem.component.Shape
+import ru.yotfr.designsystem.component.punchedShadow
 
 @Preview
 @Composable
 fun CreateFabPreview() {
-    AlarmTheme {
+    ru.yotfr.designsystem.theme.AlarmTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = AlarmTheme.colors.background),
+                .background(color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background),
             contentAlignment = Alignment.Center
         ) {
             CreateAlarmFAB(
@@ -51,25 +51,25 @@ fun CreateAlarmFAB(
                 interactionSource = remember { MutableInteractionSource() }
             ) { onClick() }
             .punchedShadow(
-                offsetX = AlarmTheme.shadowOffset.extraLarge,
-                offsetY = AlarmTheme.shadowOffset.extraLarge,
-                blurRadius = AlarmTheme.shadowBlurRadius.large,
-                shape = Shape.RoundedRect,
-                darkColor = AlarmTheme.colors.darkShadow,
-                lightColor = AlarmTheme.colors.lightShadow,
-                cornerRadius = AlarmTheme.shapeCornerRadius.default
+                offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.extraLarge,
+                offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.extraLarge,
+                blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.large,
+                shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.default
             )
-            .clip(AlarmTheme.shape.default)
+            .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.default)
             .background(
-                color = AlarmTheme.colors.accent
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.accent
             )
             .padding(vertical = 12.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = stringResource(id = R.string.save),
-            style = AlarmTheme.typography.headline,
-            color = AlarmTheme.colors.background
+            style = ru.yotfr.designsystem.theme.AlarmTheme.typography.headline,
+            color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
         )
     }
 }

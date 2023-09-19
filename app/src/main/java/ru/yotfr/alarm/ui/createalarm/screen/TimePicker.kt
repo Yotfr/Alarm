@@ -1,6 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
-import AlarmTheme
+import ru.yotfr.designsystem.theme.AlarmTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,14 +15,14 @@ import androidx.compose.ui.unit.dp
 import com.commandiron.wheel_picker_compose.WheelTimePicker
 import com.commandiron.wheel_picker_compose.core.TimeFormat
 import com.commandiron.wheel_picker_compose.core.WheelPickerDefaults
-import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.punchedShadow
+import ru.yotfr.designsystem.component.Shape
+import ru.yotfr.designsystem.component.punchedShadow
 import java.time.LocalTime
 
 @Preview
 @Composable
 fun PreviewNumberPicker() {
-    AlarmTheme {
+    ru.yotfr.designsystem.theme.AlarmTheme {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
@@ -42,25 +42,25 @@ fun TimePicker(
         modifier = Modifier
             .fillMaxWidth()
             .punchedShadow(
-                offsetX = AlarmTheme.shadowOffset.default,
-                offsetY = AlarmTheme.shadowOffset.default,
-                blurRadius = AlarmTheme.shadowBlurRadius.default,
-                shape = Shape.RoundedRect,
-                darkColor = AlarmTheme.colors.darkShadow,
-                lightColor = AlarmTheme.colors.lightShadow,
-                cornerRadius = AlarmTheme.shapeCornerRadius.default
+                offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.default
             )
-            .clip(AlarmTheme.shape.default)
+            .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.default)
             .background(
-                color = AlarmTheme.colors.background
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
             )
             .padding(
                 horizontal = 16.dp,
                 vertical = 64.dp
             ),
         timeFormat = TimeFormat.HOUR_24,
-        textStyle = AlarmTheme.typography.display,
-        textColor = AlarmTheme.colors.text,
+        textStyle = ru.yotfr.designsystem.theme.AlarmTheme.typography.display,
+        textColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.text,
         onSnappedTime = onTimeChanged,
         selectorProperties = WheelPickerDefaults.selectorProperties(
             enabled = false

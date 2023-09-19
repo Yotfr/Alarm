@@ -23,7 +23,7 @@ fun AlarmRingContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = AlarmTheme.colors.background)
+            .background(color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background)
             .padding(16.dp)
     ) {
         Spacer(modifier = Modifier.height(32.dp))

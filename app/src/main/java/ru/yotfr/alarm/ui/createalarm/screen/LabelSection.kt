@@ -1,6 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
-import AlarmTheme
+import ru.yotfr.designsystem.theme.AlarmTheme
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.fadeIn
@@ -35,19 +35,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.R
-import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.pressedShadow
-import ru.yotfr.alarm.ui.common.punchedShadow
+import ru.yotfr.designsystem.component.Shape
+import ru.yotfr.designsystem.component.pressedShadow
+import ru.yotfr.designsystem.component.punchedShadow
 
 @Preview
 @Composable
 fun PressedTextFieldPreview() {
     var text by remember { mutableStateOf("") }
-    AlarmTheme {
+    ru.yotfr.designsystem.theme.AlarmTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = AlarmTheme.colors.background)
+                .background(color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background)
                 .padding(16.dp),
             contentAlignment = Alignment.Center
         ) {
@@ -71,17 +71,17 @@ fun LabelSection(
         modifier = Modifier
             .fillMaxWidth()
             .punchedShadow(
-                offsetX = AlarmTheme.shadowOffset.default,
-                offsetY = AlarmTheme.shadowOffset.default,
-                blurRadius = AlarmTheme.shadowBlurRadius.default,
-                shape = Shape.RoundedRect,
-                darkColor = AlarmTheme.colors.darkShadow,
-                lightColor = AlarmTheme.colors.lightShadow,
-                cornerRadius = AlarmTheme.shapeCornerRadius.default
+                offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.default
             )
-            .clip(AlarmTheme.shape.default)
+            .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.default)
             .background(
-                color = AlarmTheme.colors.background
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
             )
             .padding(horizontal = 16.dp)
     ) {
@@ -93,8 +93,8 @@ fun LabelSection(
         ) {
             Text(
                 text = stringResource(id = R.string.label),
-                style = AlarmTheme.typography.headline,
-                color = AlarmTheme.colors.text
+                style = ru.yotfr.designsystem.theme.AlarmTheme.typography.headline,
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
             )
             AnimatedVisibility(
                 visible = value.isNotBlank(),
@@ -109,7 +109,7 @@ fun LabelSection(
                             indication = null,
                             interactionSource = remember { MutableInteractionSource() }
                         ) { onValueChange("") },
-                    tint = AlarmTheme.colors.text
+                    tint = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
                 )
             }
         }
@@ -135,30 +135,30 @@ fun PressedTextField(
         onValueChange = {
             onValueChange(it)
         },
-        textStyle = AlarmTheme.typography.caption.copy(
-            color = AlarmTheme.colors.text
+        textStyle = ru.yotfr.designsystem.theme.AlarmTheme.typography.caption.copy(
+            color = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
         ),
         cursorBrush = Brush.verticalGradient(
             colors = listOf(
-                AlarmTheme.colors.disabledText,
-                AlarmTheme.colors.text,
-                AlarmTheme.colors.disabledText
+                ru.yotfr.designsystem.theme.AlarmTheme.colors.disabledText,
+                ru.yotfr.designsystem.theme.AlarmTheme.colors.text,
+                ru.yotfr.designsystem.theme.AlarmTheme.colors.disabledText
             )
         ),
         decorationBox = { innerTextField ->
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(AlarmTheme.shape.default)
+                    .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.default)
                     .pressedShadow(
-                        offsetX = AlarmTheme.shadowOffset.default,
-                        offsetY = AlarmTheme.shadowOffset.default,
-                        blurRadius = AlarmTheme.shadowBlurRadius.default,
-                        darkColor = AlarmTheme.colors.darkShadow,
-                        lightColor = AlarmTheme.colors.lightShadow,
-                        shape = Shape.RoundedRect,
-                        cornerRadius = AlarmTheme.shapeCornerRadius.default,
-                        backgroundColor = AlarmTheme.colors.background
+                        offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                        offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                        blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                        darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                        lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                        shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                        cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.default,
+                        backgroundColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
                     )
                     .padding(16.dp)
                     .animateContentSize()
@@ -166,8 +166,8 @@ fun PressedTextField(
                 if (value.isBlank()) {
                     Text(
                         text = stringResource(id = R.string.label_placeholder),
-                        style = AlarmTheme.typography.caption,
-                        color = AlarmTheme.colors.disabledText
+                        style = ru.yotfr.designsystem.theme.AlarmTheme.typography.caption,
+                        color = ru.yotfr.designsystem.theme.AlarmTheme.colors.disabledText
                     )
                 }
                 innerTextField()

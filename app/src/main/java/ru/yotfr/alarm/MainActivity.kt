@@ -1,6 +1,6 @@
 package ru.yotfr.alarm
 
-import AlarmTheme
+import ru.yotfr.designsystem.theme.AlarmTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -16,8 +16,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AlarmTheme {
-                val backgroundArgbColor = AlarmTheme.colors.background.toArgb()
+            ru.yotfr.designsystem.theme.AlarmTheme {
+                val backgroundArgbColor =
+                    ru.yotfr.designsystem.theme.AlarmTheme.colors.background.toArgb()
                 enableEdgeToEdge(
                     statusBarStyle = if (isSystemInDarkTheme()) {
                         SystemBarStyle.dark(

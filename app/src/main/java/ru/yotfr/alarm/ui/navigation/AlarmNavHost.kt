@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
-import ru.yotfr.alarm.ui.alarmlist.screen.AlarmsListScreen
+import ru.yotfr.alarmlist.screen.AlarmsListScreen
 import ru.yotfr.alarm.ui.alarmring.screen.AlarmRingScreen
 import ru.yotfr.alarm.ui.createalarm.screen.CreateAlarmScreen
 
@@ -22,9 +22,9 @@ fun AlarmNavHost() {
         composable(
             route = Screen.AlarmList.route
         ) {
-            AlarmsListScreen(
+            ru.yotfr.alarmlist.screen.AlarmsListScreen(
                 navigateToCreateAlarmScreen = { id ->
-                    Log.d("TEST","Start navigating from list to create")
+                    Log.d("TEST", "Start navigating from list to create")
                     navController.navigate(
                         route = Screen.CreateAlarm.passId(id)
                     )

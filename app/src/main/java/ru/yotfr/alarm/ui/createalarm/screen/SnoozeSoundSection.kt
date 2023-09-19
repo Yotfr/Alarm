@@ -1,6 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
-import AlarmTheme
+import ru.yotfr.designsystem.theme.AlarmTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -29,9 +29,9 @@ import androidx.compose.ui.unit.dp
 import ru.yotfr.alarm.R
 import ru.yotfr.model.Snooze
 import ru.yotfr.model.Sound
-import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.pressedShadow
-import ru.yotfr.alarm.ui.common.punchedShadow
+import ru.yotfr.designsystem.component.Shape
+import ru.yotfr.designsystem.component.pressedShadow
+import ru.yotfr.designsystem.component.punchedShadow
 import ru.yotfr.alarm.ui.common.stringResource
 import ru.yotfr.alarm.ui.createalarm.mapper.stringResource
 
@@ -54,17 +54,17 @@ fun SnoozeSoundSection(
         modifier = Modifier
             .fillMaxWidth()
             .punchedShadow(
-                offsetX = AlarmTheme.shadowOffset.default,
-                offsetY = AlarmTheme.shadowOffset.default,
-                blurRadius = AlarmTheme.shadowBlurRadius.default,
-                shape = Shape.RoundedRect,
-                darkColor = AlarmTheme.colors.darkShadow,
-                lightColor = AlarmTheme.colors.lightShadow,
-                cornerRadius = AlarmTheme.shapeCornerRadius.default
+                offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.default
             )
-            .clip(AlarmTheme.shape.default)
+            .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.default)
             .background(
-                color = AlarmTheme.colors.background
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
             )
             .padding(horizontal = 16.dp)
     ) {
@@ -76,8 +76,8 @@ fun SnoozeSoundSection(
         ) {
             Text(
                 text = stringResource(id = R.string.snooze),
-                style = AlarmTheme.typography.headline,
-                color = AlarmTheme.colors.text
+                style = ru.yotfr.designsystem.theme.AlarmTheme.typography.headline,
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
             )
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -89,16 +89,16 @@ fun SnoozeSoundSection(
                     ) {
                         isSnoozeDialogOpened = true
                     }
-                    .clip(AlarmTheme.shape.small)
+                    .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.small)
                     .pressedShadow(
-                        offsetX = AlarmTheme.shadowOffset.default,
-                        offsetY = AlarmTheme.shadowOffset.default,
-                        blurRadius = AlarmTheme.shadowBlurRadius.default,
-                        darkColor = AlarmTheme.colors.darkShadow,
-                        lightColor = AlarmTheme.colors.lightShadow,
-                        shape = Shape.RoundedRect,
-                        cornerRadius = AlarmTheme.shapeCornerRadius.small,
-                        backgroundColor = AlarmTheme.colors.background
+                        offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                        offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                        blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                        darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                        lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                        shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                        cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.small,
+                        backgroundColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
                     )
                     .padding(
                         top = 4.dp,
@@ -109,14 +109,14 @@ fun SnoozeSoundSection(
             ) {
                 Text(
                     text = snooze.stringResource(),
-                    style = AlarmTheme.typography.caption,
-                    color = AlarmTheme.colors.text
+                    style = ru.yotfr.designsystem.theme.AlarmTheme.typography.caption,
+                    color = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Icon(
                     imageVector = Icons.Filled.KeyboardArrowRight,
                     contentDescription = null,
-                    tint = AlarmTheme.colors.text
+                    tint = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
                 )
             }
         }
@@ -128,8 +128,8 @@ fun SnoozeSoundSection(
         ) {
             Text(
                 text = stringResource(id = R.string.sound),
-                style = AlarmTheme.typography.headline,
-                color = AlarmTheme.colors.text
+                style = ru.yotfr.designsystem.theme.AlarmTheme.typography.headline,
+                color = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
             )
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -141,16 +141,16 @@ fun SnoozeSoundSection(
                     ) {
                         isSoundDialogOpened = true
                     }
-                    .clip(AlarmTheme.shape.small)
+                    .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.small)
                     .pressedShadow(
-                        offsetX = AlarmTheme.shadowOffset.default,
-                        offsetY = AlarmTheme.shadowOffset.default,
-                        blurRadius = AlarmTheme.shadowBlurRadius.default,
-                        darkColor = AlarmTheme.colors.darkShadow,
-                        lightColor = AlarmTheme.colors.lightShadow,
-                        shape = Shape.RoundedRect,
-                        cornerRadius = AlarmTheme.shapeCornerRadius.small,
-                        backgroundColor = AlarmTheme.colors.background
+                        offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                        offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                        blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                        darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                        lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                        shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                        cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.small,
+                        backgroundColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
                     )
                     .padding(
                         top = 4.dp,
@@ -161,14 +161,14 @@ fun SnoozeSoundSection(
             ) {
                 Text(
                     text = sound.stringResource(),
-                    style = AlarmTheme.typography.caption,
-                    color = AlarmTheme.colors.text
+                    style = ru.yotfr.designsystem.theme.AlarmTheme.typography.caption,
+                    color = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Icon(
                     imageVector = Icons.Filled.KeyboardArrowRight,
                     contentDescription = null,
-                    tint = AlarmTheme.colors.text
+                    tint = ru.yotfr.designsystem.theme.AlarmTheme.colors.text
                 )
             }
         }

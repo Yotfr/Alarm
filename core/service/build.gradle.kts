@@ -38,6 +38,8 @@ android {
 dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:mediaplayer"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:mediaplayer"))
 
     core()
     hilt()

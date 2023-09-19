@@ -1,6 +1,6 @@
 package ru.yotfr.alarm.ui.createalarm.screen
 
-import AlarmTheme
+import ru.yotfr.designsystem.theme.AlarmTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -21,8 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.yotfr.alarm.ui.common.Shape
-import ru.yotfr.alarm.ui.common.pressedShadow
+import ru.yotfr.designsystem.component.Shape
+import ru.yotfr.designsystem.component.pressedShadow
 import java.time.DayOfWeek
 import java.time.format.TextStyle
 import java.util.Locale
@@ -30,12 +30,12 @@ import java.util.Locale
 @Preview
 @Composable
 fun WeekDayRowPreview() {
-    AlarmTheme {
+    ru.yotfr.designsystem.theme.AlarmTheme {
         val activeList = remember { mutableStateListOf(DayOfWeek.MONDAY, DayOfWeek.SATURDAY) }
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = AlarmTheme.colors.background),
+                .background(color = ru.yotfr.designsystem.theme.AlarmTheme.colors.background),
             contentAlignment = Alignment.Center
         ) {
             WeekDayRow(
@@ -121,16 +121,16 @@ fun WeekDayCard(
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() }
             ) { onClick(weekDay) }
-            .clip(AlarmTheme.shape.extraSmall)
+            .clip(ru.yotfr.designsystem.theme.AlarmTheme.shape.extraSmall)
             .pressedShadow(
-                offsetX = AlarmTheme.shadowOffset.default,
-                offsetY = AlarmTheme.shadowOffset.default,
-                blurRadius = AlarmTheme.shadowBlurRadius.default,
-                darkColor = AlarmTheme.colors.darkShadow,
-                lightColor = AlarmTheme.colors.lightShadow,
-                shape = Shape.RoundedRect,
-                cornerRadius = AlarmTheme.shapeCornerRadius.extraSmall,
-                backgroundColor = AlarmTheme.colors.background
+                offsetX = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                offsetY = ru.yotfr.designsystem.theme.AlarmTheme.shadowOffset.default,
+                blurRadius = ru.yotfr.designsystem.theme.AlarmTheme.shadowBlurRadius.default,
+                darkColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.darkShadow,
+                lightColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.lightShadow,
+                shape = ru.yotfr.designsystem.component.Shape.RoundedRect,
+                cornerRadius = ru.yotfr.designsystem.theme.AlarmTheme.shapeCornerRadius.extraSmall,
+                backgroundColor = ru.yotfr.designsystem.theme.AlarmTheme.colors.background
             )
         ,contentAlignment = Alignment.Center
     ) {
@@ -144,8 +144,8 @@ fun WeekDayCard(
                 DayOfWeek.SATURDAY -> DayOfWeek.SATURDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
                 DayOfWeek.SUNDAY -> DayOfWeek.SUNDAY.getDisplayName(TextStyle.FULL, Locale.getDefault()).take(1)
             },
-            style = AlarmTheme.typography.headline,
-            color = if (!active) AlarmTheme.colors.disabledText else AlarmTheme.colors.text
+            style = ru.yotfr.designsystem.theme.AlarmTheme.typography.headline,
+            color = if (!active) ru.yotfr.designsystem.theme.AlarmTheme.colors.disabledText else ru.yotfr.designsystem.theme.AlarmTheme.colors.text
         )
     }
 }
