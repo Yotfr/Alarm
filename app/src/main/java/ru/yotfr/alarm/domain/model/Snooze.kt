@@ -7,5 +7,15 @@ enum class Snooze {
     FIFTEEN,
     TWENTY,
     TWENTY_FIVE,
-    THIRTY
+    THIRTY;
+
+    fun minutes(): Int = when(this) {
+        OFF -> throw IllegalArgumentException("Snooze turned off")
+        FIVE -> 5
+        TEN -> 10
+        FIFTEEN -> 15
+        TWENTY -> 20
+        TWENTY_FIVE -> 25
+        THIRTY -> 30
+    }
 }

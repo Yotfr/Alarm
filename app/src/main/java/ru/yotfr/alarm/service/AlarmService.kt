@@ -26,6 +26,7 @@ import ru.yotfr.alarm.domain.model.getNextTriggerTime
 import ru.yotfr.alarm.domain.usecase.ChangeAlarmTriggerTimeUseCase
 import ru.yotfr.alarm.domain.usecase.DismissAlarmUseCase
 import ru.yotfr.alarm.domain.usecase.GetAlarmByIdUseCase
+import ru.yotfr.alarm.domain.usecase.SnoozeAlarmUseCase
 import ru.yotfr.alarm.mediaplayer.AlarmPlayer
 import ru.yotfr.alarm.ui.navigation.NavigationConstants
 import javax.inject.Inject
@@ -35,10 +36,15 @@ class AlarmService : Service() {
 
     @Inject
     lateinit var getAlarmByIdUseCase: GetAlarmByIdUseCase
+
     @Inject
     lateinit var changeAlarmTriggerTimeUseCase: ChangeAlarmTriggerTimeUseCase
+
     @Inject
     lateinit var dismissAlarmUseCase: DismissAlarmUseCase
+
+    @Inject
+    lateinit var snoozeAlarmUseCase: SnoozeAlarmUseCase
 
     private val binder = AlarmBinder()
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
@@ -115,17 +121,18 @@ class AlarmService : Service() {
     }
 
     private fun processSnoozeAction() {
+        stopSelf()
+        stopForeground(STOP_FOREGROUND_REMOVE)
         scope.launch {
             _alarm.value?.let {
-                changeAlarmTriggerTimeUseCase(
-                    it.copy(
-                        triggerTime = it.triggerTime.plusMinutes(2)
-                    )
+                snoozeAlarmUseCase(
+                    alarmModel = it,
+                    snoozeMinutes = it.snooze.minutes()
                 )
                 _event.send(AlarmServiceEvent.AlarmDismissed)
             }
-            state = AlarmServiceHelper.AlarmState.SNOOZED
         }
+        state = AlarmServiceHelper.AlarmState.SNOOZED
     }
 
     private fun processDismissAction() {
