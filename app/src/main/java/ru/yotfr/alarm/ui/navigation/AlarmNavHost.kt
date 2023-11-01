@@ -24,7 +24,6 @@ fun AlarmNavHost() {
         ) {
             AlarmsListScreen(
                 navigateToCreateAlarmScreen = { id ->
-                    Log.d("TEST","Start navigating from list to create")
                     navController.navigate(
                         route = Screen.CreateAlarm.passId(id)
                     )
@@ -57,18 +56,14 @@ fun AlarmNavHost() {
             ),
             deepLinks = listOf(navDeepLink {
                 uriPattern =
-                    "${NavigationConstants.MY_URI_RING}/${NavigationConstants.ALARM_ID_ARGUMENT_KEY}={${NavigationConstants.ALARM_ID_ARGUMENT_KEY}}"
+                    NavigationConstants.MY_URI_RING
             })
-        ) { backStackEntry ->
-            backStackEntry.arguments?.getString(NavigationConstants.ALARM_ID_ARGUMENT_KEY)
-                ?.toLong()?.let { alarmId ->
-                    AlarmRingScreen(
-                        alarmId = alarmId,
-                        navigateBack = {
-                            navController.popBackStack()
-                        }
-                    )
+        ) {
+            AlarmRingScreen(
+                navigateBack = {
+                    navController.popBackStack()
                 }
+            )
         }
     }
 }

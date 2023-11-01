@@ -19,6 +19,6 @@ class DismissAlarmUseCase @Inject constructor(
                 )
             )
         }
-        alarmScheduler.dismissAlarm()
+        //alarmScheduler.dismissAlarm()
     }
 }

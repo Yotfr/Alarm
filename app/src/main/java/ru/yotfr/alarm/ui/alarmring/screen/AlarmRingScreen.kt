@@ -1,73 +1,83 @@
 package ru.yotfr.alarm.ui.alarmring.screen
 
-import android.content.Context
-import android.content.Intent
+import android.content.ComponentName
+import android.content.ServiceConnection
+import android.os.IBinder
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.repeatOnLifecycle
-import kotlinx.coroutines.flow.collectLatest
 import ru.yotfr.alarm.domain.model.Snooze
-import ru.yotfr.alarm.service.AlarmRingStatus
 import ru.yotfr.alarm.service.AlarmService
-import ru.yotfr.alarm.ui.alarmring.event.AlarmRingEvent
-import ru.yotfr.alarm.ui.alarmring.viewmodel.AlarmRingViewModel
-import ru.yotfr.alarm.ui.common.OnPauseOnDestroyEffect
-import ru.yotfr.alarm.ui.createalarm.event.CreateAlarmScreenEvent
+import ru.yotfr.alarm.service.AlarmServiceEvent
+import ru.yotfr.alarm.service.AlarmServiceHelper
+import ru.yotfr.alarm.ui.utils.OnGoBackground
+import ru.yotfr.alarm.ui.utils.OnReturnForeground
+import ru.yotfr.alarm.ui.utils.collectWithLifecycle
 
 @Composable
 fun AlarmRingScreen(
-    alarmId: Long,
-    vm: AlarmRingViewModel = hiltViewModel(),
     navigateBack: () -> Unit
 ) {
-    val alarm by vm.alarm.collectAsState()
     val context = LocalContext.current
-    val lifecycle = LocalLifecycleOwner.current.lifecycle
-
-    LaunchedEffect(Unit) {
-        vm.onEvent(AlarmRingEvent.EnterScreen(alarmId))
-    }
-
-    OnPauseOnDestroyEffect(
-        onPause = { recreateActivity(context) },
-        onDestroy = { recreateActivity(context) }
-    )
-
-    BackHandler {}
-
-    LaunchedEffect(Unit) {
-        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            vm.event.collectLatest {
-                when (it) {
-                    CreateAlarmScreenEvent.NavigateBack -> {
-                        navigateBack()
-                    }
+    var alarmService by remember { mutableStateOf<AlarmService?>(null) }
+    val alarm = alarmService?.alarm?.collectAsState()
+    val serviceConnection by remember {
+        mutableStateOf<ServiceConnection>(
+            object : ServiceConnection {
+                override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                    val binder = service as AlarmService.AlarmBinder
+                    alarmService = binder.getService()
                 }
+                override fun onServiceDisconnected(name: ComponentName?) {}
+            }
+        )
+    }
+    alarmService?.event?.collectWithLifecycle { alarmServiceEvent ->
+        when (alarmServiceEvent) {
+            AlarmServiceEvent.AlarmDismissed,
+            AlarmServiceEvent.AlarmSnoozed -> {
+                navigateBack()
             }
         }
     }
+    OnReturnForeground {
+        AlarmServiceHelper.bindService(
+            context = context,
+            serviceConnection = serviceConnection
+        )
+    }
+    OnGoBackground {
+        AlarmServiceHelper.unbindService(
+            context = context,
+            serviceConnection = serviceConnection
+        )
+    }
 
-    AlarmRingContent(
-        triggerTime = alarm.triggerTime,
-        label = alarm.label,
-        onSnoozeClicked = { vm.onEvent(AlarmRingEvent.SnoozeAlarm) },
-        onDismissClicked = { vm.onEvent(AlarmRingEvent.DismissAlarm) },
-        isSnoozeActive = alarm.snooze != Snooze.OFF
-    )
-}
+    BackHandler {}
 
-private fun recreateActivity(context: Context) {
-    if (AlarmRingStatus.isRinging) {
-        val recreateActivityServiceIntent = Intent(context, AlarmService::class.java)
-            .putExtra(AlarmService.RECREATE_ACTIVITY_INTENT_EXTRA_KEY, true)
-        context.startService(recreateActivityServiceIntent)
+    alarm?.value?.let {
+        AlarmRingContent(
+            triggerTime = it.triggerTime,
+            label = it.label,
+            onSnoozeClicked = {
+                AlarmServiceHelper.triggerServiceCommand(
+                    context = context,
+                    command = AlarmServiceHelper.ServiceCommand.ACTION_SNOOZE_ALARM
+                )
+            },
+            onDismissClicked = {
+                AlarmServiceHelper.triggerServiceCommand(
+                    context = context,
+                    command = AlarmServiceHelper.ServiceCommand.ACTION_DISMISS_ALARM
+                )
+            },
+            isSnoozeActive = it.snooze != Snooze.OFF
+        )
     }
 }
 
